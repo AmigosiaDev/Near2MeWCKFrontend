@@ -10,8 +10,6 @@ import { Location } from '@angular/common'; //Used for Back Button
 import { environment } from '../../environments/environment';
 //---------------------------------------------------------
 
-
-
 const BACKEND_URL = environment.apiUrl;
 
 @Component({
@@ -23,7 +21,7 @@ export class SelectLocationComponent implements OnInit {
   options: any = {
     componentRestrictions: { country: 'IN' },
   };
-  
+
   showSpinner = false;
   categories: any = [];
   currentLocation: any = '';
@@ -32,6 +30,7 @@ export class SelectLocationComponent implements OnInit {
   public address: any;
   selecteddistance: number = 100;
   params = { latitude: 0, longitude: 0, distance: 100 };
+  shortAddress: string;
 
   returnPage: string = undefined;
 
@@ -77,6 +76,11 @@ export class SelectLocationComponent implements OnInit {
     console.log(address.geometry.location.lng());
     this.lat = address.geometry.location.lat();
     this.address = address.formatted_address;
+    this.shortAddress = address.name;
+    console.log('Short Address: ', this.shortAddress);
+    if (this.shortAddress) {
+      localStorage.setItem('shortAddress', this.shortAddress);
+    }
     this.lng = address.geometry.location.lng();
     //this.listCategories(2);
     if (this.lat && this.lng) {
@@ -156,23 +160,19 @@ export class SelectLocationComponent implements OnInit {
 
   getCurrentLocations() {
     this.showSpinner = true;
-    this.locationservice.getCurrentLocation()
+    this.locationservice
+      .getCurrentLocation()
       .then(() => {
         // Wait for the Promise to resolve before navigating
         this.showSpinner = false;
         this.goToReturnPage();
         console.log('this.returnPage', this.returnPage);
       })
-      .catch(error => {
+      .catch((error) => {
         this.showSpinner = false;
         console.error('Error getting current location', error);
       });
   }
-  
-
-
-  
-  
 
   ngOnInit() {
     // Retrieve the address from local storage

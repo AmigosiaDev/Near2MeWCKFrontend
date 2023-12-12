@@ -25,6 +25,12 @@ export class ShowMoreRecentProductComponent implements OnInit {
   totalItems = 0;
   loading: boolean = false;
   disableNextPage: boolean = false;
+  filterValue: boolean = false;
+  filterType: string = 'date';
+  filterCardProduct: boolean = false;
+  filterCardDate: boolean = false;
+  showSpinner: boolean = false;
+
   loadNextPage() {
     this.loading = true;
     this.ShowMoreService.showMoreItems = [];
@@ -34,8 +40,13 @@ export class ShowMoreRecentProductComponent implements OnInit {
       this.currentPage++;
       this.ShowMoreService.currentPage++;
       console.log('currentpage  is ' + this.ShowMoreService.currentPage);
+      if (this.filterType === 'date') {
+        this.getProductsBasedDate();
+      }
+      if (this.filterType === 'distance') {
+        this.getRecentProducts();
+      }
 
-      this.getProductsBasedDate();
       this.showMoreItems = this.ShowMoreService.showMoreItems;
       console.log('getAllProduct is running');
     }
@@ -53,7 +64,12 @@ export class ShowMoreRecentProductComponent implements OnInit {
       this.currentPage--;
       this.ShowMoreService.currentPage--;
 
-      this.getProductsBasedDate();
+      if (this.filterType === 'date') {
+        this.getProductsBasedDate();
+      }
+      if (this.filterType === 'distance') {
+        this.getRecentProducts();
+      }
       this.showMoreItems = this.ShowMoreService.showMoreItems;
       console.log('getAllProduct is running');
     }
@@ -83,6 +99,27 @@ export class ShowMoreRecentProductComponent implements OnInit {
       this.getProductsBasedDate();
     }
   }
+
+  filter() {
+    this.filterValue = !this.filterValue;
+  }
+
+  dateBasedFilter() {
+    this.showSpinner = true;
+    this.filterValue = !this.filterValue;
+    this.filterType = 'date';
+    this.filterCardProduct = !this.filterCardProduct;
+    this.getProductsBasedDate();
+  }
+
+  distanceBasedFilter() {
+    this.showSpinner = true;
+    this.filterValue = !this.filterValue;
+    this.filterType = 'distance';
+    this.filterCardProduct = !this.filterCardProduct;
+    this.getRecentProducts();
+  }
+
   constructor(
     private http: HttpClient,
     private location: Location,
@@ -116,7 +153,8 @@ export class ShowMoreRecentProductComponent implements OnInit {
   //--------------------------------------Show all recently added products based on date --------------------------
   productBasedOnDate: any;
   getProductsBasedDate() {
-    const url = `${BACKEND_URL}/showMoreProductsDate?latitude=${this.latitude}&longitude=${this.longitude}&page=${this.currentPage}&limit=${this.limit}`;
+    this.showSpinner = true;
+    const url = `${BACKEND_URL}/showMoreProductsDate?latitude=${this.latitude}&longitude=${this.longitude}&page=${this.currentPage}&limit=${this.limit}&limit=${this.limit}`;
     // this.totalItems = productData.totalCount;
     this.http.get(url).subscribe(
       (data: any) => {
@@ -129,7 +167,7 @@ export class ShowMoreRecentProductComponent implements OnInit {
           this.productBasedOnDate,
           'productBasedOnDate fetched successfully'
         );
-
+        this.showSpinner = false;
         for (const product of this.productBasedOnDate) {
           if (
             !this.ShowMoreService.showMoreItems.some(
@@ -150,6 +188,39 @@ export class ShowMoreRecentProductComponent implements OnInit {
     );
   }
   //--------------------------------------Show all recently added products based on date ends--------------------------
+
+  productBasedOnDistance: any;
+  getRecentProducts() {
+    const url = `${BACKEND_URL}/showMoreRecentProducts?latitude=${this.latitude}&longitude=${this.longitude}&page=${this.currentPage}&limit=${this.limit}&limit=${this.limit}`;
+    this.http.get(url).subscribe(
+      (data: any) => {
+        this.productBasedOnDistance = data.products;
+        console.log(
+          this.productBasedOnDistance,
+          'Products fetched successfully'
+        );
+        this.totalItems = this.ShowMoreService.totalItems;
+        this.productBasedOnDate = null;
+        this.showSpinner = false;
+        for (const product of this.productBasedOnDistance) {
+          if (
+            !this.ShowMoreService.showMoreItems.some(
+              (item: any) => item._id === product._id
+            )
+          ) {
+            this.ShowMoreService.showMoreItems.push(product);
+          }
+        }
+      },
+      (error: any) => {
+        console.error('Failed to fetch products:', error);
+      },
+      () => {
+        // Set loading to false when the request is complete
+        this.loading = false;
+      }
+    );
+  }
 
   getRibbonStyles(productTypeOfSale: string): object {
     switch (productTypeOfSale) {

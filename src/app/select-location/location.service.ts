@@ -161,6 +161,7 @@ export class LocationService {
   public address: any = null;
   public dataResponse: any;
   public locationData = [];
+  public shortAddress: string = null;
   private locationObject$ = new BehaviorSubject<any>({});
   public selectedLocation$ = this.locationObject$.asObservable();
   locationDetails = new Object();
@@ -177,6 +178,29 @@ export class LocationService {
               this.locationDetails['address'] =
                 response.results[1].formatted_address;
               this.selectLocation(this.locationDetails);
+
+              console.log('address[0]', response.results[0].formatted_address);
+              console.log('address[1]', response.results[1].formatted_address);
+              console.log('address[2]', response.results[2].formatted_address);
+              console.log('address[3]', response.results[3].formatted_address);
+              console.log('address[4]', response.results[4].formatted_address);
+              console.log('address[5]', response.results[5].formatted_address);
+              console.log('address[6]', response.results[6].formatted_address);
+              const formattedAddress = response.results[6].formatted_address;
+
+              // Split the address by commas and get the first part
+              const addressParts = formattedAddress.split(',');
+              const city = addressParts[0].trim(); // Trim to remove leading/trailing spaces
+
+              // Assign the city to this.shortAddress
+              this.shortAddress = city;
+
+              console.log('the short address is ', this.shortAddress);
+
+              if (this.shortAddress) {
+                localStorage.setItem('shortAddress', this.shortAddress);
+              }
+
               console.log('locationDetails', this.locationDetails);
               resolve();
             });
@@ -250,8 +274,9 @@ export class LocationService {
     this.address = param.address;
     this.locationData = param;
     this.locationObject$.next(this.locationData);
+    console.log('the location data in location service :', this.locationData);
     this.localStorage.set('locationData', this.locationData);
- 
+
     let selectedLoc = this.localStorage.get('locationData');
     console.log('selectedLocation in Local Storage: ', selectedLoc);
   }

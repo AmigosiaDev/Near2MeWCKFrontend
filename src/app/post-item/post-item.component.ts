@@ -146,6 +146,7 @@ export class PostItemComponent implements OnInit {
   products: productInterface[] = [];
   showPostItem: boolean = true;
   showSelectCategory: boolean = false;
+  shortAddress: string ;
 
   //Declare a constructor to read data from database by calling getAllStudents()
   constructor(
@@ -216,6 +217,8 @@ export class PostItemComponent implements OnInit {
     //this.checkLocationAvailable();
     //To call the function that gets the selected location from location service
     this.locationData = this.localStorage.get('locationData');
+    this.shortAddress = localStorage.getItem('shortAddress');
+    console.log('the short address in post-item is:', this.shortAddress);
     console.log('POST PAGE LOCATION DATA', this.locationData);
     this.latitude = this.locationData.latitude;
     this.longitude = this.locationData.longitude;
@@ -566,6 +569,7 @@ export class PostItemComponent implements OnInit {
       ) {
         this.register(
           this.productCategory,
+          this.shortAddress,
           this.productID,
           this.productTitle,
           this.productPrice,
@@ -673,6 +677,7 @@ export class PostItemComponent implements OnInit {
   //--------------------To register a new Product---------------------------------------
   register(
     productCategory: string,
+    shortAddress: string,
     productID: string,
     productTitle: string,
     productPrice: string,
@@ -692,6 +697,7 @@ export class PostItemComponent implements OnInit {
     //Append to formData
     console.log('productPrice', productPrice);
     formData.append('productCategory', productCategory);
+    formData.append('shortAddress',shortAddress)
     formData.append('productID', productID);
     formData.append('productTitle', productTitle);
     formData.append('productPrice', productPrice);
@@ -1153,6 +1159,7 @@ export class PostItemComponent implements OnInit {
         this.registerService(
           (this.date = new Date().toISOString().substr(0, 10).toString()),
           this.serviceCategory,
+          this.shortAddress,
           this.serviceID,
           this.serviceTitle,
           this.serviceDescription,
@@ -1257,6 +1264,7 @@ export class PostItemComponent implements OnInit {
   registerService(
     date: string,
     serviceCategory: string,
+    shortAddress: string,
     serviceID: string,
     serviceTitle: string,
     serviceDescription: string,
@@ -1272,6 +1280,7 @@ export class PostItemComponent implements OnInit {
     //Append to formData
     formData.append('date', date);
     formData.append('serviceCategory', serviceCategory);
+    formData.append('shortAddress',shortAddress)
     formData.append('serviceID', serviceID);
     formData.append('serviceTitle', serviceTitle);
     formData.append('serviceDescription', serviceDescription);

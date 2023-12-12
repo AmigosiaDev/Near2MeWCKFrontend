@@ -107,9 +107,14 @@ span {
   border-radius: 10px;
 }
 
+.address {
+  color: #00796b;
+  font-size: small;
+  margin: 0;
+}
 
 .distance {
-  color: #075e54;
+  color: #07435e;
   font-size: small;
   margin: 0;
 }

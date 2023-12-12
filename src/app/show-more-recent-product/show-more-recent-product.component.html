@@ -22,13 +22,77 @@
 <br />
 <div class="container">
   <div class="row">
-    <h3>{{ "Recently Added Products" | translate }}</h3>
+    <div class="col">
+      <h3>
+        {{ "Recently Added Products" | translate }}
+        <span (click)="filter()" style="float: right"
+          ><i class="fa-solid fa-filter"></i
+        ></span>
+      </h3>
+    </div>
     <br />
+  </div>
+</div>
+<div
+  class="container"
+  *ngIf="showSpinner"
+  style="text-align: center"
+>
+  <div class="row">
+    <div class="col">
+      <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
   </div>
 </div>
 
 <!------------------------------------------------------------>
-
+<div class="overlay" *ngIf="filterValue">
+  <div class="modal-content">
+    <div class="modal-body text-left p-3">
+      <div class="form-group m-2">
+        <h3>Filter based on</h3>
+      </div>
+      <hr />
+      <br />
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col" (click)="dateBasedFilter()">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+              [checked]="!filterCardProduct"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Date
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-4">
+        <div class="col-1"></div>
+        <div class="col" (click)="distanceBasedFilter()">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault2"
+              [checked]="filterCardProduct"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Distance
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-------------------------------------------------------------->
 <!--date based-->
 <div class="container" *ngIf="productBasedOnDate">
@@ -39,7 +103,7 @@
   </div> -->
   <div class="row sm-12">
     <div class="col-4 p-2" *ngFor="let item of productBasedOnDate">
-      <div class="card">
+      <div class="card" *ngIf="!filterCardProduct">
         <div class="productButtons">
           <div>
             <div *ngIf="item.productTypeOfSale !== 'NOR'">
@@ -73,6 +137,47 @@
             <div class="truncate">
               <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
             </div>
+            <div class="row pt-2" *ngIf="item.shortAddress">
+              <div class="float-end">
+                <p
+                  class="address truncate"
+                  style="
+                    margin-bottom: 0;
+                    background-color: white;
+
+                    border-radius: 10px;
+                  "
+                >
+                  {{ item.shortAddress }}
+                </p>
+              </div>
+            </div>
+            <div class="row pt-2" *ngIf="!item.shortAddress">
+              <div class="float-end">
+                <!-- <p class="address truncate" style="
+                margin-bottom: 0;
+                color: transparent;
+                border-radius: 10px;
+              ">
+                  
+                  Palakkad
+                </p> -->
+                <p
+                  class="address truncate"
+                  style="
+                    margin-bottom: 0;
+                    background-color: white;
+                    border-radius: 10px;
+                  "
+                >
+                  {{
+                    item.shortAddress
+                      ? item.shortAddress
+                      : item.address.split(",")[1]
+                  }}
+                </p>
+              </div>
+            </div>
             <div class="float-end">
               <p class="distance">
                 <i class="fa-regular fa-calendar-days"></i>
@@ -86,33 +191,107 @@
     </div>
   </div>
 </div>
+
+<div class="container" *ngIf="productBasedOnDistance">
+  <!-- <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "Recently Added" | translate }}</h4>
+    </div>
+  </div> -->
+  <div class="row sm-12">
+    <div class="col-4 p-2" *ngFor="let item of productBasedOnDistance">
+      <div class="card" *ngIf="filterCardProduct">
+        <div class="productButtons">
+          <div>
+            <div *ngIf="item.productTypeOfSale !== 'NOR'">
+              <div
+                class="ribbon"
+                [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+              >
+                {{ getDisplayName(item.productTypeOfSale) }}
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-lg recentlyAddedButton"
+            (click)="gotoSearchProductDescription(item.productID)"
+          >
+            <div *ngIf="item.productImageURL">
+              <img
+                [src]="item.productImageURL"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div *ngIf="item.productImageURL == null || ''">
+              <img
+                src="assets/personImages/loketeDefaultImage.jpg"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div class="truncate">
+              <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
+            </div>
+            <div class="row pt-2" *ngIf="item.shortAddress">
+              <div class="float-end">
+                <p
+                  class="address truncate"
+                  style="
+                    margin-bottom: 0;
+                    background-color: white;
+
+                    border-radius: 10px;
+                  "
+                >
+                  {{ item.shortAddress }}
+                </p>
+              </div>
+            </div>
+            <div class="row pt-2" *ngIf="!item.shortAddress">
+              <div class="float-end">
+                <!-- <p class="address truncate" style="
+                margin-bottom: 0;
+                color: transparent;
+                border-radius: 10px;
+              ">
+                  
+                  Palakkad
+                </p> -->
+                <p
+                  class="address truncate"
+                  style="
+                    margin-bottom: 0;
+                    background-color: white;
+                    border-radius: 10px;
+                  "
+                >
+                  {{
+                    item.shortAddress
+                      ? item.shortAddress
+                      : item.address.split(",")[1]
+                  }}
+                </p>
+              </div>
+            </div>
+            <div class="float-end">
+              <p class="distance">
+                <i class="fa-solid fa-location-dot fa-sm"></i>
+                {{ item.distance }} Km away
+              </p>
+            </div>
+            <!-- <div class="row"><div class="col"><p></p></div></div> -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <br />
 <br />
 <!-------------------------------------------------------------->
-<!-- <div class="container" *ngIf="showMoreItems.length !== 0">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-      <div class="pagination" style="padding: 5px; border-radius: 15px">
-        <button
-          class="btn btn-success mx-2"
-          (click)="loadPreviousPage()"
-          [disabled]="currentPage === 1"
-        >
-          <i class="fa fa-arrow-left" aria-hidden="true"></i>
-        </button>
-        <button
-          class="btn btn-success mx-2"
-          (click)="loadNextPage()"
-          [disabled]="currentPage * limit >= totalItems"
-        >
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div>
-    <div class="col"></div>
-  </div>
-</div> -->
+
 <div class="container">
   <div class="row">
     <div class="col"></div>
