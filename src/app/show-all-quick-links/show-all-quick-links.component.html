@@ -1,0 +1,169 @@
+<!-- header-->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" (click)="goBack()">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>    <div class="col-2"></div>
+  </div>
+</div>
+
+<!--Space to show the elements below floating header-->
+<br /><br /><br /><br />
+
+<!--categories-->
+<div class="container pb-5">
+  <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{"quickLinks"|translate}}</h4>
+    </div>
+  </div>
+  <div class="row sm-12">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img
+          class="categoryImage"
+            src="assets/categoryImages/brandStore.png"
+            alt=""
+            id="ORG"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{"organic"|translate}}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img      class="categoryImage"
+            src="assets/categoryImages/superSale.png"
+            alt=""
+            id="DIS"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{"discounted"|translate}}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img      class="categoryImage"
+            src="assets/categoryImages/freeItems.png"
+            alt=""
+            id="FRE"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{"freeItems"|translate}}</p>
+    </div>
+  </div>
+
+  <div class="row"></div>
+  <div class="row sm-12">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img      class="categoryImage"
+            src="assets\categoryImages\festival.png"
+            alt=""
+            id="FES"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{"festiveSpecials"|translate}}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img      class="categoryImage"
+            src="assets\categoryImages\exotic.png"
+            alt=""
+            id="EXO"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{"exotic"|translate}}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img      class="categoryImage"
+            src="assets\categoryImages\seasonal.png"
+            alt=""
+            id="SEA"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{"seasonal"|translate}}</p>
+    </div>
+  </div>
+  <!------------------------------third row starts----------------------------------->
+  <div class="row sm-12">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons ">
+          <img class="Kudumbasree" 
+          src="assets/categoryImages/Kudumbashree_logo.png"
+          alt=""
+            id="ID_CAT_KUD"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "Kudumbasree" | translate }}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img  class="categoryImage"
+          src="assets/categoryImages/farmmade.png"
+          alt=""
+            id="ID_CAT_PRO"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "Farm Products" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButtons">
+          <img  class="categoryImage"
+          src="assets/categoryImages/home-made.png"
+          alt=""
+            id="ID_CAT_HOM"
+            (click)="gotoProductListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "Homemade" | translate }}</p>
+    </div>
+  </div>
+  <!------------------------------third row ends----------------------------------->
+</div>
+
+<!--navigation bar-->
+<app-navigation-bar></app-navigation-bar>

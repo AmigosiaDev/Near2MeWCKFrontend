@@ -1,0 +1,63 @@
+<div class="container-fluid pt-2">
+  <div class="row">
+    <nav class="nav p-0">
+      <div class="col">
+        <a
+          class="nav__link"
+          routerLink="/home"
+          routerLinkActive="active"
+          (click)="home()"
+        >
+          <i class="fa fa-home fa-2x"></i>
+          <span class="nav__text">Home</span>
+        </a>
+      </div>
+      <div class="col">
+        <a
+          class="nav__link"
+          routerLinkActive="active"
+          routerLink="/notifications"
+          (click)="notifications()"
+        >
+          <i class="fa fa-bell fa-2x"></i>
+          <span class="nav__text">Notification</span>
+        </a>
+      </div>
+      <div class="col d-flex justify-content-center align-items-center">
+        <div class="container-grid">
+          <div class="grid-column">
+            <button
+              type="button"
+              class="btn btn-success rounded-circle postButton"
+              (click)="goToPost()"
+            >
+              <div class="col d-flex justify-content-center">Post</div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <a
+          class="nav__link"
+          routerLink="/favourites"
+          routerLinkActive="active"
+          (click)="goToFav()"
+        >
+          <i class="fa-solid fa-star fa-2x"></i>
+          <span class="nav__text">Favourites</span>
+        </a>
+      </div>
+      <div class="col p-0">
+        <a
+          class="nav__link"
+          routerLinkActive="active"
+          routerLink="/settings"
+          (click)="goToSettings()"
+        >
+          <i class="fa fa-gear fa-2x"></i>
+          <span class="nav__text">Settings</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</div>

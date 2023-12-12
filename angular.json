@@ -1,0 +1,121 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "near2MeApp": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "../Near2MeBackend/Near2Me",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.webmanifest"
+            ],
+            "styles": [
+              "src/custom-theme.scss",
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/@fortawesome/fontawesome-free/js/all.js"
+            ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "5kb",
+                  "maximumError": "7kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "test": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "near2MeApp:build:production"
+            },
+            "development": {
+              "browserTarget": "near2MeApp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "near2MeApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "918ee1e5-6061-4198-a3f0-e54d3605ae16"
+  }
+}

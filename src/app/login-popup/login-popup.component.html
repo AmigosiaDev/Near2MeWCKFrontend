@@ -1,0 +1,20 @@
+<div class="popup-background" [ngClass]="{'show-modal': showModal}">
+  <div class="row langContainer">
+    <div class="row">
+      <div class="col">
+        <div class="languageSelect mt-3">
+          <h3 class="text-center">Login for Free Advertising during trial period</h3>
+          <br>
+          <!-- Add d-flex justify-content-center class to center the buttons -->
+          <div class="d-flex justify-content-center">
+            <!-- Close button -->
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Later</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- OK button -->
+            <button type="button" class="btn btn-success" (click)="onOk()">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

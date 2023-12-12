@@ -1,0 +1,33 @@
+<div class="popup-background" *ngIf="showLangPopup">
+  <div class="row">
+    <div class="row langContainer">
+      <div class="col">
+        <div class="languageSelect mt-3">
+          <h1 class="text-center">Select Language</h1>
+          <br>
+          <div class="justify-content-center">
+            <label class="control control--radio">English
+              <input type="radio" name="radio" [checked]="selectedLanguage === 'en'" [(ngModel)]="selectedLanguage" value="en"/>
+              <div class="control__indicator"></div>
+            </label>
+            <label class="control control--radio">മലയാളം
+              <input type="radio" name="radio" [checked]="selectedLanguage === 'ml'" [(ngModel)]="selectedLanguage" value="ml"/>
+              <div class="control__indicator"></div>
+            </label>
+            <label class="control control--radio">தமிழ்
+              <input type="radio" name="radio" [checked]="selectedLanguage === 'tl'" [(ngModel)]="selectedLanguage" value="tl"/>
+              <div class="control__indicator"></div>
+            </label>
+          </div>
+          <br>
+          <div class="text-center mt-3">
+            <button type="button" class="btn btn-success" (click)="switchLanguage()">Save Preference</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

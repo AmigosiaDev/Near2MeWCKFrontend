@@ -1,0 +1,83 @@
+<!--header-->
+<!--Header-->
+<div class="container-fluid pt-3">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" (click)="goBack()">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+<hr class="hr" />
+
+<!--Input and continue Section-->
+<!--Container "fullPage" is a div for the entire page so that we can apply styles throughout the page-->
+<div class="container fullPage">
+  <!--The title-->
+  <div class="container p-5">
+    <div class="row">
+      <h3 class="">Verify {{ passedPhoneNumber }}</h3>
+    </div>
+  </div>
+
+  <!--The input Phone number Section-->
+  <div class="container inputPhoneNumber">
+    <div class="row">
+      <p>
+        Please enter the OTP sent to {{ passedPhoneNumber }}.
+        <a routerLink="/login">Wrong Number?</a>.
+      </p>
+    </div>
+    <div class="row">
+      <input
+        class="form-control"
+        placeholder="Enter OTP"
+        [(ngModel)]="otpValue"
+        (input)="updateButtonState()"
+        (keyup.enter)="handleEnterKeyPress($event)"
+
+      />
+    </div>
+    <div class="row">
+      <div class="col p-0"><p>Enter 4-digit code</p></div>
+      <div class="col p-0" style="text-align: end">
+        <!-- <a (click)="resendOTP()">Resend SMS</a> -->
+        <button
+          class="resentButton"
+          [disabled]="isResendDisabled"
+          (click)="resendOTP()"
+        >
+          Resend SMS
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      Time remaining before OTP expires: <span>{{ counter | formatTime }}</span>
+    </div>
+    <!--Agree & Continue Section-->
+    <div class="container">
+      <div class="row pt-5">
+        <button
+          type="submit"
+          class="btn btn-success"
+          (click)="verifyNumber()"
+          [disabled]="!isButtonEnabled"
+        >
+          Continue
+        </button>
+      </div>
+      <div class="row pt-3">
+        <a style="text-align: center" routerLink="/faq">Need Help? Click Here</a>
+      </div>
+    </div>
+
+    <!--The footer part containg Amigosia Title-->
+  </div>
+</div>

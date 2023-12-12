@@ -1,0 +1,122 @@
+/*Header*/
+.title {
+  text-align: center;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  display: absolute;
+  z-index: 1;
+}
+
+/*category-subcategory-section*/
+#v-pills-tab {
+  background-color: #e4e5e5;
+  color: #747474;
+}
+
+button {
+  color: black;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #075e54;
+  background-color: #ffffff;
+}
+
+.nav-pills .nav-link {
+  background: 0 0;
+  border: 0;
+  border-radius: 0;
+  height: 150px;
+  width: 100px;
+  color: black; /* Set text color to black */
+}
+
+a {
+  color: grey;
+  text-decoration: none;
+  float: right;
+}
+
+img {
+  float: center;
+  border-radius: 50%;
+  width: 100%;
+  border: #075e54 1px solid;
+}
+
+.container-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+}
+
+.container-grid .grid-column {
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+p {
+  text-align: center;
+  font-size: medium;
+}
+
+.tab-content {
+  width: 100%;
+}
+
+#v-pills-tabContent.tab-content {
+  max-height: fit-content;
+  max-width: fit-content;
+}
+
+.scrollable-container {
+  height: 1000px; /* Adjust the value as per your requirements */
+  overflow-y: scroll;
+  min-width: 100px;
+  overflow-y: scroll;
+  padding-right: 10px;
+  text-align: center;
+  overflow-x: hidden; /* Add this line to hide the horizontal scroll */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.scrollable-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.scrollable-container2::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+.subCat {
+  margin-top: 0;
+  position: fixed;
+}
+
+/* Malayalam font size */
+.ml-font {
+  font-size: 14px;
+  text-align: center;
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+}
+.ml-font::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: Set a background color */
+}
+ /* Tamil font size */
+.tl-font {
+  font-size: 14px;
+  text-align: center;
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+}
+.tl-font::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: Set a background color */
+}

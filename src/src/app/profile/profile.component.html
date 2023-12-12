@@ -1,0 +1,741 @@
+<!--Header-->
+<!---->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" routerLink="/settings">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+<!--Space to show the elements below floating header-->
+<br /><br /><br />
+
+<!--Profile Details-->
+<div class="bodyBackground">
+  <br />
+
+  <div class="container p-3 profileDetailsContainer">
+    <div class="row p-3">
+      <div class="myPageTitle">My Profile</div>
+    </div>
+    <div class="row p-3">
+      <div class="col-3">
+        <img
+          class="profileImage"
+          *ngIf="imageURL"
+          [src]="imageURL"
+          alt="Profile Image"
+          (click)="toggleImageZoom()"
+        />
+        <img
+          class="profileImage"
+          *ngIf="!imageURL"
+          src="assets/personImages/defaultimage.jpg"
+          alt="Default Image"
+          (click)="toggleImageZoom()"
+        />
+      </div>
+      <div *ngIf="isZoomed" class="zoomed-container" (click)="closeImageZoom()">
+        <img
+          class="zoomed-image"
+          [src]="imageURL || 'assets/personImages/defaultimage.jpg'"
+          alt="Zoomed Profile Image"
+        />
+      </div>
+
+      <div class="col-9 contactDetails">
+        <div class="row p-2">
+          <div class="col d-flex flex-column">
+            <p class="profileName">{{ userName }}</p>
+            <p class="phoneDetailName">+91&nbsp;{{ mobileNumber }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 pt-2">
+        <p class="detailName">Profile ID:</p>
+      </div>
+      <div class="col pt-2">
+        <p class="detailContent">{{ profileID }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 pt-2">
+        <p class="detailName">WhatsApp:</p>
+      </div>
+      <div class="col pt-2">
+        <p class="detailContent" *ngIf="whatsApp !== 'undefined'">
+          +91&nbsp; {{ whatsApp }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 pt-3">
+        <p class="detailName">Address:</p>
+      </div>
+      <div class="col-8 pt-3">
+        <p class="detailContent" *ngIf="address !== 'undefined'">
+          {{ address }}
+        </p>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-4">
+          <p class="detailName">Area of interest/Service:</p>
+        </div>
+        <div class="col-8">
+          <p class="detailContent">{{ areaOfInterest }} Km</p>
+        </div>
+      </div> -->
+    <!-- <div class="row">
+      <div class="col">
+        <p>
+          (When you add a category to your favorites list, you'll receive
+          notifications for new posts in that category, considering the above
+          distance.)
+        </p>
+      </div>
+       </div> -->
+    <br /><br />
+    <hr style="margin: 0" />
+    <p class="detailName" style="text-align: center">Seller Options</p>
+    <br />
+
+    <!--Elements inside Accordian-->
+    <div class="row pt-2">
+      <div class="col-4">
+        <p class="detailName">Category:</p>
+      </div>
+      <div class="col-8">
+        <p class="detailContent">{{ getUserCategory(category) }}</p>
+      </div>
+    </div>
+
+    <div class="row pt-2">
+      <p class="detailName">About your Business:</p>
+      <p class="detailContent-about-text" *ngIf="about !== '' || undefined">
+        {{ about }}
+      </p>
+    </div>
+
+    <!-- <div class="row">
+            <div class="col detailContent-about">
+              
+            </div>
+          </div> -->
+
+    <div class="row pt-2">
+      <!--Product Image Carousel-->
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p class="detailName">Business Images:</p>
+          </div>
+        </div>
+      </div>
+      <div class="container" *ngIf="userImageURL[0]">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                *ngIf="userImageURL[0]"
+                [src]="userImageURL[0]"
+                class="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item" *ngIf="userImageURL[1]">
+              <img
+                *ngIf="userImageURL[1]"
+                [src]="userImageURL[1]"
+                class="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item" *ngIf="userImageURL[2]">
+              <img
+                *ngIf="userImageURL[2]"
+                [src]="userImageURL[2]"
+                class="d-block w-100"
+                alt="..."
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <br />
+      </div>
+
+      <!--Product Image Carousel ends-->
+      <!-- <div class="row">
+          <div class="text-center">
+            <button
+              type="button"
+              class="btn btn-light optionsButton"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Seller Options <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+        </div> -->
+      <!--Collapsible panel (Accordian)-->
+      <!-- <div class="container p-0">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne"></h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse hide"
+                aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample"
+              >
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+    </div>
+    <!--Collapsible panel ends-->
+
+    <!--Edit Profile Button-->
+
+    <div class="container p-3">
+      <div class="row p-3 pb-0 pt-0" id="editProfile">
+        <button
+          class="btn btn-success editProfileButton"
+          (click)="goToEditProfile()"
+        >
+          Edit Profile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="div" *ngIf="listingArray.length !== 0">
+    <!--Recently Added Section/Group-->
+    <div class="bodyBackground">
+      <div class="container-fluid recentlyAddedContainer">
+        <div class="row p-3">
+          <div class="myPageTitle">My Ads</div>
+        </div>
+      </div>
+
+      <!--tabs-->
+      <div class="container-fluid">
+        <div class="row px-1">
+          <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <div class="col-6">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="w-100 nav-link active"
+                  id="pills-active-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-active"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-active"
+                  aria-selected="true"
+                  (click)="scrollToSection('editProfile')"
+                >
+                  Active Ads
+                </button>
+              </li>
+            </div>
+            <div class="col-6">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link w-100"
+                  id="pills-inactive-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-inactive"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-inactive"
+                  aria-selected="false"
+                  (click)="scrollToSection('editProfile')"
+                >
+                  Inactive Ads
+                </button>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <!--Tab Contents: Active-->
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-active"
+          role="tabpanel"
+          aria-labelledby="pills-active-tab"
+          tabindex="0"
+        >
+          <div class="container pb-2">
+            <!--Product Active Card starts-->
+            <div *ngFor="let productItem of listingArray">
+              <div class="container p-0 m-0">
+                <div
+                  class="container p-0 m-0"
+                  *ngIf="productItem.productStatus === 'Active'"
+                >
+                  <a>
+                    <div class="card mt-3">
+                      <div class="card-body p-1">
+                        <div class="row">
+                          <div class="col">
+                            <div
+                              class="approvalPending ms-1"
+                              *ngIf="productItem.isApproved === false"
+                            >
+                              <p class="approvalPendingTitle float-">
+                                Approval Pending
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col pe-3">
+                            <div
+                              class="d-grid gap-2 d-flex justify-content-md-end float-end"
+                            >
+                              <button
+                                class="btn btn-success editButton btn-sm"
+                                type="button"
+                                (click)="editProducts(productItem)"
+                              >
+                                <p>Edit</p>
+                              </button>
+                              <button
+                                class="btn btn-light optionsButton2 btn-sm"
+                                type="button"
+                                (click)="deactivateProduct(productItem)"
+                              >
+                                <p>Deactivate</p>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row align-items-center">
+                          <div class="col-4">
+                            <div>
+                              <img
+                                class="productImage"
+                                *ngIf="productItem.productThumbNailImage"
+                                [src]="productItem.productThumbNailImage"
+                              />
+
+                              <img
+                                class="productImage"
+                                *ngIf="!productItem.productThumbNailImage"
+                                src="assets/personImages/loketeDefaultImage.jpg"
+                                alt="Default Image"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-8">
+                            <div class="row">
+                              <div class="col-6"></div>
+                              <div class="col-6"></div>
+                            </div>
+                            <div class="row">
+                              <div class="col m-3 m-3 mt-0 mb-0 p-0 truncate">
+                                <h5 class="cardTitle">
+                                  {{ productItem.productTitle }}
+                                </h5>
+                              </div>
+                            </div>
+                            <div class="row itemDetails">
+                              <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                                <h6>&nbsp;{{ productItem.productPrice }}&nbsp;/</h6>
+                                <p>&nbsp;{{ productItem.productUnit }}</p>
+                              </div>
+                            </div>
+                            <hr class="lineInsideCard" />
+                            <div class="row">
+                              <div class="col-6">
+                                <p style="margin: 0">
+                                  {{ productItem.date }}
+                                </p>
+                              </div>
+                              <div class="col-6 mt-0 p-3 pt-0 pb-0">
+                                <div class="float-end">
+                                  <p><b>Views: </b>{{ productItem.views }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-11 productBox">
+                                <i class="fa-solid fa-box"></i> ID:
+                                <b>{{ productItem.productID }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!--Product Active Card ends-->
+            <!--Service Active Card starts-->
+            <div *ngFor="let item of listingArray">
+              <div class="container p-0 m-0">
+                <div
+                  class="container p-0 m-0"
+                  *ngIf="item.serviceStatus === 'Active'"
+                >
+                  <a>
+                    <div class="card mt-3">
+                      <div class="card-body p-1">
+                        <div class="row">
+                          <div class="col">
+                            <div
+                              class="approvalPending ms-1"
+                              *ngIf="item.isApproved === false"
+                            >
+                              <p class="approvalPendingTitle float-">
+                                Approval Pending
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col pe-3">
+                            <div
+                              class="d-grid gap-2 d-flex justify-content-md-end float-end"
+                            >
+                              <button
+                                class="btn btn-success editButton btn-sm"
+                                type="button"
+                                (click)="editServices(item)"
+                              >
+                                <p>Edit</p>
+                              </button>
+                              <button
+                                class="btn btn-light optionsButton2 btn-sm"
+                                type="button"
+                                (click)="deactivateService(item)"
+                              >
+                                <p>Deactivate</p>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row align-items-center">
+                          <div class="col-4">
+                            <div>
+                              <img
+                                class="productImage"
+                                *ngIf="item.serviceThumbNailImage"
+                                [src]="item.serviceThumbNailImage"
+                              />
+
+                              <img
+                                class="productImage"
+                                *ngIf="!item.serviceThumbNailImage"
+                                src="assets/personImages/loketeDefaultImage.jpg"
+                                alt="Default Image"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-8">
+                            <div class="row">
+                              <div class="col-6"></div>
+                              <div class="col-6"></div>
+                            </div>
+                            <div class="row">
+                              <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                                <h5 class="card-title">
+                                  {{ item.serviceTitle }}
+                                </h5>
+                              </div>
+                            </div>
+
+                            <hr class="lineInsideCard" />
+                            <div class="row">
+                              <div class="col-6 mt-1">
+                                <p class="validity" style="margin: 0">
+                                  {{ item.date }}
+                                </p>
+                              </div>
+                              <div class="col-6 mt-0 p-3 pt-0 pb-0">
+                                <div class="float-end">
+                                  <p><b>Views: </b>{{ item.views }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-11 productBox">
+                                <i class="fa-solid fa-box"></i> ID:
+                                <b>{{ item.serviceID }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!--Service Active  Card ends-->
+          </div>
+        </div>
+
+        <!--Tab Contents: Inactive-->
+        <div
+          class="tab-pane fade"
+          id="pills-inactive"
+          role="tabpanel"
+          aria-labelledby="pills-inactive-tab"
+          tabindex="0"
+        >
+          <div class="container pb-2">
+            <!--Product Inactive Card starts-->
+            <div *ngFor="let item of listingArray">
+              <div class="container p-0 m-0">
+                <div
+                  class="container p-0 m-0"
+                  *ngIf="item.productStatus === 'Inactive'"
+                >
+                  <a>
+                    <div class="card mt-3">
+                      <div class="card-body p-1">
+                        <div class="row">
+                          <div class="col">
+                            <div
+                              class="approvalPending ms-1"
+                              *ngIf="item.isApproved === false"
+                            >
+                              <p class="approvalPendingTitle float-">
+                                Approval Pending
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col pe-3">
+                            <div
+                              class="d-grid gap-2 d-flex justify-content-md-end float-end"
+                            >
+                              <button
+                                class="btn btn-success editButton btn-sm"
+                                type="button"
+                                (click)="editProducts(item)"
+                              >
+                                <p>Edit</p>
+                              </button>
+
+                              <button
+                                class="btn btn-danger deleteButton btn-sm"
+                                type="button"
+                                (click)="setDelete(item)"
+                              >
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row align-items-center">
+                          <div class="col-4">
+                            <img
+                              class="productImage"
+                              *ngIf="item.productThumbNailImage"
+                              [src]="item.productThumbNailImage"
+                            />
+
+                            <img
+                              class="productImage"
+                              *ngIf="!item.productThumbNailImage"
+                              src="assets/personImages/loketeDefaultImage.jpg"
+                              alt="Default Image"
+                            />
+                          </div>
+                          <div class="col-8">
+                            <div class="row">
+                              <div class="col-6"></div>
+                              <div class="col-6"></div>
+                            </div>
+                            <div class="row">
+                              <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                                <h5 class="card-title">
+                                  {{ item.productTitle }}
+                                </h5>
+                              </div>
+                            </div>
+                            <div class="row itemDetails">
+                              <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                                <h6>&nbsp;{{ item.productPrice }}&nbsp;/</h6>
+                                <p>&nbsp;{{ item.productUnit }}</p>
+                              </div>
+                            </div>
+                            <hr class="lineInsideCard" />
+                            <div class="row">
+                              <div class="col-6 mt-1">
+                                <p class="validity" style="margin: 0">
+                                  {{ item.date | slice : 0 : 10 }}
+                                </p>
+                              </div>
+                              <div class="col-6 mt-0 p-3 pt-0 pb-0">
+                                <div class="float-end">
+                                  <p><b>Views: </b>{{ item.views }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-11 productBox">
+                                <i class="fa-solid fa-box"></i> ID:
+                                <b>{{ item.productID }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <!--Product Inactive Card ends-->
+              <!--Service Inactive Card starts-->
+              <div class="container p-0 m-0">
+                <div
+                  class="container p-0 m-0"
+                  *ngIf="item.serviceStatus === 'Inactive'"
+                >
+                  <a>
+                    <div class="card mt-3">
+                      <div class="card-body p-1">
+                        <div class="row">
+                          <div class="col">
+                            <div
+                              class="approvalPending ms-1"
+                              *ngIf="item.isApproved === false"
+                            >
+                              <p class="approvalPendingTitle float-">
+                                Approval Pending
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col pe-3">
+                            <div
+                              class="d-grid gap-2 d-flex justify-content-md-end float-end"
+                            >
+                              <button
+                                class="btn btn-success editButton btn-sm"
+                                type="button"
+                                (click)="editServices(item)"
+                              >
+                                <p>Edit</p>
+                              </button>
+
+                              <button
+                                class="btn btn-danger deleteButton btn-sm"
+                                type="button"
+                                (click)="serviceDelete(item)"
+                              >
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row align-items-center">
+                          <div class="col-4">
+                            <img
+                              class="productImage"
+                              *ngIf="item.serviceThumbNailImage"
+                              [src]="item.serviceThumbNailImage"
+                            />
+
+                            <img
+                              class="productImage"
+                              *ngIf="!item.serviceThumbNailImage"
+                              src="assets/personImages/loketeDefaultImage.jpg"
+                              alt="Default Image"
+                            />
+                          </div>
+                          <div class="col-8">
+                            <div class="row">
+                              <div class="col-6"></div>
+                              <div class="col-6"></div>
+                            </div>
+                            <div class="row">
+                              <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                                <h5 class="card-title">
+                                  {{ item.serviceTitle }}
+                                </h5>
+                              </div>
+                            </div>
+
+                            <hr class="lineInsideCard" />
+                            <div class="row">
+                              <div class="col-6 mt-1">
+                                <p class="validity" style="margin: 0">
+                                  {{ item.date | slice : 0 : 10 }}
+                                </p>
+                              </div>
+                              <div class="col-6 mt-0 p-3 pt-0 pb-0">
+                                <div class="float-end">
+                                  <p><b>Views: </b>{{ item.views }}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-11 productBox">
+                                <i class="fa-solid fa-box"></i> ID:
+                                <b>{{ item.serviceID }}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <!--Service Inactive Card ends-->
+            </div>
+            <!-- <div *ngFor="let item of listingArray">
+
+        </div> -->
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <app-navigation-bar></app-navigation-bar>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+/* introduction-screen.component.css */
+.near2MeLogo {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.introduction-screen {
+  width: 100%;
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+
+  box-sizing: border-box;
+}
+
+.near2meImage {
+  width: 125px;
+  /* position: fixed; */
+  /* top: 20px; */
+}
+
+.malayalam {
+  font-size: 14px;
+}
+
+.tamil {
+  font-size: 14px;
+}
+
+/* .startButton {
+  position: fixed;
+  bottom: 30px;
+}
+.checkButton {
+  position: fixed;
+  bottom: 80px;
+} */
+
+.getStartedSection{
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+/* Center the carousel content vertically */
+#carouselExampleDark {
+   width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* padding: 20px; */
+  /* box-sizing: border-box;
+   display: flex;
+  justify-content: center;
+  align-items: center;  */
+}
+
+/* Vertically center the carousel items */
+/* .carousel-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  } */
+
+/* Add a fixed height to carousel items if needed */
+/* .carousel-item {
+    height: 100%;
+  } */

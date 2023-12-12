@@ -1,0 +1,169 @@
+/* Header */
+.title {
+  text-align: center;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  z-index: 100;
+}
+
+.near2meImage {
+  width: 125px;
+}
+
+/* Current Location */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Recently Added */
+.recentlyAddedButton {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #ebecee;
+}
+
+.recentlyAddedProductTitle {
+  margin: 0;
+  font-size: small;
+}
+
+.recentlyAddedImage {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.distance {
+  color: #075e54;
+  font-size: small;
+  margin: 0;
+}
+
+p {
+  text-align: center;
+}
+
+/* Malayalam font size */
+.ml-font {
+  font-size: 18px;
+  text-align: left;
+  overflow: scroll;
+  scrollbar-width: none;
+  font-weight: bold;
+}
+
+.ml-font-search {
+  font-size: 14px;
+  text-align: left;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.ml-font::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* Tamil font size */
+.tl-font {
+  font-size: 18px;
+  text-align: left;
+  overflow: scroll;
+  scrollbar-width: none;
+  font-weight: bold;
+}
+
+.tl-font-search {
+  font-size: 14px;
+  text-align: left;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.tl-font::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ribbon CSS */
+.ribbon {
+  --f: 10px;
+  --r: 15px;
+  --t: 3px;
+  position: absolute;
+  inset: var(--t) calc(-1 * var(--f)) auto auto;
+  padding: 0 10px var(--f) calc(10px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  background: #bd1550;
+  box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+  color: rgb(44, 44, 44);
+  font-size: 11px;
+}
+
+.card {
+  position: relative;
+  border: none !important;
+}
+
+/* Styles for the pagination buttons */
+.pagination {
+  position: fixed;
+  bottom: 12%; /* Adjust this value to set the distance from the top */
+  left: 50%; /* Place buttons at the horizontal center */
+  transform: translateX(-50%); /* Center the buttons horizontally */
+  z-index: 101; /* Ensure the buttons appear on top of other elements */
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.288); /* Increased shadow intensity */
+  background-color: #ebecee;
+}
+
+/* Additional styles for better visibility */
+.pagination button {
+  border: 0;
+  background-color: #a9af9f; /* Green color - adjust as needed */
+  color: rgb(43, 43, 43); /* White text for better visibility */
+}
+
+/* Add this CSS for the spinner */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #a9af9f;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite; /* Use a spinning animation */
+  margin: 10px auto; /* Adjust the margin based on your layout */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

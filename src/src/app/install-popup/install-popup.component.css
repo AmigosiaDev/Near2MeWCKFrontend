@@ -1,0 +1,32 @@
+/* Popup overlay */
+.popup-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+    z-index: 9999; /* Set the z-index to bring the popup above other elements */
+  }
+  
+  /* Show the modal when showModal is true */
+  .show-modal {
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Center the buttons */
+  .justify-content-center {
+    display: flex;
+    justify-content: center;
+  }
+  .langContainer{
+    background-color: rgb(217,220,220);
+    border-radius: 15px;
+    color: black;
+    width: 380px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+  }

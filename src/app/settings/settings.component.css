@@ -1,0 +1,122 @@
+/* css for header */
+.title {
+  text-align: center;
+}
+
+/* css for content */
+
+.profilePhoto {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin-left: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+/* .thumbnail {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+} */
+
+.zoomed-image {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  border-radius: 10%;
+}
+
+.zoomed-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.profileName {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 0; /* Remove default margin to improve alignment */
+}
+
+.detailName {
+  color: #777777;
+  display: inline-block;
+  margin: 0;
+}
+
+.detailContent {
+  display: inline-block;
+  color: #000000;
+}
+
+.detailContent.null {
+  color: #777777;
+}
+
+/* account */
+
+.account {
+  padding-left: 15px;
+  color: #008a7a;
+  padding-top: 25px;
+  font-style: normal;
+}
+
+.profileButton {
+  width: 100%;
+  margin: 2px;
+  padding-left: 15px;
+  background: #e7fff5;
+  border-radius: 8px;
+  border: #e7fff5;
+  padding-right: 15px;
+}
+.profileIcons {
+  color: #00332d;
+  float: left;
+}
+
+.profileIcon {
+  text-align: left;
+  float: left;
+  padding-left: 10px;
+  color: #00332d;
+}
+
+.profileButton:active {
+  background-color: #e7fff5;
+}
+
+.rightArrow {
+  color: #00332d;
+  float: right;
+  padding-right: 10px;
+}
+
+.logos {
+  width: 150px;
+}
+
+/*Sweet Alert*/
+
+/* Custom button classes */
+.swal2-confirm-button {
+  background-color: #ff0000; /* Change this to the desired color */
+  color: #3a0909; /* Text color for the button */
+}
+/* Custom style for the OK button */
+.swal2-ok-button {
+  background-color: #00ff00; /* Change this to the desired color */
+  color: #fff; /* Text color for the button */
+}

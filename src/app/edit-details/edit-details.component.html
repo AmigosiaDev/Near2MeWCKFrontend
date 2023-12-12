@@ -1,0 +1,460 @@
+<!--Header-->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-3">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" routerLink="/profile">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+    </div>
+    <div class="col-6 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-3"></div>
+  </div>
+</div>
+<!--Space to show the elements below floating header-->
+<br /><br /><br />
+
+<!--Profile Details-->
+<!--Image Upload Section-->
+<!-- <div class="container p-3">
+  <div class="row">
+    <div class="col">
+      <div class="imagePreview">
+        <img
+          class="profileImage"
+          [src]="selectedImageUrls[0] || defaultProfileImage"
+          alt="seller images"
+        />
+      </div>
+      <button
+        type="button"
+        (click)="fileInput.click()"
+        class="btn btn-light imageUploadButton btn-sm"
+      >
+        Upload new profile picture
+      </button>
+  
+      <input
+        type="file"
+        #fileInput
+        style="display: none"
+        (change)="onImageSelected($event, 0)"
+      />
+    </div>
+  </div>
+</div> -->
+<!--OLD CODE-->
+<div class="container p-1 profileDetailsContainer">
+  <div class="row p-3">
+    <div class="col-3">
+      <img
+        class="profileImage"
+        *ngIf="imageURL || selectedImageUrls[0]"
+        [src]="selectedImageUrls[0] || imageURL || defaultProfileImage"
+        alt="seller images"
+      />
+      <div *ngIf="!imageURL">
+        <img
+          class="profileImage"
+          *ngIf="!selectedImageUrls[0]"
+          src="assets/personImages/defaultimage.jpg"
+          alt="Default Image"
+        />
+      </div>
+    </div>
+
+    <div class="col-9">
+      <p class="detailName">Profile id:&nbsp;</p>
+      <p class="detailContent">{{ profileID }}</p>
+      <br />
+      <button
+        type="button"
+        (click)="fileInput.click()"
+        class="btn btn-light imageUploadButton btn-sm"
+      >
+        Upload new profile picture
+      </button>
+      <input
+        type="file"
+        #fileInput
+        style="display: none"
+        (change)="onImageSelected($event, 0)"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <p class="detailName">Name:</p>
+    </div>
+    <div class="col-9">
+      <p class="detailContent">
+        <input
+          type="text"
+          [(ngModel)]="userName"
+          class="form-control inputBoxes"
+          id="formGroupExampleInput"
+          placeholder="Enter Name"
+          value="{{ userName }}"
+          (input)="onInputChange()"
+          maxlength="30"
+          required
+        />
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <p class="detailName">Tel:</p>
+    </div>
+    <div class="col-9">+91&nbsp;{{ mobileNumber }}</div>
+  </div>
+  <div class="row">
+    <div class="form-check p-0">
+      <!--We are using material checkbox whiich is built in with Angular. The checkbox is checked by default by setting value of myModel = true on the ts file-->
+      <mat-checkbox
+        [checked]="myModel"
+        (input)="onInputChange()"
+        [(ngModel)]="disableWhatsApp"
+        (change)="toggleWhatsApp()"
+        >Phone number same as WhatsApp number</mat-checkbox
+      >
+    </div>
+  </div>
+
+  <div class="WhatsAppBox">
+    <div class="row">
+      <div class="col-3">
+        <p class="detailName">WhatsApp:</p>
+      </div>
+      <div class="col-9">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">+91</span>
+          </div>
+          <input
+            type="tel"
+            class="form-control inputBoxes"
+            (input)="onInputChange()"
+            id="formGroupExampleInput"
+            placeholder="Enter Whatsapp Number"
+            [disabled]="disableWhatsApp"
+            value="{{ whatsApp }}"
+            [(ngModel)]="whatsApp"
+            maxlength="10"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-check">
+        <!--We are using material checkbox whiich is built in with Angular. The checkbox is checked by default by setting value of myModel = true on the ts file-->
+        <mat-checkbox [checked]="myModel" (input)="onInputChange()"
+          >Receive Updates via Whatsapp?</mat-checkbox
+        >
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col-3">
+      <p class="detailName">Address:</p>
+    </div>
+    <div class="col-9">
+      <textarea
+        [(ngModel)]="address"
+        class="form-control inputBoxes"
+        (input)="onInputChange()"
+        id="addDescriptionTextarea"
+        rows="3"
+        maxlength="400"
+        placeholder="Enter Address"
+      ></textarea>
+    </div>
+  </div>
+
+  <!--"select-category-and-subcategory for product" button ends-->
+
+  <!-- <div class="row pt-3 pb-3">
+    <label class="detailName">Area of interest/Service:</label>
+  </div>
+  <div class="row pb-3">
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-outline-success monthButton btn-sm"
+        [class.active]="areaOfInterest === '2'"
+        (click)="getAreaOfInterest(2)"
+
+      >
+        2 Km
+      </button>
+    </div>
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-outline-success monthButton"
+        [class.active]="areaOfInterest === '4'"
+        (click)="getAreaOfInterest(4)"
+      >
+        4 Km
+      </button>
+    </div>
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-outline-success monthButton"
+        [class.active]="areaOfInterest === '8'"
+        (click)="getAreaOfInterest(8)"
+      >
+        8 Km
+      </button>
+    </div>
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-outline-success monthButton"
+        [class.active]="areaOfInterest === '15'"
+        (click)="getAreaOfInterest(15)"
+        
+      >
+        15 Km
+      </button>
+    </div>
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-outline-success monthButton"
+        [class.active]="areaOfInterest === '25'"
+        (click)="getAreaOfInterest(25)"
+      >
+        25 Km
+      </button>
+    </div>
+  </div> -->
+
+  <!-- <div class="row">
+    <div class="col">
+      <p class="aresInterest">
+        (When you add a category to your favorites list, you'll receive
+        notifications for new posts in that category, considering the above
+        distance.)
+      </p>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="text-center">
+      <button
+        type="button" (input)="onInputChange()"
+        class="btn btn-light optionsButton"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+      >
+        Seller Options <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+  <br />
+  <!--Collapsible panel (Accordian)-->
+  <div class="container p-0">
+    <div class="accordion" id="accordionExample">
+      <h2 class="accordion-header" id="headingOne"></h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse hide"
+        aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample"
+      >
+        <div>
+          <!--Elements inside Accordian-->
+          <div class="row p-1">
+            <div class="col-3">
+              <p class="detailName">Category:</p>
+            </div>
+            <div class="col-9">
+              <select
+                id="inputState"
+                [(ngModel)]="category"
+                (input)="onInputChange()"
+                class="form-select"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <option value="ID_CAT_SEL" selected>Seller</option>
+                <option value="ID_CAT_STO">Store</option>
+                <option value="ID_CAT_KUD">Kudumbashree</option>
+                <option value="ID_CAT_HOM">Homemade</option>
+                <option value="ID_CAT_PRO">Farm Produce</option>
+                <option value="ID_CAT_IND">Cottage Industry</option>
+                <!-- <option value="ID_CAT_KCK">Kudumbashree Cloud Kitchen</option> -->
+              </select>
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col">
+              <p class="detailName">About your business:</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <textarea
+                [(ngModel)]="about"
+                (input)="onInputChange()"
+                class="form-control inputBoxes"
+                id="addDescriptionTextarea"
+                rows="6"
+                maxlength="400"
+                placeholder="Enter About"
+              ></textarea>
+            </div>
+          </div>
+
+          
+
+          <!--Image upload section starts-->
+
+              <div class="row pt-4 pb-0">
+                <label>
+                  <p class="detailName">{{ "uploadBusinessImages" | translate }}:</p>
+                </label>
+              </div>
+              <div class="container p-3" >
+                <div class="row">
+                  <div class="col p-2">
+                    <div class="imagePreview">
+                      <img
+                        class="uploadedImage"
+                        [src]="
+                          selectedImageUrl[0] ||
+                          userImage1 ||
+                          defaultImages
+                        "
+                        alt="selected images"
+                      />
+                      <button
+                       
+                        type="button"
+                        (click)="fileInput1.click()"
+                        class="btn btn-light imageUploadButtons btn-sm transparent-button"
+                      >
+                        Select Image
+                      </button>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        #fileInput1
+                        style="display: none"
+                        (change)="userImages($event, 0)"
+                        (input)="onInputChange()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col p-2">
+                    <ng-container *ngIf="!selectedImageUrl[0] && !userImage1">
+                      <!-- Show "+" sign when the first image is not selected -->
+                      <div class="add-image-placeholder">
+                        <i class="fas fa-plus"></i>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="selectedImageUrl[0] || userImage1">
+                      <div class="imagePreview">
+                        <img
+                          class="uploadedImage"
+                          [src]="
+                            selectedImageUrl[1] ||
+                            userImage2 ||
+                            defaultImages
+                          "
+                          alt="selected images"
+                        />
+                        <button
+                          
+                          type="button"
+                          (click)="fileInput2.click()"
+                          class="btn btn-light imageUploadButtons btn-sm transparent-button"
+                        >
+                          Select Image
+                        </button>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          #fileInput2
+                          style="display: none"
+                          (change)="userImages($event, 1)"
+                          (input)="onInputChange()"
+                        />
+                      </div>
+                    </ng-container>
+                  </div>
+                  <div class="col p-2">
+                    <ng-container *ngIf="!selectedImageUrl[1] && !userImage2">
+                      <!-- Show "+" sign when the first image is not selected -->
+                      <div class="add-image-placeholder">
+                        <i class="fas fa-plus"></i>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="selectedImageUrl[1] || userImage2">
+                      <div class="imagePreview">
+                        <img
+                          class="uploadedImage"
+                          [src]="
+                          selectedImageUrl[2] ||
+                          userImage3 ||
+                            defaultImages
+                          "
+                          alt="selected images"
+                        />
+                        <button
+                        
+                          type="button"
+                          (click)="fileInput3.click()"
+                          class="btn btn-light imageUploadButtons btn-sm transparent-button"
+                        >
+                          Select Image
+                        </button>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          #fileInput3
+                          style="display: none"
+                          (change)="userImages($event, 2)"
+                          (input)="onInputChange()"
+                        />
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <!--Image upload section ends-->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Collapsible panel ends-->
+</div>
+
+<br />
+
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <div class="editSave">
+        <button class="btn btn-success" [disabled]="!hasChanges" (click)="save()">Save</button>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+<br /><br />
+
+<!-- <app-navigation-bar></app-navigation-bar> -->

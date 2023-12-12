@@ -1,0 +1,905 @@
+<app-language-popup></app-language-popup>
+<app-login-popup></app-login-popup>
+<!-- Home-page Header-->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-2 p-0" (click)="logIn()">
+      <div *ngIf="profileID">
+        <img
+          class="profileImage"
+          *ngIf="imageURL"
+          [src]="imageURL"
+          alt="Profile Image"
+        />
+        <img
+          class="profileImage"
+          *ngIf="!imageURL"
+          src="assets/personImages/defaultimage.jpg"
+          alt="Default Image"
+        />
+      </div>
+      <div *ngIf="!profileID">
+        <!--Using a Font Awesome icon-->
+        <!-- <i class="fa-solid fa-circle-user fa-xl"></i> -->
+        <button type="submit" class="btn btn loginButton">login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Space to show the elements below floating header-->
+<br /><br /><br />
+
+<!--Current-Location-Section-->
+
+<div class="container">
+  <div class="row p-3">
+    <span class="border p-1">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <div class="truncate">
+            <app-selected-location
+              (click)="goToSelectLocation()"
+              class="currentLocation"
+            ></app-selected-location>
+          </div>
+        </div>
+        <div class="col-3">
+          <!-- Example single danger button -->
+          <div class="btn-group radiusButton">
+            <button
+              type="button"
+              class="btn dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              (click)="listCategories(100)"
+            >
+              {{ selectedDistance1 }}
+              <div class="km" *ngIf="selectedDistance1 !== 'All'">Km</div>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" (click)="listCategories(2)">2 Km</a>
+              </li>
+              <br />
+              <li>
+                <a class="dropdown-item" (click)="listCategories(4)">4 Km</a>
+              </li>
+              <br />
+
+              <li>
+                <a class="dropdown-item" (click)="listCategories(6)">6 Km</a>
+              </li>
+              <br />
+              <li>
+                <a class="dropdown-item" (click)="listCategories(10)">10 Km</a>
+              </li>
+              <br />
+              <li>
+                <a class="dropdown-item" (click)="listCategories(25)">25 Km</a>
+              </li>
+              <br />
+              <li>
+                <a class="dropdown-item" (click)="listCategories(100)">All</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<!--Search-Bar-->
+<div class="container pt-0">
+  <div class="row">
+    <div class="col">
+      <input
+        class="form-control"
+        type="search"
+        placeholder="{{ 'searchString' | translate }}"
+        id="example-search-input"
+        [(ngModel)]="searchTerm"
+        [ngModelOptions]="{ standalone: true }"
+        (keyup)="handleKeyUp($event)"
+        [ngClass]="getFontClassSearch()"
+      />
+    </div>
+  </div>
+</div>
+
+<!--Recent-Ads-Banner-->
+<div class="container p-3" *ngIf="setLanguage === 'en'">
+  <div class="row">
+    <div class="col">
+      <!--Carousel starts-->
+      <div
+        id="carouselExampleInterval"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <!-- <div class="carousel-item active" data-bs-interval="5000">
+
+          <div class="carousel-item active" data-bs-interval="5000" *ngIf="address">
+            <img
+              src="assets/carouselImages/carousel-1.jpeg"
+              class="d-block w-100 rounded-4"
+            />
+          </div> -->
+
+          <div class="carousel-item active" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-4.jpeg"
+              [alt]="address + ' Image'"
+              class="d-block w-100 rounded-4"
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-2.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-3.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-4.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-1.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+          <!-- <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-6.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+          <!-- <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-7.jpg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!--Carousel Ends-->
+    </div>
+  </div>
+</div>
+
+<!--Recent-Ads-Banner-->
+<div class="container p-3" *ngIf="setLanguage === 'ml'">
+  <div class="row">
+    <div class="col">
+      <!--Carousel starts-->
+      <div
+        id="carouselExampleInterval"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <!-- <div class="carousel-item active" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-1.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+          <div class="carousel-item active" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-4.jpeg"
+              [alt]="address + ' Image'"
+              class="d-block w-100 rounded-4"
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-2.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-3.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-4.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-1.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+          <!-- <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-6.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+          <!-- <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-7.jpg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!--Carousel Ends-->
+    </div>
+  </div>
+</div>
+
+<!--Carousel for Tamil-->
+<div class="container p-3" *ngIf="setLanguage === 'tl'">
+  <div class="row">
+    <div class="col">
+      <!--Carousel starts-->
+      <div
+        id="carouselExampleInterval"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <!-- <div class="carousel-item active" data-bs-interval="5000">
+
+          <div class="carousel-item active" data-bs-interval="5000" *ngIf="address">
+            <img
+              src="assets/carouselImages/carousel-1.jpeg"
+              class="d-block w-100 rounded-4"
+            />
+          </div> -->
+
+          <div class="carousel-item active" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-4.jpeg"
+              [alt]="address + ' Image'"
+              class="d-block w-100 rounded-4"
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-2.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-3.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-4.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+
+          <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-1.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div>
+          <!-- <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-6.jpeg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+          <!-- <div class="carousel-item" data-bs-interval="5000">
+            <img
+              src="assets/carouselImages/carousel-7.jpg"
+              class="d-block w-100 rounded-4"
+              alt="..."
+            />
+          </div> -->
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!--Carousel Ends-->
+    </div>
+  </div>
+</div>
+
+<!--Recently added-->
+<div class="container pt-1" *ngIf="productForHome">
+  <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "Recently Added" | translate }}</h4>
+    </div>
+    <div class="col">
+      <a class="showAllButton" (click)="showAllRecentProducts()">
+        Show More <i class="fa-solid fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row sm-12 scrollable-row">
+    <div class="col-4 p-2" *ngFor="let item of productForHome">
+      <div class="card">
+        <div class="productButtons">
+          <div>
+            <div *ngIf="item.productTypeOfSale !== 'NOR'">
+              <div
+                class="ribbon"
+                [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+              >
+                {{ getDisplayName(item.productTypeOfSale) }}
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-lg recentlyAddedButton"
+            (click)="gotoSearchProductDescription(item.productID)"
+          >
+            <div *ngIf="item.productImageURL">
+              <img
+                [src]="item.productImageURL"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div *ngIf="item.productImageURL == null || ''">
+              <img
+                src="assets/personImages/loketeDefaultImage.jpg"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div class="truncate">
+              <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
+            </div>
+            <div class="float-end">
+              <p class="distance">
+                <i class="fa-solid fa-location-dot fa-sm"></i>
+                {{ item.distance }} Km away
+              </p>
+            </div>
+            <!-- <div class="row"><div class="col"><p></p></div></div> -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------------------------>
+
+<!-------------------------------------------------------------->
+<!--date based-->
+<div class="container" *ngIf="productBasedOnDate">
+  <!-- <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "Recently Added" | translate }}</h4>
+    </div>
+  </div> -->
+  <div class="row sm-12 scrollable-row">
+    <div class="col-4 p-2" *ngFor="let item of productBasedOnDate">
+      <div class="card">
+        <div class="productButtons">
+          <div>
+            <div *ngIf="item.productTypeOfSale !== 'NOR'">
+              <div
+                class="ribbon"
+                [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+              >
+                {{ getDisplayName(item.productTypeOfSale) }}
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-lg recentlyAddedButton"
+            (click)="gotoSearchProductDescription(item.productID)"
+          >
+            <div *ngIf="item.productImageURL">
+              <img
+                [src]="item.productImageURL"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div *ngIf="item.productImageURL == null || ''">
+              <img
+                src="assets/personImages/loketeDefaultImage.jpg"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div class="truncate">
+              <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
+            </div>
+            <div class="float-end">
+              <p class="distance">
+                <i class="fa-regular fa-calendar-days"></i>
+                {{ item.formattedDate }}
+              </p>
+            </div>
+            <!-- <div class="row"><div class="col"><p></p></div></div> -->
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4 p-2">
+      <div class="card showAllBtnRecent" (click)="showAllRecentProducts()">
+        <p class="show-all-button">
+          Show More <i class="fas fa-chevron-right"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-------------------------------------------------------------->
+<!-- Products-Categories-->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "products" | translate }}</h4>
+    </div>
+    <div class="col">
+      <a class="showAllButton" (click)="goToAllProduct()">
+        Show All <i class="fa-solid fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row sm-12 scrollable-row">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButton"
+          (click)="goToCategories('Farm Produce')"
+        >
+          <img
+            src="assets/categoryImages/farmProduce.png"
+            class="categoryImage"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "farmProduce" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButton"
+          (click)="goToCategories('Home Produce')"
+        >
+          <img
+            src="assets/categoryImages/homeProduce.png"
+            alt=""
+            class="categoryImage"
+          />
+        </button>
+      </div>
+      <p>{{ "homeProduce" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButton"
+          (click)="goToCategories('Garden')"
+        >
+          <img
+            src="assets/categoryImages/garden.png"
+            alt=""
+            class="categoryImage"
+          />
+        </button>
+      </div>
+      <p>{{ "garden" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButton"
+          (click)="goToCategories('Livestocks')"
+        >
+          <img
+            src="assets/categoryImages/livestocks.png"
+            alt=""
+            class="categoryImage"
+          />
+        </button>
+      </div>
+      <p>{{ "livestocks" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButton"
+          (click)="goToCategories('Pets')"
+        >
+          <img
+            src="assets/categoryImages/pets.png"
+            alt=""
+            class="categoryImage"
+          />
+        </button>
+      </div>
+      <p>{{ "pets" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButton"
+          (click)="goToCategories('Used Items')"
+        >
+          <img
+            src="assets/categoryImages/usedItems.png"
+            alt=""
+            class="categoryImage"
+          />
+        </button>
+      </div>
+      <p>{{ "usedItems" | translate }}</p>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------>
+
+<!--Quick-Links-Categories-->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "quickLinks" | translate }}</h4>
+    </div>
+    <div class="col">
+      <a (click)="goToQuickLinks()" class="showAllButton">
+        Show All <i class="fa-solid fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row sm-12 scrollable-row">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/brandStore.png"
+            alt=""
+            class="categoryImage"
+            id="ORG"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "organic" | translate }}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/superSale.png"
+            alt=""
+            class="categoryImage"
+            id="DIS"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "discounted" | translate }}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/freeItems.png"
+            alt=""
+            class="categoryImage"
+            id="FRE"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "freeItems" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/festival.png"
+            alt=""
+            class="categoryImage"
+            id="FES"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "festiveSpecials" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/exotic.png"
+            alt=""
+            class="categoryImage"
+            id="EXO"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "exotic" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/seasonal.png"
+            alt=""
+            class="categoryImage"
+            id="SEA"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "seasonal" | translate }}</p>
+    </div>
+  </div>
+  <!------------->
+  <div class="row sm-12 scrollable-row">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/Kudumbashree_logo.png"
+            alt=""
+            class="categoryImage Kudumbasree"
+            id="ID_CAT_KUD"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "Kudumbasree" | translate }}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/farmmade.png"
+            alt=""
+            class="categoryImage"
+            id="ID_CAT_PRO"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "Farm Products" | translate }}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/home-made.png"
+            alt=""
+            class="categoryImage"
+            id="ID_CAT_HOM"
+            (click)="gotoQuickLinkListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "Homemade" | translate }}</p>
+    </div>
+
+    <!------------>
+  </div>
+
+  <!--Services-Categories-->
+  <!-- <div class="container"> -->
+  <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "services" | translate }}</h4>
+    </div>
+    <div class="col">
+      <a class="showAllButton" (click)="goToAllService()">
+        Show All <i class="fa-solid fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row sm-12 scrollable-row">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/farmServices.png"
+            alt=""
+            class="categoryImage"
+            id="ID_FRM"
+            (click)="gotoServiceListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "farmServices" | translate }}</p>
+    </div>
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/skilledServices.png"
+            alt=""
+            class="categoryImage"
+            id="ID_SKL"
+            (click)="gotoServiceListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "skilledServices" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/localEvents.png"
+            alt=""
+            class="categoryImage"
+            id="ID_LLE"
+            (click)="gotoServiceListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "localEvents" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button type="button" class="btn btn-lg categoryButton">
+          <img
+            src="assets/categoryImages/otherServices.png"
+            alt=""
+            class="categoryImage"
+            id="ID_OTH"
+            (click)="gotoServiceListing($event)"
+          />
+        </button>
+      </div>
+
+      <p>{{ "otherServices" | translate }}</p>
+    </div>
+  </div>
+  <!-- </div> -->
+
+  <hr />
+  <!--Logos-->
+  <div class="container pb-5">
+    <div class="row align-items-center justify-content-center">
+      <div class="col p-0 text-center">
+        <img class="logos" src="assets/logos/KSUM.png" alt="" />
+      </div>
+      <div class="col p-0 text-center">
+        <img class="logos" src="assets/logos/startupIndia.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <br />
+</div>
+<!--Navigation-Bar-->
+<app-navigation-bar></app-navigation-bar>

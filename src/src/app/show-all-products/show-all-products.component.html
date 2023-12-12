@@ -1,0 +1,135 @@
+<!--header -->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" (click)="goBack()">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+
+<!--Space to show the elements below floating header-->
+<br /><br /><br /><br />
+
+<!--categories-->
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "products" | translate }}</h4>
+    </div>
+  </div>
+  <div class="row sm-12">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButtons"
+          (click)="goToCategories('Farm Produce')"
+        >
+          <img
+            class="categoryImage"
+            src="assets/categoryImages/farmProduce.png"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "farmProduce" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButtons"
+          (click)="goToCategories('Home Produce')"
+        >
+          <img
+            class="categoryImage"
+            src="assets/categoryImages/homeProduce.png"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "homeProduce" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButtons"
+          (click)="goToCategories('Garden')"
+        >
+          <img
+            class="categoryImage"
+            src="assets/categoryImages/garden.png"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "garden" | translate }}</p>
+    </div>
+  </div>
+  <div class="row sm-12">
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButtons"
+          (click)="goToCategories('Livestocks')"
+        >
+          <img
+            class="categoryImage"
+            src="assets\categoryImages\livestocks.png"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "Livestocks" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButtons"
+          (click)="goToCategories('Pets')"
+        >
+          <img
+            class="categoryImage"
+            src="assets\categoryImages\pets.png"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "Pets" | translate }}</p>
+    </div>
+
+    <div class="col p-2">
+      <div class="productButtons">
+        <button
+          type="button"
+          class="btn btn-lg categoryButtons"
+          (click)="goToCategories('Used Items')"
+        >
+          <img
+            class="categoryImage"
+            src="assets\categoryImages\usedItems.png"
+            alt=""
+          />
+        </button>
+      </div>
+      <p>{{ "usedItems" | translate }}</p>
+    </div>
+  </div>
+</div>
+
+<!--navigation bar-->
+<app-navigation-bar></app-navigation-bar>

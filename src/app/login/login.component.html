@@ -1,0 +1,94 @@
+<!--Container fullPage is a div for the entire page so that we can apply styles throughout the page-->
+<div class="container fullPage">
+  <!--The title-->
+  <div class="container p-5">
+    <div class="row">
+      <h3 class="">Welcome to</h3>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <img class="logos" src="assets/logos/Near2me.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!--The input Phone number Section-->
+  <div class="container inputPhoneNumber">
+    <div class="row">
+      <label class="form-label verifyYourPhoneNumberText">{{
+        "verifyPhone" | translate
+      }}</label>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-2"><b style="float: right">+91</b></div>
+      <div class="col-10 p-0">
+        <input
+        type="text"
+        class="form-control newUserPhoneNumber"
+        id="newUserPhoneNumber"
+        [(ngModel)]="newUserPhoneNumber"
+        [ngModelOptions]="{ standalone: true }"
+        placeholder="Enter your Phone number"
+        required
+        pattern="^\d{10}$"
+        maxlength="10"
+        inputmode="numeric"
+        title="Please enter a valid 10-digit phone number"
+        oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 10) this.value = this.value.slice(0, 10);"
+        (input)="checkPhoneNumberLength()"
+        (keyup.enter)="handleEnterKeyPress($event)"
+      />
+
+      </div>
+
+      <div class="row">
+        <div class="form-check">
+          <!--We are using material checkbox whiich is built in with Angular. The checkbox is checked by default by setting value of myModel = true on the ts file-->
+          <mat-checkbox [checked]="myModel"
+            >Receive Updates via Whatsapp?</mat-checkbox
+          >
+        </div>
+      </div>
+
+      <!--Agree & Continue Section-->
+      <div class="container agreeContinue">
+        <div class="row">
+          <p>
+            Read our <a (click)="PrivacyPolicy()">Privacy Policy</a>. Tap Agree & Continue to accept the
+            <a (click)="TermsAndConditions()">Terms & Conditions</a>.
+          </p>
+        </div>
+        <div class="row">
+          <button
+            type="submit"
+            class="btn btn-success"
+            (click)="passPhoneNumber()"
+            
+            [disabled]="newUserPhoneNumber.length !== 10"
+          >
+            {{ "agreeAndContinue" | translate }}
+          </button>
+        </div>
+        <br /><br />
+        <div class="row">
+          <button type="button" class="btn btn-light" (click)="goToBack()">
+            {{ "skip" | translate }}
+          </button>
+        </div>
+        <br />
+        <div class="row align-items-center justify-content-center">
+          <div class="col p-0 text-center">
+            <img class="logos" src="assets/logos/KSUM.png" alt="" />
+          </div>
+          <div class="col p-0 text-center">
+            <img class="logos" src="assets/logos/startupIndia.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <!--The footer part containg Amigosia Title-->
+    </div>
+  </div>
+</div>
+
+

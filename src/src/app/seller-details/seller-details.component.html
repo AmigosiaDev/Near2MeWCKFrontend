@@ -1,0 +1,283 @@
+<!--header for the seller page-->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" (click)="goBack()">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+    </div>
+    <div class="col-8 title"><h4>Profile</h4></div>
+    <div class="col-2"></div>
+  </div>
+</div>
+
+<!--Space to show the elements below floating header-->
+<br /><br />
+
+<!--seller details-->
+<div class="sellerPage">
+  <p class="sellerDetails"></p>
+  <div class="container mt-5">
+    <div class="detailBox">
+      <div class="row">
+        <div class="col-3">
+          <img
+            class="sellerImg"
+            [src]="sellerImageURL || defaultImage"
+            alt="seller images"
+            (click)="toggleImageZoom()"
+          />
+        </div>
+        <div
+          *ngIf="isZoomed"
+          class="zoomed-container"
+          (click)="closeImageZoom()"
+        >
+          <img
+            class="zoomed-image"
+            [src]="sellerImageURL || 'assets/personImages/defaultimage.jpg'"
+            alt="Zoomed Profile Image"
+          />
+        </div>
+
+        <div class="col-1">
+          <!-- <span>
+            <i class="fa-solid fa-thumbs-up fa-lg upButton"></i>
+            <i class="fa-solid fa-thumbs-down fa-lg downButton"></i>
+          </span>
+          <p><span>887</span> <span class="disLike">79</span></p> -->
+        </div>
+        <div class="col-8">
+          <!-- <i class="fa-solid fa-ellipsis-vertical fa-lg dots"></i> -->
+          <button *ngIf="profileID!==sellerprofileID"
+            type="button"
+            class="btn btn-danger reportButton"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            data-bs-whatever="@getbootstrap"
+          >
+            Report User
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-4">
+          <div class="idBox">
+            <p class="sellerProfile">ID:</p>
+          </div>
+        </div>
+        <div class="col-8">
+          <b>{{ sellerDetails?.profileID }}</b>
+        </div>
+      </div>
+      <br />
+      <div class="row pb-3">
+        <div class="col-4"><p class="sellerProfile">Aadhar verified :</p></div>
+        <div class="col-8"><p class="seller">NO</p></div>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <p class="sellerProfile">Name:</p>
+        </div>
+        <div class="col-8">{{ sellerDetails?.username }}</div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-4">
+          <p class="sellerProfile">Category :</p>
+        </div>
+        <div class="col-8">{{ userCategory }}</div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-4"><p class="sellerProfile">About :</p></div>
+      </div>
+      <div class="row">
+        <div class="col detailContent">
+          {{ about != "undefined" ? about : null }}
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-4"><p class="sellerProfile">Address :</p></div>
+        <div class="col-8 detailContent">
+          {{ address != "undefined" ? address : null }}
+        </div>
+      </div>
+      <br />
+      <div class="row d-flex align-items-center">
+        <div class="col-4"><p class="sellerProfile">Tel :</p></div>
+        <div class="col-8">
+          <a [href]="'tel:' + sellerPhone">
+            <button
+              type="button"
+              class="btn btn btnColor1 w-100"
+              (click)="countUp()"
+            >
+              <i class="fa-solid fa-phone" style="color: #ffffff"></i>
+              Call
+            </button></a
+          >
+          <!-- <p class="seller">1235456</p> -->
+        </div>
+      </div>
+      <br />
+      <div class="row d-flex align-items-center">
+        <div class="col-4"><p class="sellerProfile">WhatsApp :</p></div>
+        <div class="col-8">
+          <a
+            aria-label="Chat on WhatsApp"
+            [href]="
+              'https://wa.me/' + '+91' + sellerPhone + '?text=' + sellerMessage
+            "
+            (click)="countUp()"
+          >
+            <img
+              class="whatsAppButton w-100"
+              alt="Chat on WhatsApp"
+              src="assets\buttons\WhatsAppButtonGreenSmall.png"
+            />
+          </a>
+          <!-- <p class="seller">123456</p> -->
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col pb-3">
+          <p class="sellerProfile" *ngIf="userImageURL">Business Images :</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <img
+            *ngIf="userImageURL[0]"
+            [src]="userImageURL[0]"
+            class="d-block w-100 userImageURL"
+            alt="..."
+            (click)="toggleImageZoomImg0()"
+          />
+        </div>
+        <div
+          *ngIf="isZoomedImg0"
+          class="zoomed-container"
+          (click)="closeImageZoomImg0()"
+        >
+          <img
+            class="zoomed-image"
+            [src]="userImageURL[0]"
+            alt="Zoomed Profile Image"
+          />
+        </div>
+        <div class="col">
+          <img
+            *ngIf="userImageURL[1]"
+            [src]="userImageURL[1]"
+            class="d-block w-100 userImageURL"
+            alt="..."
+            (click)="toggleImageZoomImg1()"
+          />
+        </div>
+        <div
+          *ngIf="isZoomedImg1"
+          class="zoomed-container"
+          (click)="closeImageZoomImg1()"
+        >
+          <img
+            class="zoomed-image"
+            [src]="userImageURL[1]"
+            alt="Zoomed Profile Image"
+          />
+        </div>
+        <div class="col">
+          <img
+            *ngIf="userImageURL[2]"
+            [src]="userImageURL[2]"
+            class="d-block w-100 userImageURL"
+            alt="..."
+            (click)="toggleImageZoomImg2()"
+          />
+        </div>
+        <div
+          *ngIf="isZoomedImg2"
+          class="zoomed-container"
+          (click)="closeImageZoomImg2()"
+        >
+          <img
+            class="zoomed-image"
+            [src]="userImageURL[2]"
+            alt="Zoomed Profile Image"
+          />
+        </div>
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 member">
+          <i class="fa-solid fa-check"></i>
+          Member Since: {{ memberSince }}
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+    <!-- <button type="button" class="btn btn-primary favouritesButton">
+      <span>Add to Favourites</span>
+    </button> -->
+  </div>
+</div>
+<br /><br /><br />
+<!--Modal Window for Report User-->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Report the User</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea
+              [(ngModel)]="reportMessage"
+              [ngModelOptions]="{ standalone: true }"
+              class="form-control"
+              id="message-text"
+              rows="3"
+              maxlength="100"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="addReport()"
+          data-bs-dismiss="modal"
+        >
+          Report
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--navigation bar-->
+<app-navigation-bar></app-navigation-bar>

@@ -1,0 +1,66 @@
+/*Header*/
+.title {
+  text-align: center;
+}
+
+/*Input and Continue Section*/
+.fullPage {
+  font-family: inter;
+}
+
+h3 {
+  text-align: center;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 900;
+  font-size: xx-large;
+}
+
+.near2meImage {
+  width: 125px;
+}
+
+a {
+  color: #007ba8;
+  text-decoration: none;
+  font-weight: 600;
+}
+.inputPhoneNumber {
+  padding-top: 10%;
+}
+
+.verifyYourPhoneNumberText {
+  font-weight: 600;
+  font-size: large;
+}
+
+.form-control {
+  border-color: #047857;
+  border-width: 2px;
+  float: center;
+}
+
+.form-control:focus {
+  border-color: #047857;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.amigosiaTitle {
+  padding-top: 20%;
+  position: relative;
+  text-align: center;
+  font-size: x-large;
+  color: #047857;
+  font-weight: 900;
+}
+
+.resentButton {
+  text-decoration: none; /* Remove the default underline */
+  /* pointer-events: none; Disable click events on the link */
+  border: none; /* Remove border */
+  background-color: transparent;
+}

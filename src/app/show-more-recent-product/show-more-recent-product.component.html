@@ -1,0 +1,147 @@
+<!-- Home-page Header-->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <div class="col-2">
+        <!--Using a Bootstrap button-->
+        <button type="button" class="btn btn-light" (click)="goBack()">
+          <!--Using a Font Awesome icon-->
+          <i class="fa-solid fa-arrow-left fa-xl"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-2 p-0"></div>
+  </div>
+</div>
+
+<!--Space to show the elements below floating header-->
+<br /><br /><br />
+<br />
+<div class="container">
+  <div class="row">
+    <h3>{{ "Recently Added Products" | translate }}</h3>
+    <br />
+  </div>
+</div>
+
+<!------------------------------------------------------------>
+
+<!-------------------------------------------------------------->
+<!--date based-->
+<div class="container" *ngIf="productBasedOnDate">
+  <!-- <div class="row">
+    <div class="col">
+      <h4 [ngClass]="getFontClass()">{{ "Recently Added" | translate }}</h4>
+    </div>
+  </div> -->
+  <div class="row sm-12">
+    <div class="col-4 p-2" *ngFor="let item of productBasedOnDate">
+      <div class="card">
+        <div class="productButtons">
+          <div>
+            <div *ngIf="item.productTypeOfSale !== 'NOR'">
+              <div
+                class="ribbon"
+                [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+              >
+                {{ getDisplayName(item.productTypeOfSale) }}
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-lg recentlyAddedButton"
+            (click)="gotoSearchProductDescription(item.productID)"
+          >
+            <div *ngIf="item.productImageURL">
+              <img
+                [src]="item.productImageURL"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div *ngIf="item.productImageURL == null || ''">
+              <img
+                src="assets/personImages/loketeDefaultImage.jpg"
+                class="recentlyAddedImage"
+                alt=""
+              />
+            </div>
+            <div class="truncate">
+              <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
+            </div>
+            <div class="float-end">
+              <p class="distance">
+                <i class="fa-regular fa-calendar-days"></i>
+                {{ item.formattedDate }}
+              </p>
+            </div>
+            <!-- <div class="row"><div class="col"><p></p></div></div> -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<!-------------------------------------------------------------->
+<!-- <div class="container" *ngIf="showMoreItems.length !== 0">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <div class="pagination" style="padding: 5px; border-radius: 15px">
+        <button
+          class="btn btn-success mx-2"
+          (click)="loadPreviousPage()"
+          [disabled]="currentPage === 1"
+        >
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+        <button
+          class="btn btn-success mx-2"
+          (click)="loadNextPage()"
+          [disabled]="currentPage * limit >= totalItems"
+        >
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div> -->
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <!-- Show the spinner if loading is true -->
+      <div class="pagination" style="padding: 5px; border-radius: 15px">
+        <div *ngIf="loading" class="spinner"></div>
+        <button
+          *ngIf="!loading"
+          class="btn btn-success mx-2"
+          (click)="loadPreviousPage()"
+          [disabled]="currentPage === 1"
+        >
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+        <button
+          *ngIf="!loading"
+          class="btn btn-success mx-2"
+          (click)="loadNextPage()"
+          [disabled]="currentPage === 5"
+        >
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+<br /><br /><br /><br />
+
+<!--Navigation-Bar-->
+<app-navigation-bar></app-navigation-bar>

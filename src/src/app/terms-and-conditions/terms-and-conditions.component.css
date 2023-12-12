@@ -1,0 +1,41 @@
+/*Header*/
+.title {
+  text-align: center;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  display: absolute;
+  z-index: 1;
+}
+
+/*Body*/
+body {
+  background-color: #f0f0f0 !important; /* Replace this with the desired grey color code */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
+}
+
+a {
+  color: black;
+}
+.headings {
+  margin-bottom: 15px;
+}
+.small {
+  font-size: smaller;
+}
+li {
+  font-size: small;
+}
+.title {
+  text-align: center;
+}
+.near2meImage {
+  width: 125px;
+}

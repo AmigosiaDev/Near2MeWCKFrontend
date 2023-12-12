@@ -1,0 +1,805 @@
+<!--Header-->
+<div class="container-fluid p-3 header">
+  <div class="row">
+    <div class="col-2">
+      <!--Using a Bootstrap button-->
+      <button type="button" class="btn btn-light" (click)="goBack()">
+        <!--Using a Font Awesome icon-->
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      </button>
+    </div>
+    <div class="col-8 title">
+      <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+<!--Space to show the elements below floating header-->
+<br /><br /><br />
+
+<!--search cards starts -->
+
+<!--Product Description Starts-->
+<div *ngFor="let item of searchArray">
+  <div *ngIf="item.productTitle">
+    <!--div *ngIf="item.productID === productIDValue"-->
+
+    <!--Product Image Carousel-->
+    <div class="container p-3">
+      <div class="row ribbonCard">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- <div *ngIf="item.productTypeOfSale !== 'NOR'">
+              <div
+                class="ribbonDescription"
+                [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+              >
+                {{ getDisplayName(item.productTypeOfSale) }}
+              </div>
+            </div> -->
+            <div class="carousel-item active">
+              <div *ngIf="item.productTypeOfSale !== 'NOR'">
+                <div
+                  class="ribbonDescription"
+                  [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+                >
+                  {{ getDisplayName(item.productTypeOfSale) }}
+                </div>
+              </div>
+              <img
+                *ngIf="item.productImageData[0]"
+                [src]="item.productImageData[0]"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+
+              <img
+                *ngIf="!item.productImageData[0]"
+                src="assets/personImages/loketeDefaultImage.jpg"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item" *ngIf="item.productImageData[1]">
+              <div *ngIf="item.productTypeOfSale !== 'NOR'">
+                <div
+                  class="ribbonDescription"
+                  [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+                >
+                  {{ getDisplayName(item.productTypeOfSale) }}
+                </div>
+              </div>
+              <img
+                [src]="item.productImageData[1]"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item" *ngIf="item.productImageData[2]">
+              <div *ngIf="item.productTypeOfSale !== 'NOR'">
+                <div
+                  class="ribbonDescription"
+                  [ngStyle]="getRibbonStyles(item.productTypeOfSale)"
+                >
+                  {{ getDisplayName(item.productTypeOfSale) }}
+                </div>
+              </div>
+              <img
+                [src]="item.productImageData[2]"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--product details-->
+
+    <div class="container p-3">
+      <div class="row">
+        <p style="text-align: left; font-size: 0.9em; color: #0090f0" (click)="goToListing()">
+          <b>
+            {{ CategoryName }}
+          </b>
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <h4 class="postTitle">
+            <b>{{ item.productTitle }}</b>
+          </h4>
+        </div>
+        <div class="col-2">
+          <button class="favButton" (click)="toggleIconBackground('products')">
+            <div *ngIf="!isIconBackgroundToggled">
+              <i class="fa-regular fa-heart fa-lg likeSign"></i>
+            </div>
+            <div *ngIf="isIconBackgroundToggled">
+              <i class="fa-regular fa-heart fa-lg fa likeSign"></i>
+            </div>
+          </button>
+        </div>
+
+        <div class="col-2">
+          <button class="shareButton" (click)="sharePage()">
+            <i class="fa-regular fa-share-from-square fa-lg shareSign"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4>
+            <i class="fa-solid fa-indian-rupee-sign"></i
+            ><b>{{ item.productPrice }} / {{ item.productUnit }}</b>
+          </h4>
+        </div>
+        <div class="col">
+          <div class="float-end">
+            <button
+              [disabled]="isInterestShown"
+              type="button"
+              class="btn btn-light btn showInterestedButton"
+              (click)="
+                sendNotificationToSeller(
+                  item.profileID,
+                  item.productTitle,
+                  item.productID
+                )
+              "
+            >
+              {{ isInterestShown ? "Shown interest" : "Show interest" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p><b>Views: </b>{{ viewCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="locationClass">
+      <div class="container locationBox">
+        <div class="row pb-1 p-3">
+          <div class="col">
+            <i class="fa-solid fa-thumbtack" style="color: #858585"></i>
+            &nbsp;
+            {{ item.distance }} Km's away
+          </div>
+          <div class="col">
+            <div class="float-end">
+              <a class="showOnMaps" (click)="openGoogleMapsDirections()"
+                ><b> Show on Maps</b>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row pb-1 p-3">
+          <div class="col">
+            <i class="fa-solid fa-location-dot" style="color: #858585"></i>
+            &nbsp; {{ item.address }}
+          </div>
+        </div>
+        <div class="row pb-3 p-3">
+          <div class="postedOnText">
+            <i class="fa-regular fa-calendar-days" style="color: #858585"></i
+            >&nbsp; Posted: {{ item.date }}
+          </div>
+        </div>
+        <!-- <div class="row pb-3 p-3">
+          <div class="postedOnText">
+            <i class="fa-solid fa-box" style="color: #858585"></i>
+            ID: {{ item.productID }}
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="container pt-2">
+      <div class="row">
+        <div class="col productBox">
+          <i class="fa-solid fa-box"></i> ID:
+          {{ item.productID }}
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <hr />
+    </div>
+
+    <div class="container pb-2">
+      <div class="row">
+        <div class="col">
+          <h4>About</h4>
+          <p class="description">{{ item.productDescription }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <hr />
+    </div>
+
+    <!--seller-details-->
+    <div class="container pb-2">
+      <div class="row pb-2">
+        <div class="col"><b>Seller Profile</b></div>
+        <div class="col px-0 pt-1" style="text-align: right">
+          <button class="favButton" (click)="addSellerFav('sellers')">
+            <div *ngIf="!sellerFavButton">
+              <i class="fa-regular fa-heart fa-lg likeSign"></i>
+            </div>
+            <div *ngIf="sellerFavButton">
+              <i class="fa-regular fa-heart fa-lg fa likeSign"></i>
+            </div>
+          </button>
+        </div>
+
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-outline btn-sm showInterestedButton"
+            style="float: right"
+            (click)="redirectToProductSellerDetails(sellerID, this.productDBID)"
+          >
+            Show Profile
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-2">
+          <img
+            class="profileImage"
+            [src]="sellerImageURL || 'assets/personImages/defaultimage.jpg'"
+            alt="Profile Image"
+          />
+        </div>
+        <div class="col-6">
+          <b>{{ sellerName }}</b>
+          <br />
+          <div class="memberSinceText">Member Since {{ memberSince }}</div>
+          <div
+            class="sellerCategoryFarmProduce"
+            style="padding-left: 5px; padding-right: 5px"
+            [ngStyle]="getStyles(sellerCategory)"
+            *ngIf="sellerCategory != 'ID_CAT_SEL'"
+          >
+            {{ getUserCategory(sellerCategory) }}
+          </div>
+        </div>
+        <div class="col-4">
+          <!-- <button
+            type="button"
+            class="btn btn-outline btn-sm showInterestedButton"
+            routerLink="/seller-details"
+          >
+            Show Profile
+          </button> -->
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+      <div class="row contact pb-1">
+        <div class="col text-center">
+          <a [href]="'tel:' + sellerPhone">
+            <button
+              type="button"
+              class="btn btn btnColor1 w-100"
+              (click)="incrementProductContactCount()"
+            >
+              <i class="fa-solid fa-phone" style="color: #ffffff"></i>
+              Call
+            </button></a
+          >
+        </div>
+        <div class="col text-center">
+          <a
+            aria-label="Chat on WhatsApp"
+            [href]="
+              'https://wa.me/' +
+              '+91' +
+              sellerwhatsApp +
+              '?text=' +
+              sellerMessage
+            "
+            (click)="incrementProductContactCount()"
+          >
+            <img
+              class="whatsAppButton w-100"
+              alt="Chat on WhatsApp"
+              src="assets\buttons\WhatsAppButtonGreenSmall.png"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--/div-->
+  </div>
+
+  <hr />
+  <!--Product Description Ends-->
+
+  <!--Service Description Starts-->
+  <div *ngIf="item.serviceTitle">
+    <!--div *ngIf="item.serviceID === serviceIDValue"-->
+    <!--Hardcoded to show only the details of Apple-->
+    <!--Service Image Carousel-->
+    <div class="container p-3">
+      <div class="row">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                *ngIf="item.serviceImageData[0]"
+                [src]="item.serviceImageData[0]"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+
+              <img
+                *ngIf="!item.serviceImageData[0]"
+                src="assets/personImages/loketeDefaultImage.jpg"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item" *ngIf="item.serviceImageData[1]">
+              <img
+                [src]="item.serviceImageData[1]"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+            </div>
+            <div class="carousel-item" *ngIf="item.serviceImageData[2]">
+              <img
+                [src]="item.serviceImageData[2]"
+                class="d-block w-100 carouselImage"
+                alt="..."
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--service details-->
+    <div class="container p-3 pb-0">
+      <div class="row">
+        <div class="col-8">
+          <h4 class="postTitle">
+            <b>{{ item.serviceTitle }}</b>
+          </h4>
+        </div>
+        <div class="col-2">
+          <button class="favButton" (click)="toggleIconBackground('services')">
+            <div *ngIf="!isIconBackgroundToggled">
+              <i class="fa-regular fa-heart fa-lg likeSign"></i>
+            </div>
+            <div *ngIf="isIconBackgroundToggled">
+              <i class="fa-regular fa-heart fa-lg fa likeSign"></i>
+            </div>
+          </button>
+        </div>
+        <div class="col-2">
+          <button class="shareButton" (click)="sharePage()">
+            <i class="fa-regular fa-share-from-square fa-lg shareSign"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col productBox pt-1 pb-1">
+          <i class="fa-solid fa-box"></i> ID:
+          {{ item.serviceID }}
+        </div>
+        <div class="col mb-1">
+          <div class="float-end">
+            <button
+              [disabled]="isInterestShown"
+              type="button"
+              class="btn btn-outline btn showInterestedButton"
+              (click)="
+                sendNotificationToSeller(
+                  item.profileID,
+                  item.serviceTitle,
+                  item.serviceID
+                )
+              "
+            >
+              {{ isInterestShown ? "Shown interest" : "Show interest" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p><b>Views: </b>{{ viewCount }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="locationClass">
+      <div class="container locationBox">
+        <div class="row pb-1 p-3">
+          <div class="col">
+            <i class="fa-solid fa-thumbtack" style="color: #858585"></i>
+            &nbsp;
+            {{ item.distance }} Km's away
+          </div>
+        </div>
+
+        <div class="row pb-1 p-3">
+          <div class="col">
+            <i class="fa-solid fa-location-dot" style="color: #858585"></i>
+            &nbsp;
+            {{ item.address }}
+          </div>
+        </div>
+        <div class="row pb-3 p-3">
+          <div class="postedOnText">
+            <i class="fa-regular fa-calendar-days" style="color: #858585"></i>
+            &nbsp; Posted: {{ item.date }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <hr />
+    </div>
+
+    <div class="container pb-2">
+      <div class="row">
+        <div class="col">
+          <h4>About</h4>
+          <p class="description">{{ item.serviceDescription }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <hr />
+    </div>
+
+    <!--seller-details-->
+    <div class="container pb-2">
+      <div class="row pb-2">
+        <div class="col"><b>Seller Profile</b></div>
+        <div class="col px-0 pt-1" style="text-align: right">
+          <button class="favButton" (click)="addSellerFav('sellers')">
+            <div *ngIf="!sellerFavButton">
+              <i class="fa-regular fa-heart fa-lg likeSign"></i>
+            </div>
+            <div *ngIf="sellerFavButton">
+              <i class="fa-regular fa-heart fa-lg fa likeSign"></i>
+            </div>
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-outline btn-sm showInterestedButton"
+            style="float: right"
+            (click)="redirectToServiceSellerDetails(sellerID, this.serviceDBID)"
+          >
+            Show Profile
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-2">
+          <img
+            class="profileImage"
+            [src]="sellerImageURL || 'assets/personImages/defaultimage.jpg'"
+            alt="Profile Image"
+          />
+        </div>
+        <div class="col-6">
+          <b>{{ sellerName }}</b>
+          <br />
+          <div class="memberSinceText">Member Since {{ memberSince }}</div>
+        </div>
+        <div class="col-4">
+          <!-- <button
+            type="button"
+            class="btn btn-outline btn-sm showInterestedButton"
+            routerLink="/seller-details"
+          >
+            Show Profile
+          </button> -->
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+      <div class="row contact pb-1">
+        <div class="col text-center">
+          <a [href]="'tel:' + sellerPhone">
+            <button
+              type="button"
+              class="btn btn btnColor1 w-100"
+              (click)="incrementServiceContactCount()"
+            >
+              <i class="fa-solid fa-phone" style="color: #ffffff"></i>
+              Call
+            </button></a
+          >
+        </div>
+        <div class="col text-center">
+          <a
+            aria-label="Chat on WhatsApp"
+            [href]="
+              'https://wa.me/' +
+              '+91' +
+              sellerwhatsApp +
+              '?text=' +
+              sellerMessage
+            "
+            (click)="incrementServiceContactCount()"
+          >
+            <img
+              class="whatsAppButton w-100"
+              alt="Chat on WhatsApp"
+              src="assets\buttons\WhatsAppButtonGreenSmall.png"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <!--/div-->
+  </div>
+</div>
+<!--Service Description Ends-->
+
+<!--search cards ends -->
+
+<div *ngIf="otherProducts.length > 1">
+  <div class="container">
+    <div class="row">
+      <div class="col"><h5>Other Products from Seller</h5></div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="container mb-1" *ngFor="let productItem of otherProducts">
+  <!-- ... Other code ... -->
+
+  <!--Product Part Starts-->
+  <div *ngIf="productItem.productTitle">
+    <div *ngIf="curentDescriptionID !== productItem.productID">
+      <div
+        class="container p-0 m-0"
+        *ngIf="productItem.productStatus === 'Active'"
+      >
+        <a>
+          <div
+            class="card"
+            (click)="navigateToProductDescription(productItem.productID)"
+          >
+            <div class="card-body p-1">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <div>
+                    <img
+                      class="productImage"
+                      *ngIf="productItem.productThumbNailImage"
+                      [src]="productItem.productThumbNailImage"
+                    />
+
+                    <img
+                      class="productImage"
+                      *ngIf="!productItem.productThumbNailImage"
+                      src="assets/personImages/loketeDefaultImage.jpg"
+                      alt="Default Image"
+                    />
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col m-3 m-3 mt-0 mb-0 p-0 truncate">
+                      <h5 class="cardTitle">
+                        {{ productItem.productTitle }}
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div *ngIf="productItem.productTypeOfSale !== 'NOR'">
+                      <div
+                        class="ribbon"
+                        [ngStyle]="
+                          getRibbonStyles(productItem.productTypeOfSale)
+                        "
+                      >
+                        {{ getDisplayName(productItem.productTypeOfSale) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0">
+                      <i class="fa-solid fa-indian-rupee-sign"></i>
+                      <h6>&nbsp;{{ productItem.productPrice }}&nbsp;/</h6>
+                      <p class="fontSizeSmall">
+                        &nbsp;{{ productItem.productUnit }}
+                      </p>
+                    </div>
+                    <div class="col p-0"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0">
+                      <div class="row p-0 m-0">
+                        <div class="col p-0">
+                          <p class="views">
+                            <b>Views: </b>{{ productItem.views }}
+                          </p>
+                        </div>
+                        <div class="col p-0 itemDetails">
+                          <p class="postedOn">{{ productItem.date }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="lineInsideCard" />
+                  <div class="row">
+                    <div class="col-6 p-0 mt-1">
+                      <div
+                        class="sellerCategoryFarmProduce"
+                        [ngStyle]="getStyles(productItem.userCategory)"
+                      >
+                        <p
+                          class="sellerCategoryTitle"
+                          *ngIf="productItem.userCategory != 'ID_CAT_SEL'"
+                        >
+                          {{ getUserCategory(productItem.userCategory) }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-6 ps-1 pe-3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!--Product Part Ends-->
+  <!--Service Part Starts-->
+  <div *ngIf="productItem.serviceTitle">
+    <div *ngIf="curentDescriptionID !== productItem.serviceID">
+      <a>
+        <div
+          class="card"
+          (click)="navigateToServiceDescription(productItem.serviceID)"
+        >
+          <div class="card-body p-1">
+            <div class="row align-items-center">
+              <div class="col-4">
+                <div>
+                  <img
+                    class="productImage"
+                    *ngIf="productItem.serviceThumbNailImage"
+                    [src]="productItem.serviceThumbNailImage"
+                  />
+
+                  <img
+                    class="productImage"
+                    *ngIf="!productItem.serviceThumbNailImage"
+                    src="assets/personImages/loketeDefaultImage.jpg"
+                    alt="Default Image"
+                  />
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col-6"></div>
+                </div>
+                <div class="row">
+                  <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
+                    <h5 class="cardTitle">
+                      {{ productItem.serviceTitle }}
+                    </h5>
+                  </div>
+                  <div class="col-3"></div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                      <p class="fontSizeSmall">
+                        {{ productItem.serviceDescription | slice : 0 : 25 }}...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col m-3 mt-0 mb-0 p-0">
+                    <div class="row p-0 m-0">
+                      <div class="col p-0">
+                        <p class="views">
+                          <b>Views: </b>{{ productItem.views }}
+                        </p>
+                      </div>
+                      <div class="col p-0 itemDetails">
+                        <p class="postedOn">{{ productItem.date }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="lineInsideCard" />
+                <div class="row">
+                  <div class="col-5 p-0 mt-1">
+                    <div>
+                      <p class="postedOn">
+                        {{ serviceCategory(productItem.serviceCategory) }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-7 ps-1 pe-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ... Other code ... -->
+</div>
+
+<div class="bottomPadding"></div>
+
+<!--navigation-bar-->
+<app-navigation-bar></app-navigation-bar>
