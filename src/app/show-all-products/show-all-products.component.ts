@@ -2,11 +2,24 @@ import { Component, OnInit } from '@angular/core';
 //other Imports
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'; //Used for Back Button
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-show-all-products',
   templateUrl: './show-all-products.component.html',
   styleUrls: ['./show-all-products.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class ShowAllProductsComponent implements OnInit {
   constructor(private router: Router, private location: Location) {}
@@ -18,7 +31,7 @@ export class ShowAllProductsComponent implements OnInit {
   ngOnInit() {}
 
   getFontClass(): string {
-    const currentLanguage = localStorage.getItem("setLanguage");
+    const currentLanguage = localStorage.getItem('setLanguage');
 
     switch (currentLanguage) {
       case 'en':

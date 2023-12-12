@@ -5,6 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 import { VerifyPhoneNumberService } from '../verify-phone-number/verify-phone-number.service';
 //To import the environment files
 import { environment } from '../../environments/environment';
@@ -15,6 +23,12 @@ const BACKEND_URL = environment.apiUrl;
   selector: 'app-enter-your-name',
   templateUrl: './enter-your-name.component.html',
   styleUrls: ['./enter-your-name.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class EnterYourNameComponent implements OnInit {
   //Go Back to previous page  Function

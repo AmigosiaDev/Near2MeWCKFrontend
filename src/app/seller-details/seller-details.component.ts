@@ -7,12 +7,25 @@ import { Location } from '@angular/common'; //Used for Back Button
 import { environment } from 'src/environments/environment';
 //SweetAlert2
 import Swal from 'sweetalert2';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 const BACKEND_URL = environment.apiUrl;
 @Component({
   selector: 'app-seller-details',
   templateUrl: './seller-details.component.html',
   styleUrls: ['./seller-details.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class SellerDetailsComponent implements OnInit, OnDestroy {
   //Go Back to previous page Function

@@ -5,11 +5,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timer, Subscription, Observable } from 'rxjs';
 import { VerifyPhoneNumberService } from './verify-phone-number.service';
 import { LoginService } from '../login/login.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-verify-phone-number',
   templateUrl: './verify-phone-number.component.html',
   styleUrls: ['./verify-phone-number.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class VerifyPhoneNumberComponent implements OnInit, OnDestroy {
   //Go Back to previous page  Function
@@ -108,7 +121,6 @@ export class VerifyPhoneNumberComponent implements OnInit, OnDestroy {
       } else {
       }
     });
-    
   }
   //Function to show OTP
   resendOTP() {
@@ -126,5 +138,4 @@ export class VerifyPhoneNumberComponent implements OnInit, OnDestroy {
         }
       });
   }
- 
 }

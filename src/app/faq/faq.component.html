@@ -1,48 +1,49 @@
-<!--Header-->
-<div class="container-fluid p-3 header">
-  <div class="row">
-    <div class="col-2">
-      <!--Using a Bootstrap button-->
-      <button type="button" class="btn btn-light" (click)="goBack()">
-        <!--Using a Font Awesome icon-->
-        <i class="fa-solid fa-arrow-left fa-xl"></i>
-      </button>
+<div [@fadeInOut]>
+  <!--Header-->
+  <div class="container-fluid p-3 header">
+    <div class="row">
+      <div class="col-2">
+        <!--Using a Bootstrap button-->
+        <button type="button" class="btn btn-light" (click)="goBack()">
+          <!--Using a Font Awesome icon-->
+          <i class="fa-solid fa-arrow-left fa-xl"></i>
+        </button>
+      </div>
+      <div class="col-8 title"><h4>FAQ</h4></div>
+      <div class="col-2"></div>
     </div>
-    <div class="col-8 title"><h4>FAQ</h4></div>
-    <div class="col-2"></div>
   </div>
-</div>
 
-<body>
-  <br /><br /><br />
-  <br />
-  <div class="terms login">
-    <div class="container secpad">
-      <div class="bg-white p-3 rounded-4 shadow-sm">
-        <div class="row">
-          <div class="list-group w-100">
-            <a
-              href="#shortExampleAnswer1collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p>
-                  <b>{{
-                    "Is registration necessary in Near2me app?" | translate
-                  }}</b>
+  <body>
+    <br /><br /><br />
+    <br />
+    <div class="terms login">
+      <div class="container secpad">
+        <div class="bg-white p-3 rounded-4 shadow-sm">
+          <div class="row">
+            <div class="list-group w-100">
+              <a
+                href="#shortExampleAnswer1collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p>
+                    <b>{{
+                      "Is registration necessary in Near2me app?" | translate
+                    }}</b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "No, you can view the advertisements without login. But only registered users can post an advertisement, view the details of an advertisement or seller contact. Registration is very easy, you just have to verify your mobile number with received OTP."
+                      | translate
+                  }}
                 </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "No, you can view the advertisements without login. But only registered users can post an advertisement, view the details of an advertisement or seller contact. Registration is very easy, you just have to verify your mobile number with received OTP."
-                    | translate
-                }}
-              </p>
-            </a>
-            <!-- <a
+              </a>
+              <!-- <a
               href="#shortExampleAnswer1collapse"
               data-mdb-toggle="collapse"
               aria-expanded="false"
@@ -63,151 +64,154 @@
                 }}
               </p>
             </a> -->
-            <a
-              href="#shortExampleAnswer2collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">
-                  <b>{{
-                    "How can I post an advertisement in Near2me app?"
-                      | translate
-                  }}</b>
-                </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "Posting an advertisement is very easy, tap the 'Post' button and choose either 'Products' or 'Services' option. You have only 3 mandatory fields 'Category, Title and Price' for posting an item. Once posted you need to wait till the administrator approve the post before it goes live."
-                    | translate
-                }}
-              </p>
-            </a>
-            <a
-              href="#shortExampleAnswer3collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">
-                  <b>{{
-                    "How can I connect to a vendor who advertised in the app?"
-                      | translate
-                  }}</b>
-                </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "You can connect with the vendor in 3 ways, tele call, Whatsapp or click `Show interest` on the items which they had posted earlier. When you select `Show interest` then a notification is send to Vendor showing your interest on the post and the vendor may contact you."
-                    | translate
-                }}
-              </p>
-            </a>
-            <a
-              href="#shortExampleAnswer3collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">
-                  <b>{{
-                    "How can I find a skilled professional in my locality using this the app?"
-                      | translate
-                  }}</b>
-                </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "You can find a skilled service under the Service category in the app."
-                    | translate
-                }}
-              </p>
-            </a>
-            <a
-              href="#shortExampleAnswer3collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">
-                  <b
-                    >{{
-                      "I am a home maker and occasionally I make pickles using the lemon available at home, can I use Near2Me to sell these pickles in my locality?"
+              <a
+                href="#shortExampleAnswer2collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p class="mb-1">
+                    <b>{{
+                      "How can I post an advertisement in Near2me app?"
                         | translate
-                    }}
-                    <br /><br />
-                    {{
-                      "I have a terrace garden where I grow veggies in small quantities that I cannot sell at veg market. How can Near2me help me?"
-                        | translate
-                    }}
-                  </b>
-                </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "You can post vegetables or any home made products in Near2Me platform even if it is very small quantity. There are many families eagerly waiting for such home grown vegetables or homemade snacks at their neighborhood."
-                    | translate
-                }}
-              </p>
-            </a>
-            <a
-              href="#shortExampleAnswer3collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">
-                  <b>{{ "Can I trust the vendors in Near2me?" | translate }}</b>
-                </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "Advertisements are posted only by the registered users who have a valid mobile number. Since this is a kind of directory services exclusively in your locality, it is the responsibility of the user to check the authenticity of the posting. But Near2me have features like fraud reporting and negative feedback to minimize any false or irrelevant postings."
-                    | translate
-                }}
-              </p>
-            </a>
-            <a
-              href="#shortExampleAnswer3collapse"
-              data-mdb-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="shortExampleAnswer1collapse"
-              class="list-group-item list-group-item-action"
-            >
-              <div class="d-flex w-100 justify-content-between">
-                <p class="mb-1">
-                  <b>{{
-                    "Will it be possible for me to post my used laptop and mobile phone in Near2me?"
+                    }}</b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "Posting an advertisement is very easy, tap the 'Post' button and choose either 'Products' or 'Services' option. You have only 3 mandatory fields 'Category, Title and Price' for posting an item. Once posted you need to wait till the administrator approve the post before it goes live."
                       | translate
-                  }}</b>
+                  }}
                 </p>
-              </div>
-              <p class="mb-1 small">
-                {{
-                  "Yes, Of course, you may use the `used Items` category to post such ads."
-                    | translate
-                }}
-              </p>
-            </a>
-          </div>
-          <br />
+              </a>
+              <a
+                href="#shortExampleAnswer3collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p class="mb-1">
+                    <b>{{
+                      "How can I connect to a vendor who advertised in the app?"
+                        | translate
+                    }}</b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "You can connect with the vendor in 3 ways, tele call, Whatsapp or click `Show interest` on the items which they had posted earlier. When you select `Show interest` then a notification is send to Vendor showing your interest on the post and the vendor may contact you."
+                      | translate
+                  }}
+                </p>
+              </a>
+              <a
+                href="#shortExampleAnswer3collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p class="mb-1">
+                    <b>{{
+                      "How can I find a skilled professional in my locality using this the app?"
+                        | translate
+                    }}</b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "You can find a skilled service under the Service category in the app."
+                      | translate
+                  }}
+                </p>
+              </a>
+              <a
+                href="#shortExampleAnswer3collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p class="mb-1">
+                    <b
+                      >{{
+                        "I am a home maker and occasionally I make pickles using the lemon available at home, can I use Near2Me to sell these pickles in my locality?"
+                          | translate
+                      }}
+                      <br /><br />
+                      {{
+                        "I have a terrace garden where I grow veggies in small quantities that I cannot sell at veg market. How can Near2me help me?"
+                          | translate
+                      }}
+                    </b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "You can post vegetables or any home made products in Near2Me platform even if it is very small quantity. There are many families eagerly waiting for such home grown vegetables or homemade snacks at their neighborhood."
+                      | translate
+                  }}
+                </p>
+              </a>
+              <a
+                href="#shortExampleAnswer3collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p class="mb-1">
+                    <b>{{
+                      "Can I trust the vendors in Near2me?" | translate
+                    }}</b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "Advertisements are posted only by the registered users who have a valid mobile number. Since this is a kind of directory services exclusively in your locality, it is the responsibility of the user to check the authenticity of the posting. But Near2me have features like fraud reporting and negative feedback to minimize any false or irrelevant postings."
+                      | translate
+                  }}
+                </p>
+              </a>
+              <a
+                href="#shortExampleAnswer3collapse"
+                data-mdb-toggle="collapse"
+                aria-expanded="false"
+                aria-controls="shortExampleAnswer1collapse"
+                class="list-group-item list-group-item-action"
+              >
+                <div class="d-flex w-100 justify-content-between">
+                  <p class="mb-1">
+                    <b>{{
+                      "Will it be possible for me to post my used laptop and mobile phone in Near2me?"
+                        | translate
+                    }}</b>
+                  </p>
+                </div>
+                <p class="mb-1 small">
+                  {{
+                    "Yes, Of course, you may use the `used Items` category to post such ads."
+                      | translate
+                  }}
+                </p>
+              </a>
+            </div>
+            <br />
 
-          <div class="col title">
-            <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+            <div class="col title">
+              <img class="near2meImage" src="assets/logos/Near2me.png" alt="" />
+            </div>
           </div>
         </div>
+        <br />
       </div>
-      <br />
     </div>
-  </div>
-</body>
+  </body>
+</div>

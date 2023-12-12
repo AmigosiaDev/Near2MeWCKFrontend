@@ -6,11 +6,25 @@ import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-web-storage';
 import { ShowMoreService } from './show-more.service';
 import { ListingService } from '../listing/listing.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 const BACKEND_URL = environment.apiUrl;
 @Component({
   selector: 'app-show-more-recent-product',
   templateUrl: './show-more-recent-product.component.html',
   styleUrls: ['./show-more-recent-product.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate(300)), // Adjust the duration (300ms) as needed
+    ]),
+  ],
 })
 export class ShowMoreRecentProductComponent implements OnInit {
   locationData: any = null;
@@ -103,7 +117,10 @@ export class ShowMoreRecentProductComponent implements OnInit {
   filter() {
     this.filterValue = !this.filterValue;
   }
-
+  closeOverlay(): void {
+    // Set filterValue to false to hide the overlay
+    this.filterValue = false;
+  }
   dateBasedFilter() {
     this.showSpinner = true;
     this.filterValue = !this.filterValue;

@@ -10,6 +10,13 @@ import { environment } from '../../environments/environment';
 const BACKEND_URL = environment.apiUrl;
 //SweetAlert2
 import Swal from 'sweetalert2';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 interface UserProfile {
   userName: string;
@@ -25,6 +32,12 @@ interface UserProfile {
   selector: 'app-edit-details',
   templateUrl: './edit-details.component.html',
   styleUrls: ['./edit-details.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class EditDetailsComponent implements OnInit {
   //Declare an empty array and default values of input to null.
@@ -204,10 +217,7 @@ export class EditDetailsComponent implements OnInit {
     if (this.images && this.images.length > 0) {
       formData.append('images', this.images[0]);
     }
-    console.log(
-      'userimage before data on SAVE:',
-    this.userImageData
-    );
+    console.log('userimage before data on SAVE:', this.userImageData);
     if (this.userImageData && this.userImageData.length > 0) {
       for (let i = 0; i < this.userImageData.length; i++) {
         formData.append('userImageData', this.userImageData[i]);
@@ -239,13 +249,11 @@ export class EditDetailsComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.router.navigate(['/profile']);
-         
+
             // For more information about handling dismissals please visit
             // https://sweetalert2.github.io/#handling-dismissals
           }
         });
-   
-      
       },
       (error) => {
         Swal.fire({

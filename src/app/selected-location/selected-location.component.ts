@@ -1,10 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../select-location/location.service';
 import { LocalStorageService } from 'angular-web-storage';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 @Component({
   selector: 'app-selected-location',
   templateUrl: './selected-location.component.html',
   styleUrls: ['./selected-location.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class SelectedLocationComponent implements OnInit {
   //Declare Variables

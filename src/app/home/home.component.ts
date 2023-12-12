@@ -7,6 +7,13 @@ import { LocalStorageService } from 'angular-web-storage';
 import { ActivatedRoute } from '@angular/router'; //
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../..//environments/environment';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 import { ListingService } from '../listing/listing.service';
 import { ShowMoreService } from '../show-more-recent-product/show-more.service';
@@ -27,6 +34,12 @@ interface Product {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(

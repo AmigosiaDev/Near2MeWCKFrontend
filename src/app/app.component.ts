@@ -8,12 +8,22 @@ import { MatDialog } from '@angular/material/dialog';
 import { IntroductionComponent } from './introduction/introduction.component';
 //SweetAlert2
 import Swal from 'sweetalert2';
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
+
+// <div [@fadeInOut]>
+
+// </div>
 export class AppComponent implements OnInit {
   constructor(
     private translationService: TranslationService,

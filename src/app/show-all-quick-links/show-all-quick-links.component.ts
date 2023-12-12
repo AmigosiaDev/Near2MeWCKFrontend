@@ -3,29 +3,46 @@ import { Router } from '@angular/router';
 //other imports
 import { Location } from '@angular/common'; //Used for Back Button
 import { ListingService } from '../listing/listing.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-show-all-quick-links',
   templateUrl: './show-all-quick-links.component.html',
   styleUrls: ['./show-all-quick-links.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class ShowAllQuickLinksComponent implements OnInit {
-  constructor(private router: Router, private location: Location, private listingService: ListingService) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private listingService: ListingService
+  ) {}
 
   selectedDistance: string;
   latitude: any;
   longitude: any;
 
   ngOnInit() {
-    this.listingService.searchedItems=[];
-    this.listingService.quickLink=[];
-    this.listingService.currentPage=1;
+    this.listingService.searchedItems = [];
+    this.listingService.quickLink = [];
+    this.listingService.currentPage = 1;
   }
-  
+
   //Go Back to previous page  Function
 
-    getFontClass(): string {
-    const currentLanguage = localStorage.getItem("setLanguage");
+  getFontClass(): string {
+    const currentLanguage = localStorage.getItem('setLanguage');
 
     switch (currentLanguage) {
       case 'en':

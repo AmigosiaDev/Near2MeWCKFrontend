@@ -6,11 +6,24 @@ import { environment } from '../../environments/environment';
 const BACKEND_URL = environment.apiUrl;
 //SweetAlert2
 import Swal from 'sweetalert2';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-enter-user-category',
   templateUrl: './enter-user-category.component.html',
   styleUrls: ['./enter-user-category.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class EnterUserCategoryComponent {
   //------------------------------------Select Category Page----------------------------

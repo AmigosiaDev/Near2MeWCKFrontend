@@ -1,29 +1,46 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-login-popup',
   templateUrl: './login-popup.component.html',
-  styleUrls: ['./login-popup.component.css']
+  styleUrls: ['./login-popup.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class LoginPopupComponent {
-constructor(private router: Router){}
+  constructor(private router: Router) {}
   showModal = false;
   lastShownTimeKey = 'lastShownTime';
   isLoggedIn = null; // Check the isLoggedIn value in your actual implementation
   storedLanguage = null;
   ngOnInit(): void {
-    this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    this.storedLanguage = localStorage.getItem("setLanguage");
+    this.isLoggedIn = localStorage.getItem('isLoggedIn');
+    this.storedLanguage = localStorage.getItem('setLanguage');
     this.checkShowModal();
-    console.log(this.isLoggedIn,'sdhfsdhfdsahf;osadhfisdahfi')
+    console.log(this.isLoggedIn, 'sdhfsdhfdsahf;osadhfisdahfi');
   }
 
   checkShowModal() {
-
     const lastShownTime = localStorage.getItem(this.lastShownTimeKey);
 
-    if (!this.isLoggedIn && (!lastShownTime || Date.now() - Number(lastShownTime) >= 12 * 60 * 60 * 1000) && this.storedLanguage) {
+    if (
+      !this.isLoggedIn &&
+      (!lastShownTime ||
+        Date.now() - Number(lastShownTime) >= 12 * 60 * 60 * 1000) &&
+      this.storedLanguage
+    ) {
       this.showModal = true;
     }
   }

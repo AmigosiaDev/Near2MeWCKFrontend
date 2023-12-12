@@ -10,6 +10,13 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-web-storage';
 import { DatePipe } from '@angular/common';
 import { debounce } from 'lodash';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 //SweetAlert2
 import Swal from 'sweetalert2';
@@ -23,6 +30,12 @@ const BACKEND_URL = environment.apiUrl;
   selector: 'app-description',
   templateUrl: './description.component.html',
   styleUrls: ['./description.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class DescriptionComponent implements OnInit {
   /*---------------------------------Share the current Page------------------------------*/
@@ -76,8 +89,7 @@ export class DescriptionComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private datePipe: DatePipe,
-    @Inject(DOCUMENT) private document1: Document,
-
+    @Inject(DOCUMENT) private document1: Document
   ) {
     this.route.queryParams.subscribe((params) => {
       this.productID = params['passedProductID'];
@@ -456,7 +468,6 @@ export class DescriptionComponent implements OnInit {
   }
 
   goToListing() {
-
     this.router.navigate(['/listing'], {
       queryParams: {
         passedCategoryIdValue: this.CategoryID,

@@ -7,6 +7,14 @@ import { Location } from '@angular/common'; //Used for Back Button
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router, ActivatedRoute } from '@angular/router';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 //For Image Upload
 
 //To import the environment files
@@ -120,6 +128,12 @@ interface serviceInterface {
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class ProfileComponent implements OnInit {
   //Go Back to previous page  Function
@@ -321,7 +335,6 @@ export class ProfileComponent implements OnInit {
             }
           });
         location.reload();
-        
       }
     });
   }
@@ -461,17 +474,15 @@ export class ProfileComponent implements OnInit {
       confirmButtonColor: 'rgb(231 98 98)',
       cancelButtonText: 'No, keep it',
     }).then((result) => {
-     
-        this.http
-          .delete(BACKEND_URL + '/deleteService/' + serviceData._id)
-          .subscribe(() => {
-            this.services = this.services.filter(
-              (u) => serviceData._id !== serviceData._id
-            );
-            this.getAllServices();
-          });
-        location.reload();
-      
+      this.http
+        .delete(BACKEND_URL + '/deleteService/' + serviceData._id)
+        .subscribe(() => {
+          this.services = this.services.filter(
+            (u) => serviceData._id !== serviceData._id
+          );
+          this.getAllServices();
+        });
+      location.reload();
     });
   }
 

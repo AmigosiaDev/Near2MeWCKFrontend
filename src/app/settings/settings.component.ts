@@ -7,6 +7,14 @@ import { LocalStorageService } from 'angular-web-storage';
 import { environment } from '../../environments/environment';
 import { Location } from '@angular/common';
 import { PwaService } from '../pwa.service'; // Import the PwaService
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 const BACKEND_URL = environment.apiUrl;
 //SweetAlert2
 import Swal from 'sweetalert2';
@@ -15,6 +23,12 @@ import Swal from 'sweetalert2';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class SettingsComponent implements OnInit {
   //Declare an empty array and default values of input to null.

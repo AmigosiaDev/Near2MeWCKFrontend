@@ -5,6 +5,14 @@ import { ActivatedRoute } from '@angular/router'; // for passing category id val
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common'; //Used for Back Button
 import { LocalStorageService } from 'angular-web-storage';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 import { Router } from '@angular/router';
 //To import the environment files
 import { environment } from '../../environments/environment';
@@ -141,12 +149,18 @@ interface serviceInterface {
   selector: 'app-post-item',
   templateUrl: './post-item.component.html',
   styleUrls: ['./post-item.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class PostItemComponent implements OnInit {
   products: productInterface[] = [];
   showPostItem: boolean = true;
   showSelectCategory: boolean = false;
-  shortAddress: string ;
+  shortAddress: string;
 
   //Declare a constructor to read data from database by calling getAllStudents()
   constructor(
@@ -156,8 +170,7 @@ export class PostItemComponent implements OnInit {
     private localStorage: LocalStorageService,
     private location: Location,
     private elementRef: ElementRef,
-    private AuthUserService: AuthUserService,
-
+    private AuthUserService: AuthUserService
   ) {
     console.log('Product Category is : ', this.productCategory);
   }
@@ -697,7 +710,7 @@ export class PostItemComponent implements OnInit {
     //Append to formData
     console.log('productPrice', productPrice);
     formData.append('productCategory', productCategory);
-    formData.append('shortAddress',shortAddress)
+    formData.append('shortAddress', shortAddress);
     formData.append('productID', productID);
     formData.append('productTitle', productTitle);
     formData.append('productPrice', productPrice);
@@ -845,7 +858,7 @@ export class PostItemComponent implements OnInit {
             }).then((result) => {
               if (result.isConfirmed) {
                 this.router.navigate(['/profile']);
-             location.reload();
+                location.reload();
                 // For more information about handling dismissals please visit
                 // https://sweetalert2.github.io/#handling-dismissals
               }
@@ -865,7 +878,7 @@ export class PostItemComponent implements OnInit {
                 // https://sweetalert2.github.io/#handling-dismissals
               }
             });
-          
+
             // Handle error response here
           }
         );
@@ -1172,24 +1185,22 @@ export class PostItemComponent implements OnInit {
           this.serviceThumbNailImage
         ).subscribe(
           () =>
+            Swal.fire({
+              title: 'Successfully Posted! 😀',
+              text: 'Your post will go live after approval.',
+              icon: 'success',
 
-          Swal.fire({
-            title: 'Successfully Posted! 😀',
-            text: 'Your post will go live after approval.',
-            icon: 'success',
+              confirmButtonText: 'Okay',
+              confirmButtonColor: 'rgb(38 117 79)',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['/profile']);
+                location.reload();
+                // For more information about handling dismissals please visit
+                // https://sweetalert2.github.io/#handling-dismissals
+              }
+            }),
 
-            confirmButtonText: 'Okay',
-            confirmButtonColor: 'rgb(38 117 79)',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/profile']);
-            location.reload()
-              // For more information about handling dismissals please visit
-              // https://sweetalert2.github.io/#handling-dismissals
-            }
-          }),
-
-           
           (error: HttpErrorResponse) => {
             // Handle error, e.g., show an error message, log the error, etc.
             console.log(error);
@@ -1239,7 +1250,6 @@ export class PostItemComponent implements OnInit {
             // https://sweetalert2.github.io/#handling-dismissals
           }
         });
-      
       }
     } else {
       this.updateServiceRecord(
@@ -1280,7 +1290,7 @@ export class PostItemComponent implements OnInit {
     //Append to formData
     formData.append('date', date);
     formData.append('serviceCategory', serviceCategory);
-    formData.append('shortAddress',shortAddress)
+    formData.append('shortAddress', shortAddress);
     formData.append('serviceID', serviceID);
     formData.append('serviceTitle', serviceTitle);
     formData.append('serviceDescription', serviceDescription);
@@ -1431,7 +1441,7 @@ export class PostItemComponent implements OnInit {
             }).then((result) => {
               if (result.isConfirmed) {
                 this.router.navigate(['/profile']);
-                location.reload()
+                location.reload();
                 // For more information about handling dismissals please visit
                 // https://sweetalert2.github.io/#handling-dismissals
               }
@@ -1451,7 +1461,7 @@ export class PostItemComponent implements OnInit {
                 // https://sweetalert2.github.io/#handling-dismissals
               }
             });
-          
+
             // Handle error response here
           }
         );

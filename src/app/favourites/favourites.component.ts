@@ -7,12 +7,26 @@ import { AuthUserService } from '../auth-user.service';
 import Swal from 'sweetalert2';
 //To import the environment files
 import { environment } from '../../environments/environment';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 const BACKEND_URL = environment.apiUrl;
 
 @Component({
   selector: 'app-favourites',
   templateUrl: './favourites.component.html',
   styleUrls: ['./favourites.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class FavouritesComponent implements OnInit {
   favouritesArray = [];

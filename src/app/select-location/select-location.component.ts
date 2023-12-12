@@ -8,6 +8,14 @@ import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common'; //Used for Back Button
 //To import the environment files
 import { environment } from '../../environments/environment';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 //---------------------------------------------------------
 
 const BACKEND_URL = environment.apiUrl;
@@ -16,6 +24,12 @@ const BACKEND_URL = environment.apiUrl;
   selector: 'app-select-location',
   templateUrl: './select-location.component.html',
   styleUrls: ['./select-location.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class SelectLocationComponent implements OnInit {
   options: any = {

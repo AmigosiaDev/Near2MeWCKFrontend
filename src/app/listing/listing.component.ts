@@ -9,12 +9,25 @@ import { LocalStorageService } from 'angular-web-storage';
 //To import the environment files
 import { environment } from '../../environments/environment';
 import { ListingService } from './listing.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 const BACKEND_URL = environment.apiUrl;
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class ListingComponent implements OnInit {
   imageURL: any;

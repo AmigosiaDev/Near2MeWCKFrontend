@@ -1,70 +1,77 @@
-<!--category-subcategory-section-->
+<div [@fadeInOut]>
+  <!--category-subcategory-section-->
 
-<div class="container mt-3">
-  <!-- Title for ALL RESIDENTIAL -->
-  <h5>Select your Category</h5>
-  <div class="row p-2">
-    <div
-      class="col-6 p-1"
-      style="height: 100px"
-      *ngFor="let category of userCategories; let i = index"
-    >
-      <div class="card categoryCard mb-4 h-100" [class.selected]="category === selectedCategory" >
+  <div class="container mt-3">
+    <!-- Title for ALL RESIDENTIAL -->
+    <h5>Select your Category</h5>
+    <div class="row p-2">
+      <div
+        class="col-6 p-1"
+        style="height: 100px"
+        *ngFor="let category of userCategories; let i = index"
+      >
         <div
-          class="card-body p-0 d-flex align-items-center justify-content-center"
-          (click)="assignCategoryName(category)"
+          class="card categoryCard mb-4 h-100"
+          [class.selected]="category === selectedCategory"
         >
-          <p
-            class="card-title text-center"
-            style="font-weight: 500; text-align: center; padding-left: 0"
+          <div
+            class="card-body p-0 d-flex align-items-center justify-content-center"
+            (click)="assignCategoryName(category)"
           >
-            {{ category }}
-          </p>
+            <p
+              class="card-title text-center"
+              style="font-weight: 500; text-align: center; padding-left: 0"
+            >
+              {{ category }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <hr />
+    <hr />
 
-  <h5>Kudumbashree Cloud Kitchen Members</h5>
-  <div class="row p-2">
-    <div
-      class="col p-1"
-      style="height: 100px"
-      *ngFor="let category of othersCategories; let i = index"
-    >
-      <div class="card categoryCard p-0 mb-4 h-100" [class.selected]="category === selectedCategory">
+    <h5>Kudumbashree Cloud Kitchen Members</h5>
+    <div class="row p-2">
+      <div
+        class="col p-1"
+        style="height: 100px"
+        *ngFor="let category of othersCategories; let i = index"
+      >
         <div
-          class="card-body p-0 d-flex align-items-center justify-content-center"
-          (click)="assignCategoryName(category)"
+          class="card categoryCard p-0 mb-4 h-100"
+          [class.selected]="category === selectedCategory"
         >
-          <p
-            class="card-title text-center"
-            style="font-weight: 500; text-align: center; padding-left: 0"
+          <div
+            class="card-body p-0 d-flex align-items-center justify-content-center"
+            (click)="assignCategoryName(category)"
           >
-            {{ category }}
-          </p>
+            <p
+              class="card-title text-center"
+              style="font-weight: 500; text-align: center; padding-left: 0"
+            >
+              {{ category }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
+    <hr />
   </div>
-  <hr />
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="submitButton">
-        <div class="row mb-1 mt-2">
-          <button
-            type="button"
-            class="btn btn-success"
-            (click)="sendCategory()"
-          >
-            Continue
-          </button>
-        </div>
-        <div class="row mb-4 mt-2">
-          <!-- <button
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="submitButton">
+          <div class="row mb-1 mt-2">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="sendCategory()"
+            >
+              Continue
+            </button>
+          </div>
+          <div class="row mb-4 mt-2">
+            <!-- <button
             type="button"
             class="btn btn-outline-success"
             data-mdb-ripple-color="dark"
@@ -72,6 +79,7 @@
           >
             Skip
           </button> -->
+          </div>
         </div>
       </div>
     </div>

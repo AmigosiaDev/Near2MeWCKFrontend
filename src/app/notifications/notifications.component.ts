@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../notification.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 //Other imports
 import { AuthUserService } from '../auth-user.service';
 import { environment } from 'src/environments/environment';
@@ -11,6 +19,12 @@ const BACKEND_URL = environment.apiUrl;
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class NotificationsComponent implements OnInit {
   constructor(

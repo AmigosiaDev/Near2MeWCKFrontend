@@ -1,24 +1,25 @@
-<!--Header-->
-<div class="container-fluid p-3 header">
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8 title"><h4>Favourites</h4></div>
-    <div class="col-2"></div>
+<div [@fadeInOut]>
+  <!--Header-->
+  <div class="container-fluid p-3 header">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8 title"><h4>Favourites</h4></div>
+      <div class="col-2"></div>
+    </div>
   </div>
-</div>
-<!--Space to show the elements below floating header-->
-<br /><br /><br /><br />
+  <!--Space to show the elements below floating header-->
+  <br /><br /><br /><br />
 
-<!--tabs-->
-<div class="container-fluid">
-  <div class="row">
-    <ul
-      class="nav nav-pills"
-      id="pills-tab"
-      role="tablist"
-      style="padding-right: 0"
-    >
-      <!-- <li class="nav-item" role="presentation">
+  <!--tabs-->
+  <div class="container-fluid">
+    <div class="row">
+      <ul
+        class="nav nav-pills"
+        id="pills-tab"
+        role="tablist"
+        style="padding-right: 0"
+      >
+        <!-- <li class="nav-item" role="presentation">
     <button
       class="nav-link"
       id="pills-category-tab"
@@ -33,7 +34,7 @@
       Category
     </button>
   </li> -->
-      <!-- <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
     <button
       class="nav-link"
       id="pills-seller-tab"
@@ -48,68 +49,68 @@
       seller
     </button>
   </li> -->
-      <div class="col-4">
-        <li class="nav-item" role="presentation">
-          <button
-            class="w-100 nav-link active"
-            id="pills-products-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-products"
-            type="button"
-            role="tab"
-            aria-controls="pills-products"
-            aria-selected="true"
-          >
-            Products
-          </button>
-        </li>
-      </div>
-      <div class="col-4">
-        <li class="nav-item" role="presentation">
-          <button
-            class="w-100 nav-link"
-            id="pills-services-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-services"
-            type="button"
-            role="tab"
-            aria-controls="pills-services"
-            aria-selected="false"
-          >
-            Services
-          </button>
-        </li>
-      </div>
-      <div class="col-4">
-        <li class="nav-item" role="presentation">
-          <button
-            class="w-100 nav-link"
-            id="pills-seller-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#pills-seller"
-            type="button"
-            role="tab"
-            aria-controls="pills-seller"
-            aria-selected="false"
-          >
-            Seller
-          </button>
-        </li>
-      </div>
-    </ul>
+        <div class="col-4">
+          <li class="nav-item" role="presentation">
+            <button
+              class="w-100 nav-link active"
+              id="pills-products-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-products"
+              type="button"
+              role="tab"
+              aria-controls="pills-products"
+              aria-selected="true"
+            >
+              Products
+            </button>
+          </li>
+        </div>
+        <div class="col-4">
+          <li class="nav-item" role="presentation">
+            <button
+              class="w-100 nav-link"
+              id="pills-services-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-services"
+              type="button"
+              role="tab"
+              aria-controls="pills-services"
+              aria-selected="false"
+            >
+              Services
+            </button>
+          </li>
+        </div>
+        <div class="col-4">
+          <li class="nav-item" role="presentation">
+            <button
+              class="w-100 nav-link"
+              id="pills-seller-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-seller"
+              type="button"
+              role="tab"
+              aria-controls="pills-seller"
+              aria-selected="false"
+            >
+              Seller
+            </button>
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
-</div>
-<!--Tab Contents: category-->
-<div class="tab-content" id="pills-tabContent">
-  <!-- <div
+  <!--Tab Contents: category-->
+  <div class="tab-content" id="pills-tabContent">
+    <!-- <div
     class="tab-pane fade show"
     id="pills-category"
     role="tabpanel"
     aria-labelledby="pills-category-tab"
     tabindex="0"
   > -->
-  <!--One Card starts-->
-  <!-- <div class="container cardContainer">
+    <!--One Card starts-->
+    <!-- <div class="container cardContainer">
       <a routerLink="/description-page">
         <div class="card">
           <div class="card-body">
@@ -132,19 +133,19 @@
         </div>
       </a>
     </div> -->
-  <!--One Card ends-->
-  <!-- </div> -->
+    <!--One Card ends-->
+    <!-- </div> -->
 
-  <!--Tab Contents: seller-->
-  <!-- <div
+    <!--Tab Contents: seller-->
+    <!-- <div
     class="tab-pane fade"
     id="pills-seller"
     role="tabpanel"
     aria-labelledby="pills-seller-tab"
     tabindex="0"
   > -->
-  <!--One Card starts-->
-  <!-- <div class="container cardContainer">
+    <!--One Card starts-->
+    <!-- <div class="container cardContainer">
       <a routerLink="/description-page">
         <div class="card">
           <div class="card-body">
@@ -168,83 +169,95 @@
         </div>
       </a>
     </div> -->
-  <!--One Card ends-->
-  <!-- </div> -->
-  <br />
-  <!--Tab Contents: products-->
-  <div
-    class="tab-pane active"
-    id="pills-products"
-    role="tabpanel"
-    aria-labelledby="pills-products-tab"
-    tabindex="0"
-  >
-    <!--product lists-->
+    <!--One Card ends-->
+    <!-- </div> -->
+    <br />
+    <!--Tab Contents: products-->
+    <div
+      class="tab-pane active"
+      id="pills-products"
+      role="tabpanel"
+      aria-labelledby="pills-products-tab"
+      tabindex="0"
+    >
+      <!--product lists-->
 
-    <!--One Card starts-->
-    <div class="container" *ngFor="let Items of favouritesArray">
-      <!--div *ngIf="Items.productStatus === 'Active'"-->
-      <div *ngIf="Items.productTitle">
-        <div class="card">
-          <div class="card-body p-1">
-            <div class="row align-items-center">
-              <div class="col-4" (click)="goToDescription(Items.productID, Items.profileID)">
-                <img
-                  class="productImage"
-                  *ngIf="Items.productThumbNailImage"
-                  [src]="Items.productThumbNailImage"
-                />
-                <img
-                  class="productImage"
-                  *ngIf="!Items.productThumbNailImage"
-                  src="assets/personImages/loketeDefaultImage.jpg"
-                  alt="Default Image"
-                />
-                <!--button
+      <!--One Card starts-->
+      <div class="container" *ngFor="let Items of favouritesArray">
+        <!--div *ngIf="Items.productStatus === 'Active'"-->
+        <div *ngIf="Items.productTitle">
+          <div class="card">
+            <div class="card-body p-1">
+              <div class="row align-items-center">
+                <div
+                  class="col-4"
+                  (click)="goToDescription(Items.productID, Items.profileID)"
+                >
+                  <img
+                    class="productImage"
+                    *ngIf="Items.productThumbNailImage"
+                    [src]="Items.productThumbNailImage"
+                  />
+                  <img
+                    class="productImage"
+                    *ngIf="!Items.productThumbNailImage"
+                    src="assets/personImages/loketeDefaultImage.jpg"
+                    alt="Default Image"
+                  />
+                  <!--button
                   class="btn btn-success btn-sm removeButton mt-1 p-1 w-100 float-middle"
                 >
                   Remove
                 </button-->
-              </div>
-              <div class="col-8">
-                <div class="row">
-                  <div class="col-8" (click)="goToDescription(Items.productID, Items.profileID)">
-                    <div class="row">
-                      <div class="col">
-                        <div class="truncate">
-                          <h5 class="fontSize">
-                            {{ Items.productTitle }}
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <div
+                      class="col-8"
+                      (click)="
+                        goToDescription(Items.productID, Items.profileID)
+                      "
+                    >
+                      <div class="row">
+                        <div class="col">
+                          <div class="truncate">
+                            <h5 class="fontSize">
+                              {{ Items.productTitle }}
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="fontSizeh5">
+                            <i class="fa-solid fa-indian-rupee-sign"></i
+                            >{{ Items.productPrice }}/
                           </h5>
+                          <p>{{ Items.productUnit }}</p>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="fontSizeh5">
-                          <i class="fa-solid fa-indian-rupee-sign"></i
-                          >{{ Items.productPrice }}/
-                        </h5>
-                        <p>{{ Items.productUnit }}</p>
-                      </div>
+                    <div class="col-4">
+                      <button
+                        class="btn btn-danger btn-sm"
+                        type="button"
+                        style="
+                          float: right;
+                          margin-top: 5px;
+                          margin-right: 10px;
+                        "
+                        (click)="favouritesDelete(Items)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
                     </div>
                   </div>
-                  <div class="col-4">
-                    <button
-                      class="btn btn-danger btn-sm"
-                      type="button"
-                      style="float: right; margin-top: 5px; margin-right: 10px"
-                      (click)="favouritesDelete(Items)"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-                <!-- <div class="row" (click)="goToDescription(Items.productID)">
+                  <!-- <div class="row" (click)="goToDescription(Items.productID)">
                   <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
                     <h5 class="fontSize">{{ Items.productTitle }}</h5>
                   </div>
                 </div> -->
-                <!-- <div
+                  <!-- <div
                   class="row itemDetails"
                   (click)="goToDescription(Items.productID)"
                 >
@@ -254,38 +267,42 @@
                     <p>/{{ Items.productUnit }}</p>
                   </div>
                 </div> -->
-                <div class="row">
-                  <div class="col">
-                    <p class="postedOn">{{ Items.date | slice : 0 : 10 }}</p>
-                  </div>
-                </div>
-                <hr class="lineInsideCard" />
-                <div class="row">
-                  <div
-                    class="col-7 p-0 mt-1"
-                    (click)="goToDescription(Items.productID,  Items.profileID)"
-                  >
-                    <div
-                      class="sellerCategoryFarmProduce"
-                      [ngStyle]="getStyles(Items.userCategory)"
-                    >
-                      <p
-                        class="sellerCategoryTitle"
-                        *ngIf="Items.userCategory != 'ID_CAT_SEL'"
-                      >
-                        {{ getUserCategory(Items.userCategory) }}
-                      </p>
+                  <div class="row">
+                    <div class="col">
+                      <p class="postedOn">{{ Items.date | slice : 0 : 10 }}</p>
                     </div>
                   </div>
-                  <div
-                    class="col-5 ps-1 pe-3"
-                    (click)="goToDescription(Items.productID,  Items.profileID)"
-                  >
-                    <div class="float-end">
-                      <!--p class="distance">
+                  <hr class="lineInsideCard" />
+                  <div class="row">
+                    <div
+                      class="col-7 p-0 mt-1"
+                      (click)="
+                        goToDescription(Items.productID, Items.profileID)
+                      "
+                    >
+                      <div
+                        class="sellerCategoryFarmProduce"
+                        [ngStyle]="getStyles(Items.userCategory)"
+                      >
+                        <p
+                          class="sellerCategoryTitle"
+                          *ngIf="Items.userCategory != 'ID_CAT_SEL'"
+                        >
+                          {{ getUserCategory(Items.userCategory) }}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="col-5 ps-1 pe-3"
+                      (click)="
+                        goToDescription(Items.productID, Items.profileID)
+                      "
+                    >
+                      <div class="float-end">
+                        <!--p class="distance">
                         <i class="fa-solid fa-location-dot fa-sm"></i> 0 Km away
                       </p-->
-                      <!-- <button
+                        <!-- <button
                         class="btn btn-danger btn-sm"
                         type="button"
                         style="
@@ -297,6 +314,7 @@
                       >
                         <i class="fa-solid fa-trash"></i>
                       </button> -->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -304,106 +322,119 @@
             </div>
           </div>
         </div>
+        <!--/div-->
       </div>
-      <!--/div-->
+      <!--One Card ends-->
     </div>
-    <!--One Card ends-->
-  </div>
-  <!--Tab Contents: Drafts-->
-  <div
-    class="tab-pane fade"
-    id="pills-services"
-    role="tabpanel"
-    aria-labelledby="pills-services-tab"
-    tabindex="0"
-  >
-    <!--One Card starts-->
-    <div class="container" *ngFor="let Items of favouritesArray">
-      <!--div *ngIf="Items.productStatus === 'Active'"-->
-      <div *ngIf="Items.serviceTitle">
-        <a>
-          <div class="card">
-            <div class="row">
-              <div class="col"></div>
-            </div>
-            <div class="card-body p-1">
-              <div class="row align-items-center">
-                <div class="col-4" (click)="goToDescription(Items.serviceID, Items.profileID)">
-                  <img
-                    class="productImage"
-                    *ngIf="Items.serviceThumbNailImage"
-                    [src]="Items.serviceThumbNailImage"
-                  />
-                  <img
-                    class="productImage"
-                    *ngIf="!Items.serviceThumbNailImage"
-                    src="assets/personImages/loketeDefaultImage.jpg"
-                    alt="Default Image"
-                  />
-                </div>
-                <div class="col-8">
-                  <div class="row">
-                    <div
-                      class="col-8"
-                      (click)="goToDescription(Items.serviceID, Items.profileID)"
-                    >
-                      <div class="row">
-                        <div class="col">
-                          <div class="truncate">
-                            <h5 class="fontSize">
-                              {{ Items.serviceTitle }}
-                            </h5>
+    <!--Tab Contents: Drafts-->
+    <div
+      class="tab-pane fade"
+      id="pills-services"
+      role="tabpanel"
+      aria-labelledby="pills-services-tab"
+      tabindex="0"
+    >
+      <!--One Card starts-->
+      <div class="container" *ngFor="let Items of favouritesArray">
+        <!--div *ngIf="Items.productStatus === 'Active'"-->
+        <div *ngIf="Items.serviceTitle">
+          <a>
+            <div class="card">
+              <div class="row">
+                <div class="col"></div>
+              </div>
+              <div class="card-body p-1">
+                <div class="row align-items-center">
+                  <div
+                    class="col-4"
+                    (click)="goToDescription(Items.serviceID, Items.profileID)"
+                  >
+                    <img
+                      class="productImage"
+                      *ngIf="Items.serviceThumbNailImage"
+                      [src]="Items.serviceThumbNailImage"
+                    />
+                    <img
+                      class="productImage"
+                      *ngIf="!Items.serviceThumbNailImage"
+                      src="assets/personImages/loketeDefaultImage.jpg"
+                      alt="Default Image"
+                    />
+                  </div>
+                  <div class="col-8">
+                    <div class="row">
+                      <div
+                        class="col-8"
+                        (click)="
+                          goToDescription(Items.serviceID, Items.profileID)
+                        "
+                      >
+                        <div class="row">
+                          <div class="col">
+                            <div class="truncate">
+                              <h5 class="fontSize">
+                                {{ Items.serviceTitle }}
+                              </h5>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col">
-                          <div class="truncate">
-                            <p>
-                              {{ Items.serviceDescription | slice : 0 : 30 }}...
-                            </p>
+                          <div class="col">
+                            <div class="truncate">
+                              <p>
+                                {{
+                                  Items.serviceDescription | slice : 0 : 30
+                                }}...
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div class="col-4">
+                        <button
+                          class="btn btn-danger btn-sm"
+                          type="button"
+                          style="
+                            float: right;
+                            margin-top: 5px;
+                            margin-right: 10px;
+                          "
+                          (click)="favouritesDelete(Items)"
+                        >
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </div>
                     </div>
-                    <div class="col-4">
-                      <button
-                        class="btn btn-danger btn-sm"
-                        type="button"
-                        style="
-                          float: right;
-                          margin-top: 5px;
-                          margin-right: 10px;
-                        "
-                        (click)="favouritesDelete(Items)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
+                    <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
                     <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
                       <h5 class="card-title">{{ Items.serviceTitle }}</h5>
                     </div>
                   </div> -->
-                  <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
+                    <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
                     <div class="col">
                       <p>{{ Items.serviceDescription | slice : 0 : 30 }}...</p>
                     </div>
                   </div> -->
-                  <div class="row">
-                    <div
-                      class="col pb-1"
-                      (click)="goToDescription(Items.serviceID, Items.profileID)"
-                    >
-                      <p style="float: right">
-                        {{ Items.date | slice : 0 : 10 }}
-                      </p>
+                    <div class="row">
+                      <div
+                        class="col pb-1"
+                        (click)="
+                          goToDescription(Items.serviceID, Items.profileID)
+                        "
+                      >
+                        <p style="float: right">
+                          {{ Items.date | slice : 0 : 10 }}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <hr class="lineInsideCard" />
-                  <div class="row">
-                    <div class="col" (click)="goToDescription(Items.serviceID, Items.profileID)">
-                      <p>{{ serviceCategory(Items.serviceCategory) }}</p>
-                      <!-- <button
+                    <hr class="lineInsideCard" />
+                    <div class="row">
+                      <div
+                        class="col"
+                        (click)="
+                          goToDescription(Items.serviceID, Items.profileID)
+                        "
+                      >
+                        <p>{{ serviceCategory(Items.serviceCategory) }}</p>
+                        <!-- <button
                         class="btn btn-danger btn-sm"
                         type="button"
                         style="
@@ -415,128 +446,146 @@
                       >
                         <i class="fa-solid fa-trash"></i>
                       </button> -->
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
+        <!--/div-->
       </div>
-      <!--/div-->
+      <!--One Card ends-->
     </div>
-    <!--One Card ends-->
-  </div>
 
-  <!--Tab Contents: seller-->
-  <div
-    class="tab-pane fade"
-    id="pills-seller"
-    role="tabpanel"
-    aria-labelledby="pills-seller-tab"
-    tabindex="0"
-  >
-    <!--One Card starts-->
+    <!--Tab Contents: seller-->
+    <div
+      class="tab-pane fade"
+      id="pills-seller"
+      role="tabpanel"
+      aria-labelledby="pills-seller-tab"
+      tabindex="0"
+    >
+      <!--One Card starts-->
 
-    <div class="container" *ngFor="let Items of favouritesArray">
-      <!--div *ngIf="Items.productStatus === 'Active'"-->
-      <div *ngIf="Items.username">
-        <a>
-          <div class="card">
-            <div class="row" (click)="goToDescription(Items.latestPost, Items.profileID)">
-              <div class="col"></div>
-            </div>
-            <div class="card-body p-1">
-              <div class="row align-items-center">
-                <div class="col-4" (click)="goToDescription(Items.latestPost,Items.profileID)">
-                  <img
-                    class="productImage"
-                    *ngIf="Items.sellerThumbNailImage"
-                    [src]="Items.sellerThumbNailImage"
-                  />
-                  <img
-                    class="productImage"
-                    *ngIf="!Items.sellerThumbNailImage"
-                    src="assets/personImages/defaultimage.jpg"
-                    alt="Default Image"
-                  />
-                </div>
-                <div class="col-8">
-                  <div class="row">
-                    <div
-                      class="col-8"
-                      (click)="goToDescription(Items.latestPost, Items.profileID)"
-                    >
-                      <div class="row">
-                        <div class="col">
-                          <div class="truncate">
-                            <h5 class="fontSize">
-                              {{ Items.username }}
-                            </h5>
+      <div class="container" *ngFor="let Items of favouritesArray">
+        <!--div *ngIf="Items.productStatus === 'Active'"-->
+        <div *ngIf="Items.username">
+          <a>
+            <div class="card">
+              <div
+                class="row"
+                (click)="goToDescription(Items.latestPost, Items.profileID)"
+              >
+                <div class="col"></div>
+              </div>
+              <div class="card-body p-1">
+                <div class="row align-items-center">
+                  <div
+                    class="col-4"
+                    (click)="goToDescription(Items.latestPost, Items.profileID)"
+                  >
+                    <img
+                      class="productImage"
+                      *ngIf="Items.sellerThumbNailImage"
+                      [src]="Items.sellerThumbNailImage"
+                    />
+                    <img
+                      class="productImage"
+                      *ngIf="!Items.sellerThumbNailImage"
+                      src="assets/personImages/defaultimage.jpg"
+                      alt="Default Image"
+                    />
+                  </div>
+                  <div class="col-8">
+                    <div class="row">
+                      <div
+                        class="col-8"
+                        (click)="
+                          goToDescription(Items.latestPost, Items.profileID)
+                        "
+                      >
+                        <div class="row">
+                          <div class="col">
+                            <div class="truncate">
+                              <h5 class="fontSize">
+                                {{ Items.username }}
+                              </h5>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col">
-                          <div class="truncate">
-                            <p>
-                              {{ Items.profileID }}
-                            </p>
+                          <div class="col">
+                            <div class="truncate">
+                              <p>
+                                {{ Items.profileID }}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div class="col-4">
+                        <button
+                          class="btn btn-danger btn-sm"
+                          type="button"
+                          style="
+                            float: right;
+                            margin-top: 5px;
+                            margin-right: 10px;
+                          "
+                          (click)="favouritesDelete(Items)"
+                        >
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </div>
                     </div>
-                    <div class="col-4">
-                      <button
-                        class="btn btn-danger btn-sm"
-                        type="button"
-                        style="
-                          float: right;
-                          margin-top: 5px;
-                          margin-right: 10px;
-                        "
-                        (click)="favouritesDelete(Items)"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
+                    <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
                     <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
                       <h5 class="card-title">{{ Items.serviceTitle }}</h5>
                     </div>
                   </div> -->
-                  <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
+                    <!-- <div class="row" (click)="goToDescription(Items.serviceID)">
                     <div class="col">
                       <p>{{ Items.serviceDescription | slice : 0 : 30 }}...</p>
                     </div>
                   </div> -->
-                  <div class="row">
-                    <div
-                      class="col pb-1"
-                      (click)="goToDescription(Items.latestPost, Items.profileID)"
-                    >
-
+                    <div class="row">
+                      <div
+                        class="col pb-1"
+                        (click)="
+                          goToDescription(Items.latestPost, Items.profileID)
+                        "
+                      ></div>
                     </div>
-                  </div>
-                  <hr class="lineInsideCard" />
-                  <div class="row" (click)="goToDescription(Items.latestPost, Items.profileID)">
-                    <div class="col" (click)="goToDescription(Items.latestPost, Items.profileID)">
-
-                      <p> member since:
-                        {{ Items.date | slice : 0 : 10 }}
-                      </p>
+                    <hr class="lineInsideCard" />
+                    <div
+                      class="row"
+                      (click)="
+                        goToDescription(Items.latestPost, Items.profileID)
+                      "
+                    >
+                      <div
+                        class="col"
+                        (click)="
+                          goToDescription(Items.latestPost, Items.profileID)
+                        "
+                      >
+                        <p>
+                          member since:
+                          {{ Items.date | slice : 0 : 10 }}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
+        <!--/div-->
       </div>
-      <!--/div-->
+      <!--One Card ends-->
     </div>
-    <!--One Card ends-->
   </div>
+  <!--Tabs ends-->
 </div>
-<!--Tabs ends-->
-
 <app-navigation-bar></app-navigation-bar>

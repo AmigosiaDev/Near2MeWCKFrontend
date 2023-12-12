@@ -3,11 +3,24 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { Location } from '@angular/common'; //Used for Back Button
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class LoginComponent {
   goBack() {
@@ -47,10 +60,10 @@ export class LoginComponent {
 
   //Go Back to previous page Function
   goToBack(): void {
-  //this.location.back();
-   this.router.navigate(['/home']);
+    //this.location.back();
+    this.router.navigate(['/home']);
   }
-  TermsAndConditions(){
+  TermsAndConditions() {
     this.router.navigate(['/terms-and-conditions']);
   }
   PrivacyPolicy() {

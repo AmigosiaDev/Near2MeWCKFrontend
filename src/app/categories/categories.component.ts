@@ -3,11 +3,25 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ListingService } from '../listing/listing.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 
 @Component({
   selector: 'app-categories-page',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate(300)), // Adjust the duration (300ms) as needed
+    ]),
+  ],
 })
 export class CategoriesComponent implements OnInit {
   /*to scroll to the top*/

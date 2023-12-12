@@ -1,407 +1,192 @@
-<!--Header-->
-<div class="container-fluid p-3 pb-0 header">
-  <div class="row">
-    <div class="col-2">
-      <!--Using a Bootstrap button-->
-      <button type="button" class="btn btn-light" (click)="goBack()">
-        <!--Using a Font Awesome icon-->
-        <i class="fa-solid fa-arrow-left fa-xl"></i>
-      </button>
-    </div>
-    <div class="col-9 title">
-      <!--selected location-->
-      <div class="truncate">
-        <app-selected-location></app-selected-location>
-      </div>
-    </div>
-    <div class="col-1"></div>
-  </div>
-  <!--subcategory-title-->
-  <div class="container p-0">
-    <div class="row pt-3 pb-0">
-      <!-- <div class="col-10" *ngIf="!CategoryName"><h6>Search Results</h6></div> -->
-      <div class="col-10">
-        <h6>{{ CategoryName }}</h6>
-      </div>
+<div [@fadeInOut]>
+  <!--Header-->
+  <div class="container-fluid p-3 pb-0 header">
+    <div class="row">
       <div class="col-2">
-        <button class="shareButton" (click)="share()">
-          <i class="fa-regular fa-share-from-square fa-lg shareSign"></i>
+        <!--Using a Bootstrap button-->
+        <button type="button" class="btn btn-light" (click)="goBack()">
+          <!--Using a Font Awesome icon-->
+          <i class="fa-solid fa-arrow-left fa-xl"></i>
         </button>
       </div>
-    </div>
-  </div>
-</div>
-
-<!--product lists-->
-<br /><br /><br /><br /><br />
-
-<!--share card starts-->
-<div
-  *ngIf="
-    searchedItems &&
-    searchedItems.length === 0 &&
-    isServiceArray === null &&
-    isProductArray === null &&
-    isQuickLinkArray === null
-  "
->
-  <div class="container">
-    <div class="row">
-      <div class="col"><p class="records">No records found</p></div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <p class="records">Please increase your search area</p>
-      </div>
-    </div>
-  </div>
-
-  <br /><br />
-
-  <div class="container pb-1">
-    <div class="card text-center">
-      <div class="card-body">
-        <h5 class="card-title">Share this app in your community with</h5>
-        <ul>
-          <li class="cardList">Farmers</li>
-          <li class="cardList">Home based business</li>
-          <li class="cardList">Skilled professionals</li>
-          <li class="cardList">Friends</li>
-        </ul>
-        <p class="support">to support and promote community based business</p>
-        <br /><br />
-        <a (click)="share()" class="btn btn-success">Share</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Search Card-->
-<div class="container pb-1" *ngFor="let productItem of searchedItems">
-  <!--Product Part Starts-->
-  <div *ngIf="productItem.productTitle">
-    <div
-      class="container p-0 m-0"
-      *ngIf="productItem.productStatus === 'Active'"
-    >
-      <!--div *ngIf="productItem.productSubcategory === idValue"-->
-      <a>
-        <div
-          class="card"
-          (click)="gotoSearchProductDescription(productItem.productID)"
-        >
-          <div class="card-body p-1">
-            <div class="row align-items-center">
-              <div class="col-4">
-                <div>
-                  <img
-                    class="productImage"
-                    *ngIf="productItem.productThumbNailImage"
-                    [src]="productItem.productThumbNailImage"
-                  />
-
-                  <img
-                    class="productImage"
-                    *ngIf="!productItem.productThumbNailImage"
-                    src="assets/personImages/loketeDefaultImage.jpg"
-                    alt="Default Image"
-                  />
-                </div>
-              </div>
-              <div class="col-8">
-                <div class="row">
-                  <div class="col m-3 m-3 mt-0 mb-0 p-0 truncate">
-                    <h5 class="cardTitle">
-                      {{ productItem.productTitle }}
-                    </h5>
-                  </div>
-                </div>
-                <div class="col">
-                  <div *ngIf="productItem.productTypeOfSale !== 'NOR'">
-                    <div
-                      class="ribbon"
-                      [ngStyle]="getRibbonStyles(productItem.productTypeOfSale)"
-                    >
-                      {{ getDisplayName(productItem.productTypeOfSale) }}
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col m-3 mt-0 mb-0 p-0">
-                    <i class="fa-solid fa-indian-rupee-sign"></i>
-                    <h6>&nbsp;{{ productItem.productPrice }}&nbsp;/</h6>
-                    <p>&nbsp;{{ productItem.productUnit }}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col m-3 mt-0 mb-0 p-0">
-                    <div class="row p-0 m-0">
-                      <div class="col-5 p-0">
-                        <p><b>Views: </b>{{ productItem.views }}</p>
-                      </div>
-                      <div class="col-7 p-0 itemDetails">
-                        <p class="postedOn">{{ productItem.date }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <hr class="lineInsideCard" />
-                <div class="row">
-                  <div class="col-6 p-0 mt-1">
-                    <div
-                      class="sellerCategoryFarmProduce"
-                      [ngStyle]="getStyles(productItem.userCategory)"
-                    >
-                      <p
-                        class="sellerCategoryTitle"
-                        *ngIf="productItem.userCategory != 'ID_CAT_SEL'"
-                      >
-                        {{ getUserCategory(productItem.userCategory) }}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-6 ps-1 pe-3">
-                    <div class="float-end">
-                      <p class="distance">
-                        <i class="fa-solid fa-location-dot fa-sm"></i>
-                        {{ productItem.distance }} Km away
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="col-9 title">
+        <!--selected location-->
+        <div class="truncate">
+          <app-selected-location></app-selected-location>
         </div>
-      </a>
+      </div>
+      <div class="col-1"></div>
+    </div>
+    <!--subcategory-title-->
+    <div class="container p-0">
+      <div class="row pt-3 pb-0">
+        <!-- <div class="col-10" *ngIf="!CategoryName"><h6>Search Results</h6></div> -->
+        <div class="col-10">
+          <h6>{{ CategoryName }}</h6>
+        </div>
+        <div class="col-2">
+          <button class="shareButton" (click)="share()">
+            <i class="fa-regular fa-share-from-square fa-lg shareSign"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  <!--Product Part Ends-->
-  <!--Service Part Starts-->
-  <div *ngIf="productItem.serviceTitle">
-    <a>
+
+  <!--product lists-->
+  <br /><br /><br /><br /><br />
+
+  <!--share card starts-->
+  <div
+    *ngIf="
+      searchedItems &&
+      searchedItems.length === 0 &&
+      isServiceArray === null &&
+      isProductArray === null &&
+      isQuickLinkArray === null
+    "
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col"><p class="records">No records found</p></div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="records">Please increase your search area</p>
+        </div>
+      </div>
+    </div>
+
+    <br /><br />
+
+    <div class="container pb-1">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Share this app in your community with</h5>
+          <ul>
+            <li class="cardList">Farmers</li>
+            <li class="cardList">Home based business</li>
+            <li class="cardList">Skilled professionals</li>
+            <li class="cardList">Friends</li>
+          </ul>
+          <p class="support">to support and promote community based business</p>
+          <br /><br />
+          <a (click)="share()" class="btn btn-success">Share</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Search Card-->
+  <div class="container pb-1" *ngFor="let productItem of searchedItems">
+    <!--Product Part Starts-->
+    <div *ngIf="productItem.productTitle">
       <div
-        class="card"
-        (click)="gotoSearchServiceDescription(productItem.serviceID)"
+        class="container p-0 m-0"
+        *ngIf="productItem.productStatus === 'Active'"
       >
-        <div class="card-body p-1">
-          <div class="row align-items-center">
-            <div class="col-4">
-              <div>
-                <img
-                  class="productImage"
-                  *ngIf="productItem.serviceThumbNailImage"
-                  [src]="productItem.serviceThumbNailImage"
-                />
-
-                <img
-                  class="productImage"
-                  *ngIf="!productItem.serviceThumbNailImage"
-                  src="assets/personImages/loketeDefaultImage.jpg"
-                  alt="Default Image"
-                />
-              </div>
-            </div>
-            <div class="col-8">
-              <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6"></div>
-              </div>
-              <div class="row">
-                <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
-                  <h5 class="cardTitle">
-                    {{ productItem.serviceTitle }}
-                  </h5>
-                </div>
-                <div class="col-3"></div>
-                <div class="row">
-                  <div class="col m-3 mt-0 mb-0 p-0 truncate">
-                    <p *ngIf="productItem.serviceDescription">
-                      {{ productItem.serviceDescription | slice : 0 : 25 }}...
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col m-3 mt-0 mb-0 p-0">
-                  <div class="row p-0 m-0">
-                    <div class="col p-0">
-                      <p><b>Views: </b>{{ productItem.views }}</p>
-                    </div>
-                    <div class="col p-0 itemDetails">
-                      <p class="postedOn">{{ productItem.date }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr class="lineInsideCard" />
-              <div class="row">
-                <div class="col-5 p-0">
+        <!--div *ngIf="productItem.productSubcategory === idValue"-->
+        <a>
+          <div
+            class="card"
+            (click)="gotoSearchProductDescription(productItem.productID)"
+          >
+            <div class="card-body p-1">
+              <div class="row align-items-center">
+                <div class="col-4">
                   <div>
-                    <p>{{ serviceCategory(productItem.serviceCategory) }}</p>
+                    <img
+                      class="productImage"
+                      *ngIf="productItem.productThumbNailImage"
+                      [src]="productItem.productThumbNailImage"
+                    />
+
+                    <img
+                      class="productImage"
+                      *ngIf="!productItem.productThumbNailImage"
+                      src="assets/personImages/loketeDefaultImage.jpg"
+                      alt="Default Image"
+                    />
                   </div>
                 </div>
-                <div class="col-7">
-                  <div class="float-end">
-                    <p class="distance">
-                      <i class="fa-solid fa-location-dot fa-sm"></i>
-                      {{ productItem.distance }} Km away
-                    </p>
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col m-3 m-3 mt-0 mb-0 p-0 truncate">
+                      <h5 class="cardTitle">
+                        {{ productItem.productTitle }}
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div *ngIf="productItem.productTypeOfSale !== 'NOR'">
+                      <div
+                        class="ribbon"
+                        [ngStyle]="
+                          getRibbonStyles(productItem.productTypeOfSale)
+                        "
+                      >
+                        {{ getDisplayName(productItem.productTypeOfSale) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0">
+                      <i class="fa-solid fa-indian-rupee-sign"></i>
+                      <h6>&nbsp;{{ productItem.productPrice }}&nbsp;/</h6>
+                      <p>&nbsp;{{ productItem.productUnit }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0">
+                      <div class="row p-0 m-0">
+                        <div class="col-5 p-0">
+                          <p><b>Views: </b>{{ productItem.views }}</p>
+                        </div>
+                        <div class="col-7 p-0 itemDetails">
+                          <p class="postedOn">{{ productItem.date }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="lineInsideCard" />
+                  <div class="row">
+                    <div class="col-6 p-0 mt-1">
+                      <div
+                        class="sellerCategoryFarmProduce"
+                        [ngStyle]="getStyles(productItem.userCategory)"
+                      >
+                        <p
+                          class="sellerCategoryTitle"
+                          *ngIf="productItem.userCategory != 'ID_CAT_SEL'"
+                        >
+                          {{ getUserCategory(productItem.userCategory) }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-6 ps-1 pe-3">
+                      <div class="float-end">
+                        <p class="distance">
+                          <i class="fa-solid fa-location-dot fa-sm"></i>
+                          {{ productItem.distance }} Km away
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </a>
-  </div>
-  <!--Service Part Ends-->
-</div>
-<!--/div-->
-<!--Search Card ends-->
-
-<!--Product Listing Card starts-->
-
-<!--share card starts-->
-<div *ngIf="isServiceArray === null">
-  <div *ngIf="isSearchArray === null">
-    <div *ngIf="isQuickLinkArray === null">
-      <div *ngIf="searchedItems && searchedItems.length === 0">
-        <div class="container">
-          <div class="row">
-            <div class="col"><p class="records">No records found</p></div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <p class="records">Please increase your search area</p>
-            </div>
-          </div>
-        </div>
-
-        <br /><br />
-
-        <div class="container pb-1">
-          <div class="card text-center">
-            <div class="card-body">
-              <h5 class="card-title">Share this app in your community with</h5>
-              <ul>
-                <li class="cardList">Farmers</li>
-                <li class="cardList">Home based business</li>
-                <li class="cardList">Skilled professionals</li>
-                <li class="cardList">Friends</li>
-              </ul>
-              <p class="support">
-                to support and promote community based business
-              </p>
-              <br /><br />
-              <a (click)="share()" class="btn btn-success">Share</a>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
-  </div>
-</div>
-<!--share card ends-->
-
-<!--share card starts-->
-<div *ngIf="isSearchArray === null">
-  <div *ngIf="isProductArray === null">
-    <div *ngIf="isQuickLinkArray === null">
-      <div *ngIf="searchedItems && searchedItems.length === 0">
-        <div class="container">
-          <div class="row">
-            <div class="col"><p class="records">No records found</p></div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <p class="records">Please increase your search area</p>
-            </div>
-          </div>
-        </div>
-
-        <br /><br />
-
-        <div class="container pb-1">
-          <div class="card text-center">
-            <div class="card-body">
-              <h5 class="card-title">Share this app in your community with</h5>
-              <ul>
-                <li class="cardList">Farmers</li>
-                <li class="cardList">Home based business</li>
-                <li class="cardList">Skilled professionals</li>
-                <li class="cardList">Friends</li>
-              </ul>
-              <p class="support">
-                to support and promote community based business
-              </p>
-              <br /><br />
-              <a (click)="share()" class="btn btn-success">Share</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--share card ends-->
-
-<!--share card starts-->
-<div *ngIf="isServiceArray === null">
-  <div *ngIf="isSearchArray === null">
-    <div *ngIf="isProductArray === null">
-      <div *ngIf="quickLink && quickLink.length === 0">
-        <div class="container">
-          <div class="row">
-            <div class="col"><p class="records">No records found</p></div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <p class="records">Please increase your search area</p>
-            </div>
-          </div>
-        </div>
-
-        <br /><br />
-
-        <div class="container pb-1">
-          <div class="card text-center">
-            <div class="card-body">
-              <h5 class="card-title">Share this app in your community with</h5>
-              <ul>
-                <li class="cardList">Farmers</li>
-                <li class="cardList">Home based business</li>
-                <li class="cardList">Skilled professionals</li>
-                <li class="cardList">Friends</li>
-              </ul>
-              <p class="support">
-                to support and promote community based business
-              </p>
-              <br /><br />
-              <a (click)="share()" class="btn btn-success">Share</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--share card ends-->
-<!--QuickLinks Card starts-->
-<div class="container pb-1" *ngFor="let productItem of quickLink">
-  <!--Product Part Starts-->
-  <div *ngIf="productItem.productTitle">
-    <div
-      class="container p-0 m-0"
-      *ngIf="productItem.productStatus === 'Active'"
-    >
-      <!--div *ngIf="productItem.productSubcategory === idValue"-->
+    <!--Product Part Ends-->
+    <!--Service Part Starts-->
+    <div *ngIf="productItem.serviceTitle">
       <a>
         <div
           class="card"
-          (click)="gotoQuickLinkDescription(productItem.productID)"
+          (click)="gotoSearchServiceDescription(productItem.serviceID)"
         >
           <div class="card-body p-1">
             <div class="row align-items-center">
@@ -409,41 +194,36 @@
                 <div>
                   <img
                     class="productImage"
-                    *ngIf="productItem.productThumbNailImage"
-                    [src]="productItem.productThumbNailImage"
+                    *ngIf="productItem.serviceThumbNailImage"
+                    [src]="productItem.serviceThumbNailImage"
                   />
 
                   <img
                     class="productImage"
-                    *ngIf="!productItem.productThumbNailImage"
+                    *ngIf="!productItem.serviceThumbNailImage"
                     src="assets/personImages/loketeDefaultImage.jpg"
                     alt="Default Image"
                   />
                 </div>
               </div>
               <div class="col-8">
+                <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col-6"></div>
+                </div>
                 <div class="row">
                   <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
                     <h5 class="cardTitle">
-                      {{ productItem.productTitle }}
+                      {{ productItem.serviceTitle }}
                     </h5>
                   </div>
-                </div>
-                <div class="col">
-                  <div *ngIf="productItem.productTypeOfSale !== 'NOR'">
-                    <div
-                      class="ribbon"
-                      [ngStyle]="getRibbonStyles(productItem.productTypeOfSale)"
-                    >
-                      {{ getDisplayName(productItem.productTypeOfSale) }}
+                  <div class="col-3"></div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0 truncate">
+                      <p *ngIf="productItem.serviceDescription">
+                        {{ productItem.serviceDescription | slice : 0 : 25 }}...
+                      </p>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col m-3 mt-0 mb-0 p-0">
-                    <i class="fa-solid fa-indian-rupee-sign"></i>
-                    <h6>&nbsp;{{ productItem.productPrice }}&nbsp;/</h6>
-                    <p>&nbsp;{{ productItem.productUnit }}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -460,20 +240,12 @@
                 </div>
                 <hr class="lineInsideCard" />
                 <div class="row">
-                  <div class="col-6 p-0 mt-1">
-                    <div
-                      class="sellerCategoryFarmProduce"
-                      [ngStyle]="getStyles(productItem.userCategory)"
-                    >
-                      <p
-                        class="sellerCategoryTitle"
-                        *ngIf="productItem.userCategory != 'ID_CAT_SEL'"
-                      >
-                        {{ getUserCategory(productItem.userCategory) }}
-                      </p>
+                  <div class="col-5 p-0">
+                    <div>
+                      <p>{{ serviceCategory(productItem.serviceCategory) }}</p>
                     </div>
                   </div>
-                  <div class="col-6 ps-1 pe-3">
+                  <div class="col-7">
                     <div class="float-end">
                       <p class="distance">
                         <i class="fa-solid fa-location-dot fa-sm"></i>
@@ -488,45 +260,284 @@
         </div>
       </a>
     </div>
+    <!--Service Part Ends-->
   </div>
-</div>
-<br />
-<div
-  class="container"
-  *ngIf="searchedItems.length !== 0 || quickLink.length !== 0"
->
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-      <div class="pagination">
-        <button
-          class="btn btn-outline-success mx-2"
-          (click)="loadPreviousPage()"
-          [disabled]="currentPage === 1"
-        >
-          Previous
-        </button>
-        <button
-          class="btn btn-outline-success mx-2"
-          (click)="loadNextPage()"
-          [disabled]="currentPage * limit >= totalItems"
-        >
-          Next
-        </button>
+  <!--/div-->
+  <!--Search Card ends-->
+
+  <!--Product Listing Card starts-->
+
+  <!--share card starts-->
+  <div *ngIf="isServiceArray === null">
+    <div *ngIf="isSearchArray === null">
+      <div *ngIf="isQuickLinkArray === null">
+        <div *ngIf="searchedItems && searchedItems.length === 0">
+          <div class="container">
+            <div class="row">
+              <div class="col"><p class="records">No records found</p></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="records">Please increase your search area</p>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div class="container pb-1">
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Share this app in your community with
+                </h5>
+                <ul>
+                  <li class="cardList">Farmers</li>
+                  <li class="cardList">Home based business</li>
+                  <li class="cardList">Skilled professionals</li>
+                  <li class="cardList">Friends</li>
+                </ul>
+                <p class="support">
+                  to support and promote community based business
+                </p>
+                <br /><br />
+                <a (click)="share()" class="btn btn-success">Share</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col"></div>
   </div>
+  <!--share card ends-->
+
+  <!--share card starts-->
+  <div *ngIf="isSearchArray === null">
+    <div *ngIf="isProductArray === null">
+      <div *ngIf="isQuickLinkArray === null">
+        <div *ngIf="searchedItems && searchedItems.length === 0">
+          <div class="container">
+            <div class="row">
+              <div class="col"><p class="records">No records found</p></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="records">Please increase your search area</p>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div class="container pb-1">
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Share this app in your community with
+                </h5>
+                <ul>
+                  <li class="cardList">Farmers</li>
+                  <li class="cardList">Home based business</li>
+                  <li class="cardList">Skilled professionals</li>
+                  <li class="cardList">Friends</li>
+                </ul>
+                <p class="support">
+                  to support and promote community based business
+                </p>
+                <br /><br />
+                <a (click)="share()" class="btn btn-success">Share</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--share card ends-->
+
+  <!--share card starts-->
+  <div *ngIf="isServiceArray === null">
+    <div *ngIf="isSearchArray === null">
+      <div *ngIf="isProductArray === null">
+        <div *ngIf="quickLink && quickLink.length === 0">
+          <div class="container">
+            <div class="row">
+              <div class="col"><p class="records">No records found</p></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="records">Please increase your search area</p>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div class="container pb-1">
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Share this app in your community with
+                </h5>
+                <ul>
+                  <li class="cardList">Farmers</li>
+                  <li class="cardList">Home based business</li>
+                  <li class="cardList">Skilled professionals</li>
+                  <li class="cardList">Friends</li>
+                </ul>
+                <p class="support">
+                  to support and promote community based business
+                </p>
+                <br /><br />
+                <a (click)="share()" class="btn btn-success">Share</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--share card ends-->
+  <!--QuickLinks Card starts-->
+  <div class="container pb-1" *ngFor="let productItem of quickLink">
+    <!--Product Part Starts-->
+    <div *ngIf="productItem.productTitle">
+      <div
+        class="container p-0 m-0"
+        *ngIf="productItem.productStatus === 'Active'"
+      >
+        <!--div *ngIf="productItem.productSubcategory === idValue"-->
+        <a>
+          <div
+            class="card"
+            (click)="gotoQuickLinkDescription(productItem.productID)"
+          >
+            <div class="card-body p-1">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <div>
+                    <img
+                      class="productImage"
+                      *ngIf="productItem.productThumbNailImage"
+                      [src]="productItem.productThumbNailImage"
+                    />
+
+                    <img
+                      class="productImage"
+                      *ngIf="!productItem.productThumbNailImage"
+                      src="assets/personImages/loketeDefaultImage.jpg"
+                      alt="Default Image"
+                    />
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div class="row">
+                    <div class="col-9 m-3 mt-0 mb-0 p-0 truncate">
+                      <h5 class="cardTitle">
+                        {{ productItem.productTitle }}
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div *ngIf="productItem.productTypeOfSale !== 'NOR'">
+                      <div
+                        class="ribbon"
+                        [ngStyle]="
+                          getRibbonStyles(productItem.productTypeOfSale)
+                        "
+                      >
+                        {{ getDisplayName(productItem.productTypeOfSale) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0">
+                      <i class="fa-solid fa-indian-rupee-sign"></i>
+                      <h6>&nbsp;{{ productItem.productPrice }}&nbsp;/</h6>
+                      <p>&nbsp;{{ productItem.productUnit }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col m-3 mt-0 mb-0 p-0">
+                      <div class="row p-0 m-0">
+                        <div class="col p-0">
+                          <p><b>Views: </b>{{ productItem.views }}</p>
+                        </div>
+                        <div class="col p-0 itemDetails">
+                          <p class="postedOn">{{ productItem.date }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="lineInsideCard" />
+                  <div class="row">
+                    <div class="col-6 p-0 mt-1">
+                      <div
+                        class="sellerCategoryFarmProduce"
+                        [ngStyle]="getStyles(productItem.userCategory)"
+                      >
+                        <p
+                          class="sellerCategoryTitle"
+                          *ngIf="productItem.userCategory != 'ID_CAT_SEL'"
+                        >
+                          {{ getUserCategory(productItem.userCategory) }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-6 ps-1 pe-3">
+                      <div class="float-end">
+                        <p class="distance">
+                          <i class="fa-solid fa-location-dot fa-sm"></i>
+                          {{ productItem.distance }} Km away
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div
+    class="container"
+    *ngIf="searchedItems.length !== 0 || quickLink.length !== 0"
+  >
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <div class="pagination">
+          <button
+            class="btn btn-outline-success mx-2"
+            (click)="loadPreviousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Previous
+          </button>
+          <button
+            class="btn btn-outline-success mx-2"
+            (click)="loadNextPage()"
+            [disabled]="currentPage * limit >= totalItems"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+
+  <!--QuickLinks Card ends-->
+
+  <!--Spacing for bottom-->
+  <br />
+  <br />
+  <br />
+
+  <!--   service listing card ends -->
 </div>
-
-<!--QuickLinks Card ends-->
-
-<!--Spacing for bottom-->
-<br />
-<br />
-<br />
-
-<!--   service listing card ends -->
-
 <!--Navigation Bar-->
 <app-navigation-bar></app-navigation-bar>

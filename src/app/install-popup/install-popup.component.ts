@@ -3,6 +3,14 @@ import { Router } from '@angular/router';
 import { PwaService } from '../pwa.service'; // Import the PwaService
 //SweetAlert2
 import Swal from 'sweetalert2';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+
 declare global {
   interface BeforeInstallPromptEvent extends Event {
     userChoice: Promise<{
@@ -17,6 +25,12 @@ declare global {
   selector: 'app-install-popup',
   templateUrl: './install-popup.component.html',
   styleUrls: ['./install-popup.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class InstallPopupComponent implements OnInit {
   deferredPrompt: BeforeInstallPromptEvent;

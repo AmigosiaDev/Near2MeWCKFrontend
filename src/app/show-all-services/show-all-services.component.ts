@@ -4,31 +4,48 @@ import { Router } from '@angular/router';
 //other imports
 import { Location } from '@angular/common'; //Used for Back Button
 import { ListingService } from '../listing/listing.service';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-show-all-services',
   templateUrl: './show-all-services.component.html',
   styleUrls: ['./show-all-services.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition('void <=> *', animate('300ms')),
+    ]),
+  ],
 })
 export class ShowAllServicesComponent implements OnInit {
   //We initialize the variables for ID
   serviceIdValue: any = '';
 
-  constructor(private router: Router, private location: Location, private listingService: ListingService) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private listingService: ListingService
+  ) {}
 
   selectedDistance: string;
   latitude: any;
   longitude: any;
 
   ngOnInit(): void {
-    this.listingService.searchedItems=[];
-    this.listingService.quickLink=[];
-    this.listingService.currentPage=1;
+    this.listingService.searchedItems = [];
+    this.listingService.quickLink = [];
+    this.listingService.currentPage = 1;
   }
   //Go Back to previous page  Function
 
   getFontClass(): string {
-    const currentLanguage = localStorage.getItem("setLanguage");
+    const currentLanguage = localStorage.getItem('setLanguage');
 
     switch (currentLanguage) {
       case 'en':
