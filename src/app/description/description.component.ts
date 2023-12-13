@@ -271,21 +271,40 @@ export class DescriptionComponent implements OnInit {
       // Modify the address property in each object
       data.allSearchResults.forEach((result: any) => {
         if (result.address) {
-          if (/\w{4}\+\w{2,3}/.test(result.address)) {
-            // Find the index of the comma
-            const commaIndex = result.address.indexOf(',');
-
-            // Remove any leading single character before the comma
-            if (commaIndex !== -1) {
-              result.address = result.address
-                .substring(commaIndex + 1)
-                .replace(/^\s*\w,\s*/, '');
+          let tempArray;
+          tempArray = result.address.split(',').filter((item) => {
+            if (!item.includes('+')) {
+              // console.log(i);
+              return item;
+              //alternative solution for removing the plus code--------------------------------
+              // console.log(result.address.split(",").splice(i, 1));
+              // let tempArray = result.address.split(',');
+              // tempArray = tempArray.toString().replace(tempArray[i], '');
+              // tempArray = tempArray.toString().replace(',,', ',');
+              // console.log('temp Array', tempArray);
+              //----------------------------------------------------------------
             }
-          }
-
-          // Remove ", India" if present
+          });
+          console.log(tempArray);
+          result.address = tempArray.toString();
           result.address = result.address.replace(/, India\s*$/, '');
         }
+        // if (result.address) {
+        //   if (/\w{4}\+\w{2,3}/.test(result.address)) {
+        //     // Find the index of the comma
+        //     const commaIndex = result.address.indexOf(',');
+
+        //     // Remove any leading single character before the comma
+        //     if (commaIndex !== -1) {
+        //       result.address = result.address
+        //         .substring(commaIndex + 1)
+        //         .replace(/^\s*\w,\s*/, '');
+        //     }
+        //   }
+
+        //   // Remove ", India" if present
+        //   result.address = result.address.replace(/, India\s*$/, '');
+        // }
       });
       this.searchArray = data.allSearchResults;
       console.log('searchArray:::', this.searchArray);

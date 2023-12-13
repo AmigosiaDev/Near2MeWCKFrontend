@@ -224,6 +224,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     const url = `${BACKEND_URL}/recentProducts?latitude=${this.latitude}&longitude=${this.longitude}`;
     this.http.get(url).subscribe(
       (data: any) => {
+        data.products.forEach((result: any) => {
+          if (result.address) {
+            let tempArray;
+            tempArray = result.address.split(',').filter((item) => {
+              if (!item.includes('+')) {
+                // console.log(i);
+                return item;
+                //alternative solution for removing the plus code--------------------------------
+                // console.log(result.address.split(",").splice(i, 1));
+                // let tempArray = result.address.split(',');
+                // tempArray = tempArray.toString().replace(tempArray[i], '');
+                // tempArray = tempArray.toString().replace(',,', ',');
+                // console.log('temp Array', tempArray);
+                //----------------------------------------------------------------
+              }
+            });
+            console.log(tempArray);
+            result.address = tempArray.toString();
+          }
+        });
+
         this.productForHome = data.products;
         console.log(this.productForHome, 'Products fetched successfully');
         this.getProductsBasedDate();
@@ -240,6 +261,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     const url = `${BACKEND_URL}/productsDate?latitude=${this.latitude}&longitude=${this.longitude}`;
     this.http.get(url).subscribe(
       (data: any) => {
+        data.products.forEach((result: any) => {
+          if (result.address) {
+            let tempArray;
+            tempArray = result.address.split(',').filter((item) => {
+              if (!item.includes('+')) {
+                // console.log(i);
+                return item;
+                //alternative solution for removing the plus code--------------------------------
+                // console.log(result.address.split(",").splice(i, 1));
+                // let tempArray = result.address.split(',');
+                // tempArray = tempArray.toString().replace(tempArray[i], '');
+                // tempArray = tempArray.toString().replace(',,', ',');
+                // console.log('temp Array', tempArray);
+                //----------------------------------------------------------------
+              }
+            });
+            console.log(tempArray);
+            result.address = tempArray.toString();
+          }
+        });
         this.productBasedOnDate = data.products;
         console.log(
           this.productBasedOnDate,
