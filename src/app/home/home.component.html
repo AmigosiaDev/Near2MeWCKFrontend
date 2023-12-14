@@ -457,6 +457,7 @@
               <div class="truncate">
                 <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
               </div>
+
               <div class="row pt-2" *ngIf="item.shortAddress">
                 <div class="float-end">
                   <p
@@ -473,7 +474,7 @@
                 </div>
               </div>
               <div
-                class="row pt-2"
+                class="row"
                 *ngIf="
                   item.shortAddress &&
                   item.shortAddress != 'null' &&
@@ -620,32 +621,6 @@
                   >
                     {{ item.address.split(",")[0] }}
                   </p>
-                </div>
-              </div>
-              <div class="row pt-2" *ngIf="!item.shortAddress">
-                <div class="float-end">
-                  <!-- <p class="address truncate" style="
-                margin-bottom: 0;
-                color: transparent;
-                border-radius: 10px;
-              ">
-                  
-                  Palakkad
-                </p> -->
-                  <!-- <p
-                    class="address truncate"
-                    style="
-                      margin-bottom: 0;
-                      background-color: white;
-                      border-radius: 10px;
-                    "
-                  >
-                    {{
-                      item.shortAddress
-                        ? item.shortAddress
-                        : item.address.split(",")[0]
-                    }}
-                  </p> -->
                 </div>
               </div>
 
