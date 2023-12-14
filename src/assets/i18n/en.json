@@ -47,8 +47,8 @@
   "Kudumbasree": "Kudumbashree",
   "Homemade": "Homemade",
   "Farm Products": "Farm Products",
-  "Pleaseselectlocation":"Please select location",
-
+  "Pleaseselectlocation": "Please select location",
+  "enterLocation": "Enter location (District or City)",
 
   "//comment": "FAQ starts below",
 
@@ -108,7 +108,6 @@
   "Beauty Product": "Beauty Product",
   "Handmades": "Handmades",
 
-
   "Plants": "Plants",
   "Seeds": "Seeds",
   "Nursery": "Nursery",
@@ -123,9 +122,6 @@
   "Autos": "Autos",
   "Books": "Books",
 
-  "Please select location":"Please select location",
-  "Recently Added Products" : "Recently Added Products"
-
-
-
+  "Please select location": "Please select location",
+  "Recently Added Products": "Recently Added Products"
 }

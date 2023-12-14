@@ -140,7 +140,7 @@
           </div> -->
 
             <div class="carousel-item active" data-bs-interval="5000">
-              <img 
+              <img
                 src="assets/carouselImages/carousel-4.jpeg"
                 [alt]="address + ' Image'"
                 class="d-block w-100 rounded-4"
@@ -439,14 +439,16 @@
               (click)="gotoSearchProductDescription(item.productID)"
             >
               <div *ngIf="item.productImageURL" [@fadeInOut]>
-                <img [@fadeInOut]
+                <img
+                  [@fadeInOut]
                   [src]="item.productImageURL"
                   class="recentlyAddedImage"
                   alt=""
                 />
               </div>
               <div *ngIf="item.productImageURL == null || ''" [@fadeInOut]>
-                <img [@fadeInOut]
+                <img
+                  [@fadeInOut]
                   src="assets/personImages/loketeDefaultImage.jpg"
                   class="recentlyAddedImage"
                   alt=""
@@ -470,29 +472,47 @@
                   </p>
                 </div>
               </div>
-              <div class="row pt-2" *ngIf="!item.shortAddress">
+              <div
+                class="row pt-2"
+                *ngIf="
+                  item.shortAddress &&
+                  item.shortAddress != 'null' &&
+                  item.shortAddress != null
+                "
+              >
                 <div class="float-end">
-                  <!-- <p class="address truncate" style="
-                margin-bottom: 0;
-                color: transparent;
-                border-radius: 10px;
-              ">
-                  
-                  Palakkad
-                </p> -->
                   <p
                     class="address truncate"
                     style="
                       margin-bottom: 0;
                       background-color: white;
+
                       border-radius: 10px;
                     "
                   >
-                    {{
-                      item.shortAddress
-                        ? item.shortAddress
-                        : item.address.split(",")[0]
-                    }}
+                    {{ item.shortAddress }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="row pt-2"
+                *ngIf="
+                  !item.shortAddress ||
+                  item.shortAddress == 'null' ||
+                  item.shortAddress == null
+                "
+              >
+                <div class="float-end">
+                  <p
+                    class="address truncate"
+                    style="
+                      margin-bottom: 0;
+                      background-color: white;
+
+                      border-radius: 10px;
+                    "
+                  >
+                    {{ item.address.split(",")[0] }}
                   </p>
                 </div>
               </div>
@@ -539,15 +559,17 @@
               class="btn btn-lg recentlyAddedButton"
               (click)="gotoSearchProductDescription(item.productID)"
             >
-              <div *ngIf="item.productImageURL" [@fadeInOut]> 
-                <img [@fadeInOut]
+              <div *ngIf="item.productImageURL" [@fadeInOut]>
+                <img
+                  [@fadeInOut]
                   [src]="item.productImageURL"
                   class="recentlyAddedImage"
                   alt=""
                 />
               </div>
               <div *ngIf="item.productImageURL == null || ''" [@fadeInOut]>
-                <img [@fadeInOut]
+                <img
+                  [@fadeInOut]
                   src="assets/personImages/loketeDefaultImage.jpg"
                   class="recentlyAddedImage"
                   alt=""
@@ -556,7 +578,14 @@
               <div class="truncate">
                 <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
               </div>
-              <div class="row pt-2" *ngIf="item.shortAddress">
+              <div
+                class="row pt-2"
+                *ngIf="
+                  item.shortAddress &&
+                  item.shortAddress != 'null' &&
+                  item.shortAddress != null
+                "
+              >
                 <div class="float-end">
                   <p
                     class="address truncate"
@@ -571,6 +600,28 @@
                   </p>
                 </div>
               </div>
+              <div
+                class="row pt-2"
+                *ngIf="
+                  !item.shortAddress ||
+                  item.shortAddress == 'null' ||
+                  item.shortAddress == null
+                "
+              >
+                <div class="float-end">
+                  <p
+                    class="address truncate"
+                    style="
+                      margin-bottom: 0;
+                      background-color: white;
+
+                      border-radius: 10px;
+                    "
+                  >
+                    {{ item.address.split(",")[0] }}
+                  </p>
+                </div>
+              </div>
               <div class="row pt-2" *ngIf="!item.shortAddress">
                 <div class="float-end">
                   <!-- <p class="address truncate" style="
@@ -581,7 +632,7 @@
                   
                   Palakkad
                 </p> -->
-                  <p
+                  <!-- <p
                     class="address truncate"
                     style="
                       margin-bottom: 0;
@@ -594,7 +645,7 @@
                         ? item.shortAddress
                         : item.address.split(",")[0]
                     }}
-                  </p>
+                  </p> -->
                 </div>
               </div>
 

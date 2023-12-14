@@ -89,8 +89,19 @@ export class SelectLocationComponent implements OnInit {
     console.log(address.geometry.location.lat());
     console.log(address.geometry.location.lng());
     this.lat = address.geometry.location.lat();
+
+    console.log('ADDRESS in SELECT LOCATION', address);
+
+    address.address_components.forEach((component) => {
+      console.log('COMPONENT in SELECT LOCATION:', component);
+      // Check if the component type is "administrative_area_level_3"
+      if (component.types.includes('administrative_area_level_3')) {
+        //   // Get the short_name and add it to the shortAddress variable
+        this.shortAddress = component.long_name;
+      }
+    });
     this.address = address.formatted_address;
-    this.shortAddress = address.name;
+    // this.shortAddress = address.name;
     console.log('Short Address: ', this.shortAddress);
     if (this.shortAddress) {
       localStorage.setItem('shortAddress', this.shortAddress);

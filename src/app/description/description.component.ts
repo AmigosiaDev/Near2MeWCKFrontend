@@ -269,7 +269,7 @@ export class DescriptionComponent implements OnInit {
     this.http.get(url).subscribe((data: any): void => {
       console.log('url', url);
       // Modify the address property in each object
-      data.allSearchResults.forEach((result: any) => {
+      data.allSearchResults?.forEach((result: any) => {
         if (result.address) {
           let tempArray;
           tempArray = result.address.split(',').filter((item) => {
