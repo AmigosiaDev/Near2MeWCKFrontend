@@ -145,7 +145,7 @@
                   alt=""
                 />
               </div>
-              <div class="truncate">
+              <div class="pt-2 pb-2 truncate">
                 <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
               </div>
               <div class="row pt-2" *ngIf="item.shortAddress">
@@ -270,18 +270,11 @@
                   alt=""
                 />
               </div>
-              <div class="truncate">
+              <div class="pt-2 pb-2 truncate">
                 <p class="recentlyAddedProductTitle">{{ item.productTitle }}</p>
               </div>
               <div class="row pt-2" *ngIf="item.shortAddress">
-                <div
-                  *ngIf="
-                    !item.shortAddress ||
-                    item.shortAddress == 'null' ||
-                    item.shortAddress == null
-                  "
-                  class="float-end"
-                >
+                <div class="float-end">
                   <p
                     class="address truncate"
                     style="

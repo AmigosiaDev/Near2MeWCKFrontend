@@ -49,7 +49,7 @@ span {
 .radiusButton {
   float: right;
   /* background-color: #0a7e71; */
-    background-color: #3d7046;
+  background-color: #3d7046;
 }
 
 .loginButton {
@@ -100,6 +100,7 @@ span {
 .recentlyAddedProductTitle {
   margin: 0;
   font-size: small;
+  text-align: left;
 }
 
 .recentlyAddedImage {
@@ -136,8 +137,6 @@ span {
   transition: box-shadow 0.3s ease; /* Add a smooth transition for the shadow */
 }
 
-
-
 .show-all-button {
   margin: 0;
   font-size: 20px;
@@ -151,9 +150,6 @@ span {
   height: 100%;
   user-select: none;
 }
-
-
-
 
 .categoryButton {
   /* background-color: #81cdc6; */

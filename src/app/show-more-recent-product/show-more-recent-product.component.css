@@ -42,6 +42,7 @@
 .recentlyAddedProductTitle {
   margin: 0;
   font-size: small;
+  text-align: left
 }
 
 .recentlyAddedImage {
