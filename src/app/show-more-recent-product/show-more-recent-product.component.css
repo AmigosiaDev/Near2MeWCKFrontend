@@ -50,6 +50,13 @@
   border-radius: 10px;
 }
 
+
+.recentlyAddedDefaultImage {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 10px;
+}
+
 .distance {
   color: #07435e;
   font-size: small;

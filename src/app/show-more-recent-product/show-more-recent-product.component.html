@@ -113,7 +113,7 @@
     </div>
   </div> -->
     <div class="row sm-12">
-      <div class="col-4 p-2" *ngFor="let item of productBasedOnDate">
+      <div class="col-6 p-2" *ngFor="let item of productBasedOnDate">
         <div class="card" *ngIf="!filterCardProduct">
           <div class="productButtons">
             <div>
@@ -141,7 +141,7 @@
               <div *ngIf="item.productImageURL == null || ''">
                 <img
                   src="assets/personImages/loketeDefaultImage.jpg"
-                  class="recentlyAddedImage"
+                  class="recentlyAddedDefaultImage"
                   alt=""
                 />
               </div>
@@ -238,7 +238,7 @@
     </div>
   </div> -->
     <div class="row sm-12">
-      <div class="col-4 p-2" *ngFor="let item of productBasedOnDistance">
+      <div class="col-6 p-2" *ngFor="let item of productBasedOnDistance">
         <div class="card" *ngIf="filterCardProduct">
           <div class="productButtons">
             <div>
@@ -266,7 +266,7 @@
               <div *ngIf="item.productImageURL == null || ''">
                 <img
                   src="assets/personImages/loketeDefaultImage.jpg"
-                  class="recentlyAddedImage"
+                  class="recentlyAddedDefaultImage"
                   alt=""
                 />
               </div>

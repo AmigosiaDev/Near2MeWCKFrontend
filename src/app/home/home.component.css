@@ -108,6 +108,12 @@ span {
   border-radius: 10px;
 }
 
+.recentlyAddedDefaultImage {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 10px;
+}
+
 .address {
   color: #00796b;
   font-size: small;
