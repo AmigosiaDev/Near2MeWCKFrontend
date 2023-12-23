@@ -39,16 +39,15 @@ export class ShowMoreRecentProductComponent implements OnInit {
   totalItems = 0;
   loading: boolean = false;
   disableNextPage: boolean = false;
-  filterValue: boolean = false;
-  filterType: string = 'date';
-  filterCardProduct: boolean = false;
-  filterCardDate: boolean = false;
+  showFilter: boolean = false;
+  filterType: string = this.ShowMoreService.filterType;
+  filterCardDistance: boolean = this.ShowMoreService.filterCardDistance;
+  filterCardDate: boolean = this.ShowMoreService.filterCardDate;
   showSpinner: boolean = false;
 
   loadNextPage() {
     this.loading = true;
     this.ShowMoreService.showMoreItems = [];
-    this.showMoreItems = [];
 
     if (this.currentPage * this.limit < this.totalItems) {
       this.currentPage++;
@@ -58,7 +57,7 @@ export class ShowMoreRecentProductComponent implements OnInit {
         this.getProductsBasedDate();
       }
       if (this.filterType === 'distance') {
-        this.getRecentProducts();
+        this.getProductsBasedDistance();
       }
 
       this.showMoreItems = this.ShowMoreService.showMoreItems;
@@ -82,7 +81,7 @@ export class ShowMoreRecentProductComponent implements OnInit {
         this.getProductsBasedDate();
       }
       if (this.filterType === 'distance') {
-        this.getRecentProducts();
+        this.getProductsBasedDistance();
       }
       this.showMoreItems = this.ShowMoreService.showMoreItems;
       console.log('getAllProduct is running');
@@ -111,30 +110,36 @@ export class ShowMoreRecentProductComponent implements OnInit {
     this.productBasedOnDate = this.ShowMoreService.showMoreItems;
     if (this.ShowMoreService.showMoreItems.length == 0) {
       this.getProductsBasedDate();
+    } else {
+      this.getProductsBasedDistance();
     }
   }
 
   filter() {
-    this.filterValue = !this.filterValue;
+    this.showFilter = !this.showFilter;
   }
   closeOverlay(): void {
     // Set filterValue to false to hide the overlay
-    this.filterValue = false;
+    this.showFilter = false;
   }
   dateBasedFilter() {
     this.showSpinner = true;
-    this.filterValue = !this.filterValue;
-    this.filterType = 'date';
-    this.filterCardProduct = !this.filterCardProduct;
+    this.showFilter = !this.showFilter;
+    this.filterType = this.ShowMoreService.filterType = 'date';
+    this.filterCardDate = this.ShowMoreService.filterCardDate = true;
+    this.filterCardDistance = this.ShowMoreService.filterCardDistance = false;
+    this.currentPage = this.ShowMoreService.currentPage = 1;
     this.getProductsBasedDate();
   }
 
   distanceBasedFilter() {
     this.showSpinner = true;
-    this.filterValue = !this.filterValue;
-    this.filterType = 'distance';
-    this.filterCardProduct = !this.filterCardProduct;
-    this.getRecentProducts();
+    this.showFilter = !this.showFilter;
+    this.filterType = this.ShowMoreService.filterType = 'distance';
+    this.filterCardDate = this.ShowMoreService.filterCardDate = false;
+    this.filterCardDistance = this.ShowMoreService.filterCardDistance = true;
+    this.currentPage = this.ShowMoreService.currentPage = 1;
+    this.getProductsBasedDistance();
   }
 
   constructor(
@@ -170,6 +175,8 @@ export class ShowMoreRecentProductComponent implements OnInit {
   //--------------------------------------Show all recently added products based on date --------------------------
   productBasedOnDate: any;
   getProductsBasedDate() {
+    this.filterCardDate = this.ShowMoreService.filterCardDate = true;
+    this.filterCardDistance = this.ShowMoreService.filterCardDistance = false;
     this.showSpinner = true;
     const url = `${BACKEND_URL}/showMoreProductsDate?latitude=${this.latitude}&longitude=${this.longitude}&page=${this.currentPage}&limit=${this.limit}&limit=${this.limit}`;
     // this.totalItems = productData.totalCount;
@@ -228,8 +235,10 @@ export class ShowMoreRecentProductComponent implements OnInit {
   //--------------------------------------Show all recently added products based on date ends--------------------------
 
   productBasedOnDistance: any;
-  getRecentProducts() {
-    const url = `${BACKEND_URL}/showMoreRecentProducts?latitude=${this.latitude}&longitude=${this.longitude}&page=${this.currentPage}&limit=${this.limit}&limit=${this.limit}`;
+  getProductsBasedDistance() {
+    this.filterCardDate = this.ShowMoreService.filterCardDate = false;
+    this.filterCardDistance = this.ShowMoreService.filterCardDistance = true;
+    const url = `${BACKEND_URL}/showMorePostDistance?latitude=${this.latitude}&longitude=${this.longitude}&page=${this.currentPage}&limit=${this.limit}`;
     this.http.get(url).subscribe(
       (data: any) => {
         data.products.forEach((result: any) => {

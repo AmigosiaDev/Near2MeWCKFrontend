@@ -8,6 +8,9 @@ export class ShowMoreService {
   showMoreItems: any[] = [];
 
   currentPage: any = 1;
-  totalItems:number=0;
+  totalItems: number = 0;
   scrollPosition: any = 0;
+  filterCardDistance: boolean;
+  filterCardDate: boolean;
+  filterType: string = 'date';
 }

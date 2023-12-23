@@ -29,7 +29,6 @@
   margin: 0;
 }
 
-
 /* Recently Added */
 .recentlyAddedButton {
   width: 100%;
@@ -42,14 +41,13 @@
 .recentlyAddedProductTitle {
   margin: 0;
   font-size: small;
-  text-align: left
+  text-align: left;
 }
 
 .recentlyAddedImage {
   max-width: 100%;
   border-radius: 10px;
 }
-
 
 .recentlyAddedDefaultImage {
   width: 100%;
@@ -138,6 +136,11 @@ p {
   font-size: 11px;
 }
 
+.ribbonFont{
+  font-size: medium !important;
+
+}
+
 .card {
   position: relative;
   border: none !important;
@@ -202,7 +205,6 @@ p {
   margin: 30px;
 }
 
-.form-check-label{
+.form-check-label {
   font-size: large;
 }
-

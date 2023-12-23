@@ -126,6 +126,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.showMoreService.currentPage = 0;
     this.showMoreService.totalItems = 0;
     this.showMoreService.showMoreItems = [];
+    this.showMoreService.filterType = 'date';
     this.carouselImageDisplay();
     if (localStorage.getItem('isLoggedIn') == 'true') {
       this.fetchUsers();
