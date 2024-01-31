@@ -42,24 +42,25 @@ export class AppComponent implements OnInit {
     }
 
     //To prompt user to update Service Worker cache on each update
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
-        Swal.fire({
-          title: 'There is a newer version of Near2Me! 😀',
-          icon: 'success',
-
-          confirmButtonText: 'Continue to update!',
-          confirmButtonColor: 'rgb(38 117 79)',
-          
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.reload();
-            // For more information about handling dismissals please visit
-            // https://sweetalert2.github.io/#handling-dismissals
-          }
-        });
-      });
-    }
+    // if (this.swUpdate.isEnabled) {
+    //   this.swUpdate
+    //     .activateUpdate()
+    //     .then(() => {
+    //       Swal.fire({
+    //         title: 'There is a newer version of Near2Me! 😀',
+    //         icon: 'success',
+    //         confirmButtonText: 'Continue to update!',
+    //         confirmButtonColor: 'rgb(38 117 79)',
+    //       }).then((result) => {
+    //         if (result.isConfirmed) {
+    //           window.location.reload();
+    //         }
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error activating update:', error);
+    //     });
+    // }
 
     // this.checkShowIntroduction();
   }

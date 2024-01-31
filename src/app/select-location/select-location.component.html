@@ -19,44 +19,58 @@
 <!--Space to show the elements below floating header-->
 <br /><br /><br />
 
-<!--app-select-location-->
-<div class="container p-3">
-  <div class="row">
-    <div class="col">
-      <input
-        class="form-control"
-        ngx-google-places-autocomplete
-        [options]="options"
-        (onAddressChange)="getSelectedLocation($event)"
-        placeholder="Search city, area or neighborhood"
-        id="example-search-input"
-      />
+  <!--app-select-location-->
+  <!-- <div class="container p-3">
+    <div class="row">
+      <div class="col">
+        <input
+          class="form-control"
+          ngx-google-places-autocomplete
+          [options]="options"
+          (onAddressChange)="getSelectedLocation($event)"
+          placeholder="Search city, area or neighborhood"
+          id="example-search-input"
+        />
+      </div>
     </div>
-  </div>
-</div>
+  </div> -->
 
-<div class="container p-3">
-  <div class="row">
-    <div class="col">
-      <div
-        *ngIf="showSpinner"
-        class="spinner-border text-success"
-        role="status"
-      >
-        <span class="visually-hidden">Loading...</span>
+  <div class="container p-3">
+    <div class="row">
+      <div class="col">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search city, area or neighborhood"
+          id="google-places-autocomplete"
+        />
       </div>
     </div>
   </div>
-  <div class="row"  *ngIf="!showSpinner">
-    <a (click)="getCurrentLocations()" class="useCurrentLocation"
-      ><i class="fa-solid fa-location-crosshairs fa-lg"></i
-      ><span>Use Current Location</span>
-    </a>
+  
+
+  <div class="container p-3">
+    <div class="row">
+      <div class="col">
+        <div
+          *ngIf="showSpinner"
+          class="spinner-border locationSpinner"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="!showSpinner">
+      <a (click)="getCurrentLocations()" class="useCurrentLocation"
+        ><i class="fa-solid fa-location-crosshairs fa-lg"></i
+        ><span>Use Current Location</span>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col">{{ locationName }}</div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col">{{ locationName }}</div>
-  </div>
-</div>
 
 <!--recent-location-list-->
 <div class="backColor">
