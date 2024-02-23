@@ -43,31 +43,8 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Content Security Policy -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-      default-src 'self' https://googleads.g.doubleclick.net/ https://tpc.googlesyndication.com/ https://www.google.com/;
-      script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com/ https://tpc.googlesyndication.com/ https://maps.googleapis.com/ https://www.googletagmanager.com;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
-      img-src 'self' data: https://amigo-bucket.s3.ap-south-1.amazonaws.com https://maps.gstatic.com https://pagead2.googlesyndication.com;
-      font-src 'self' https://fonts.gstatic.com;
-      connect-src 'self'  http://localhost:3000 https://api.test1.near2me.app https://pagead2.googlesyndication.com/ https://www.google-analytics.com https://fcmregistrations.googleapis.com https://maps.googleapis.com https://firebaseinstallations.googleapis.com;
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self';
-      
-    "
-    />
-
-    <meta
-      http-equiv="Strict-Transport-Security"
-      content="max-age=31536000; includeSubDomains; preload"
-    />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
-    <meta http-equiv="Referrer-Policy" content="no-referrer" />
-    <meta http-equiv="Expect-CT" content="max-age=86400, enforce" />
+    <meta name="theme-color" content="#a1d4d4" />
+    <link rel="manifest" href="manifest.webmanifest" />
   </head>
   <body class="mat-typography">
     <app-root></app-root>

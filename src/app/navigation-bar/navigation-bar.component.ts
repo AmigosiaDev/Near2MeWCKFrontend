@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
+//SweetAlert2
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -29,7 +31,18 @@ export class NavigationBarComponent implements OnInit {
   }
 
   goToPost() {
-    this.router.navigate(['/post-item']);
+    Swal.fire({
+      title: 'Note!',
+      text: 'Before posting, please ensure that the selected location is correct. ',
+      icon: 'info',
+
+      confirmButtonText: 'Okay',
+      confirmButtonColor: 'rgb(38 117 79)',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/post-item']);
+      }
+    });
   }
 
   goToFav() {

@@ -109,15 +109,9 @@ export class ShowMoreRecentProductComponent implements OnInit {
     this.totalItems = this.ShowMoreService.totalItems;
     this.productBasedOnDate = this.ShowMoreService.showMoreItems;
     if (this.ShowMoreService.showMoreItems.length == 0) {
-      if (this.ShowMoreService.filterType == 'date') {
-        this.getProductsBasedDate();
-      }
-      this.showFilter = false;
-    }
-
-    if (this.ShowMoreService.filterType == 'distance') {
+      this.getProductsBasedDate();
+    } else {
       this.getProductsBasedDistance();
-      this.showFilter = false;
     }
   }
 

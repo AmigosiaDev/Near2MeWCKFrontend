@@ -38,7 +38,7 @@ import { AuthInterceptor } from './login/auth.interceptor';
 // to import the local storage
 import { LocalStorageService } from 'angular-web-storage';
 //google map import
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+// import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 //To import translate modules
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -111,7 +111,7 @@ import { ShowMoreRecentProductComponent } from './show-more-recent-product/show-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    GooglePlaceModule, // Google Place
+    // GooglePlaceModule, // Google Place
     MatCheckboxModule, //Used for Checkbox for Login Page Component
     AppRoutingModule,
     MatButtonModule,

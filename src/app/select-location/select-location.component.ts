@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Address } from 'ngx-google-places-autocomplete/objects/address';
+// import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { HttpParams } from '@angular/common/http';
 import { LocationService } from './location.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+
 //---------------------------------------------------------
 
 const BACKEND_URL = environment.apiUrl;
@@ -35,66 +36,32 @@ const BACKEND_URL = environment.apiUrl;
 export class SelectLocationComponent implements OnInit {
   //------------------------------------------------------------------------------------------------------------------------
   isModalOpen = true;
-  showSpinner = false;
-  categories: any = [];
-  currentLocation: any = '';
-  selectedDistance: number = 100;
-  params = { latitude: 0, longitude: 0, distance: 100 };
-
-  returnPage: string = undefined;
-  recentlyUsed: any[];
   options: any = {
     componentRestrictions: { country: 'IN' },
   };
-  constructor(
-    private locationService: LocationService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private goBackLocation: Location
-  ) {
-    this.route.queryParams.subscribe((params) => {
-      this.returnPage = params['returnPage'];
-    });
-  }
 
-  ngOnInit() {
-    this.initGooglePlacesAutocomplete();
-    this.recentlyUsed = JSON.parse(localStorage.getItem('locations')) || [];
-    this.recentlyUsed.reverse();
-  }
-  openModal() {
-    this.isModalOpen = true;
-  }
+  showSpinner = false;
+  categories: any = [];
+  currentLocation: any = '';
+  public lat: any;
+  public lng: any;
+  public address: any;
+  selecteddistance: number = 100;
+  params = { latitude: 0, longitude: 0, distance: 100 };
+  shortAddress: string;
 
-  hideModal() {
-    this.isModalOpen = false;
-    // this.clearForm();
-  }
+  returnPage: string = undefined;
 
-  initGooglePlacesAutocomplete() {
-    const inputElement = document.getElementById(
-      'google-places-autocomplete'
-    ) as HTMLInputElement;
-    if (inputElement && google && google.maps && google.maps.places) {
-      const autocomplete = new google.maps.places.Autocomplete(
-        inputElement,
-        this.options
-      );
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place.geometry && place.geometry.location) {
-          this.getSelectedLocation(place);
-        }
-      });
-    } else {
-      console.error('Google Maps API is not available');
-    }
-  }
+  address1: any;
+  recentlyUsed: any;
 
   goToReturnPage() {
     if (this.returnPage === 'post-item') {
       this.router.navigate(['/post-item']);
+    } else if (this.returnPage === 'home') {
+      this.router.navigate(['/home'], {
+        queryParams: { idVal: 'clear' },
+      });
     } else {
       this.router.navigate(['/home'], {
         queryParams: { idVal: 'clear' },
@@ -102,8 +69,93 @@ export class SelectLocationComponent implements OnInit {
     }
   }
 
+  //Go Back to previous page  Function
   goBack(): void {
     this.goBackLocation.back();
+  }
+
+  constructor(
+    private locationService: LocationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private goBackLocation: Location
+  ) {
+    //Activated Route to initialize the value of Return Page
+    this.route.queryParams.subscribe((params) => {
+      this.returnPage = params['returnPage'];
+      console.log('value of return page', this.returnPage);
+    });
+  }
+
+  // getSelectedLocation(address: Address) {
+  //   console.log(address.formatted_address);
+  //   console.log(address.geometry.location.lat());
+  //   console.log(address.geometry.location.lng());
+  //   this.lat = address.geometry.location.lat();
+
+  //   console.log('ADDRESS in SELECT LOCATION', address);
+
+  //   address.address_components.forEach((component) => {
+  //     console.log('COMPONENT in SELECT LOCATION:', component);
+  //     // Check if the component type is "administrative_area_level_3"
+  //     if (component.types.includes('administrative_area_level_3')) {
+  //       //   // Get the short_name and add it to the shortAddress variable
+  //       this.shortAddress = component.long_name;
+  //     }
+  //   });
+  //   this.address = address.formatted_address;
+  //   // this.shortAddress = address.name;
+  //   console.log('Short Address: ', this.shortAddress);
+  //   if (this.shortAddress) {
+  //     localStorage.setItem('shortAddress', this.shortAddress);
+  //   }
+  //   this.lng = address.geometry.location.lng();
+  //   //this.listCategories(2);
+  //   if (this.lat && this.lng) {
+  //     Object.assign(this.params, {
+  //       latitude: this.lat,
+  //       longitude: this.lng,
+  //       address: this.address,
+  //     });
+  //   }
+  //   this.locationservice.selectLocation(this.params);
+
+  //   this.goBack();
+  // }
+
+  recentlyUsedLocation(address: any) {
+    console.log(address.latitude, address.longitude, address.address);
+
+    this.lat = address.latitude;
+    this.lng = address.longitude;
+    this.address = address.address;
+
+    if (this.lat && this.lng) {
+      Object.assign(this.params, {
+        latitude: this.lat,
+        longitude: this.lng,
+        address: this.address,
+      });
+    }
+
+    this.locationService.selectLocation(this.params);
+    this.goBack();
+  }
+
+  listCategories(dist: number) {
+    if (this.lat && this.lng) {
+      Object.assign(this.params, {
+        lattitude: this.lat,
+        longitude: this.lng,
+        parentCategory: 0,
+      });
+
+      this.selecteddistance = this.params.distance;
+      this.categories = [];
+    } else {
+      console.log('Error: No lat lon', 'Please select a location');
+    }
   }
 
   getSelectedLocation(place: google.maps.places.PlaceResult) {
@@ -135,30 +187,35 @@ export class SelectLocationComponent implements OnInit {
       });
   }
 
-  recentlyUsedLocation(address: any) {
-    this.locationService.selectLocation(address);
-    this.goBack();
+  ngOnInit() {
+    this.initGooglePlacesAutocomplete();
+    // Retrieve the address from local storage
+    this.address1 = JSON.parse(localStorage.getItem('locations')) || [];
+    // Reverse the addresses array
+    this.recentlyUsed = this.address1.slice().reverse();
+    console.log('this.recentlyUsed', this.recentlyUsed);
   }
+  /************/
 
-  listCategories(dist: number) {
-    // Your logic for listing categories based on distance
-  }
-
-  getCurrentLocation() {
-    this.showSpinner = true;
-    this.locationService
-      .getCurrentLocation()
-      .then(() => {
-        this.showSpinner = false;
-        this.goToReturnPage();
-      })
-      .catch((error) => {
-        this.showSpinner = false;
-        console.error('Error getting current location', error);
+  initGooglePlacesAutocomplete() {
+    const inputElement = document.getElementById(
+      'google-places-autocomplete'
+    ) as HTMLInputElement;
+    if (inputElement && google && google.maps && google.maps.places) {
+      const autocomplete = new google.maps.places.Autocomplete(
+        inputElement,
+        this.options
+      );
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (place.geometry && place.geometry.location) {
+          this.getSelectedLocation(place);
+        }
       });
+    } else {
+      console.error('Google Maps API is not available');
+    }
   }
-
-  location: { latitude: number; longitude: number };
   locationName = '';
 
   gotoHomePage() {
@@ -166,9 +223,5 @@ export class SelectLocationComponent implements OnInit {
       queryParams: { passedlocationName: this.locationName },
     });
     console.log('this.location ;', this.locationName);
-  }
-
-  selectLocation(selectedLocation: string) {
-    this.locationService.handleSelectedLocation(selectedLocation);
   }
 }

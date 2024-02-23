@@ -30,3 +30,7 @@ a {
 .near2meImage {
   width: 125px;
 }
+
+.address {
+  font-size: smaller;
+}
